@@ -1,10 +1,143 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Website</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Innovate And Amplify</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f3ec78, #af4261);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Arial', sans-serif;
+            color: black;
+            margin: 0;
+            padding: 0;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        nav {
+            padding: 1.5em;
+        }
+
+        nav ul li strong {
+            color: black;
+        }
+
+        nav ul li a {
+            color: black;
+        }
+
+        nav ul li a:hover {
+            color: #af4261;
+        }
+
+        h2, h3, p {
+            color: #333;
+        }
+
+        img {
+            max-width: 50%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 8px;
+        }
+
+        footer small a {
+            color: black;
+        }
+
+        footer small a:hover {
+            color: #af4261;
+        }
+
+        form {
+            background: white;
+            padding: 1.5em;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        form input, form button {
+            border-radius: 8px;
+        }
+
+        form button {
+            background: #af4261;
+            color: white;
+        }
+
+        form button:hover {
+            background: #f3ec78;
+            color: black;
+        }
+
+        section[aria-label="Subscribe example"] h2, 
+        section[aria-label="Subscribe example"] h3 {
+            color: white;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to My Website</h1>
-    <p>This is hosted using GitHub Pages.</p>
+
+<nav class="container-fluid">
+    <ul>
+        <li><strong><a href="./index.html">Innovate And Amplify</a></strong></li>
+    </ul>
+    <ul>
+        <li><a href="./about.html">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact" role="button">Contact</a></li>
+    </ul>
+</nav>
+
+<main class="container">
+    <div class="grid">
+        <section>
+            <hgroup>
+                <h2>Welcome to Innovate And Amplify</h2>
+                <h3>Your Partner in Growth and Advertising</h3>
+            </hgroup>
+            <p>At Innovate And Amplify, we specialize in helping businesses achieve remarkable growth through tailored advertising strategies and innovative marketing solutions. Partner with us to unlock your full potential.</p>
+            <figure>
+                <img src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-nrNvCozGnlyC7kPvhVXg1okv/user-77VTVFhZVdyq9bhXogxBmeUD/img-z7qj1hnVs84UhwI3zNXKzclU.png" alt="Simpler upward-trending line graph representing growth">
+            </figure>
+
+            <h3>Why Work With Us?</h3>
+            <p>With years of experience in digital marketing and advertising, we bring a deep understanding of how to drive results for businesses of all sizes.</p>
+
+            <h3>Tailored Strategies</h3>
+            <p>Each business is unique, and we create customized strategies that align with your goals and target audience.</p>
+        </section>
+    </div>
+</main>
+
+<section aria-label="Subscribe example">
+    <div class="container">
+        <article>
+            <hgroup>
+                <h2>Contact Us</h2>
+                <h3>Let’s Build Something Great Together</h3>
+            </hgroup>
+            <form class="grid">
+                <input type="text" id="firstname" name="firstname" placeholder="Your Name" aria-label="Your Name" required />
+                <input type="email" id="email" name="email" placeholder="Your Email" aria-label="Your Email" required />
+                <button type="submit" onclick="event.preventDefault()">Get in Touch</button>
+            </form>
+        </article>
+    </div>
+</section>
+
+<footer class="container">
+    <small>© 2025 Innovate And Amplify • <a href="./about.html">About</a> • <a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a></small>
+</footer>
+
 </body>
 </html>
