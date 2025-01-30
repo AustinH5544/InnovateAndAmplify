@@ -6,86 +6,112 @@
     <title>About - Innovate And Amplify</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     <style>
+        /* Global Styles */
         body {
-            background: linear-gradient(135deg, #f3ec78, #af4261);
+            background: linear-gradient(135deg, #0F172A, #3B82F6);
             background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            font-family: 'Arial', sans-serif;
-            color: black;
+            animation: gradientBG 10s ease infinite;
+            font-family: 'Inter', sans-serif;
+            color: #E5E7EB;
             margin: 0;
             padding: 0;
         }
 
         @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
+        /* Navbar */
+        nav {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(12px);
+            padding: 1.2em 2em;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+            nav ul {
+                display: flex;
+                gap: 1.5em;
+            }
+
+                nav ul li a {
+                    color: #E5E7EB;
+                    font-weight: 600;
+                    transition: color 0.3s ease;
+                }
+
+                    nav ul li a:hover {
+                        color: #60A5FA;
+                    }
+
+        /* Main Section */
         main {
-            padding: 2em;
-            max-width: 800px;
-            margin: 2em auto;
+            text-align: center;
+            padding: 4rem 2rem;
+            max-width: 900px;
+            margin: auto;
         }
 
         h1 {
             font-size: 2.5em;
-            margin-bottom: 0.5em;
-            color: #af4261;
+            color: #F9FAFB;
         }
 
         p {
+            color: #9CA3AF;
+            font-size: 1.2rem;
             line-height: 1.6;
-            margin-bottom: 1.5em;
-            color: black;
         }
 
-        nav ul li a {
-            color: black;
-        }
-
-        nav ul li a:hover {
-            color: #af4261;
-        }
-
-        footer small a {
-            color: black;
-        }
-
-        footer small a:hover {
-            color: #af4261;
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background: #0F172A;
+            color: #9CA3AF;
         }
     </style>
 </head>
 <body>
 
-<nav class="container-fluid">
-    <ul>
-        <li><strong><a href="index.html">Innovate And Amplify</a></strong></li>
-    </ul>
-    <ul>
-        <li><a href="about.html">About</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="contact.html" role="button">Contact</a></li>
-    </ul>
-</nav>
+    <nav class="container-fluid">
+        <strong><a href="index.html">Innovate And Amplify</a></strong>
+        <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="contact.html" role="button">Contact</a></li>
+        </ul>
+    </nav>
 
-<main>
-    <h1>About Me: Crafting Creativity, Driving Sales</h1>
-    <p>As a soon-to-be graduate in Computer Science, I have spent the last few years immersing myself in the world of technology, creativity, and innovation. My journey has been defined by a deep passion for creating content that resonates with audiences, inspires action, and ultimately drives results. Armed with a solid foundation in AI graphic design and AI video production, I bring a unique blend of technical expertise and artistic flair to every project I undertake.</p>
+    <main>
+        <h1>About Me: Crafting Creativity, Driving Sales</h1>
+        <p>As a soon-to-be graduate in Computer Science, I have spent the last few years immersing myself in the world of technology, creativity, and innovation. My journey has been defined by a deep passion for creating content that resonates with audiences, inspires action, and ultimately drives results. Armed with a solid foundation in AI graphic design and AI video production, I bring a unique blend of technical expertise and artistic flair to every project I undertake.</p>
 
-    <p>Throughout my academic journey, I have honed my skills in creating compelling visual content, whether it's a stunning graphic that catches the eye or a dynamic video that tells a story. These skills have allowed me to bridge the gap between creativity and strategy, enabling me to design video advertisements that do more than just entertain — they convert.</p>
+        <p>Throughout my academic journey, I have honed my skills in creating compelling visual content, whether it's a stunning graphic that catches the eye or a dynamic video that tells a story. These skills have allowed me to bridge the gap between creativity and strategy, enabling me to design video advertisements that do more than just entertain — they convert.</p>
 
-    <p>I understand that in today’s fast-paced digital world, grabbing attention isn’t enough. Businesses need to make an impact. That’s where I come in. My mission is to create video advertisements that not only showcase your brand but also connect with your audience on a deeper level, fostering trust and driving sales.</p>
+        <p>I understand that in today’s fast-paced digital world, grabbing attention isn’t enough. Businesses need to make an impact. That’s where I come in. My mission is to create video advertisements that not only showcase your brand but also connect with your audience on a deeper level, fostering trust and driving sales.</p>
 
-    <p>Whether you're looking for a sleek and professional campaign or a bold and daring approach to advertising, I’m here to transform your vision into a reality. By combining my expertise in video production, graphic design, and storytelling, I’ll craft content that elevates your brand and sets it apart from the competition.</p>
+        <p>Whether you're looking for a sleek and professional campaign or a bold and daring approach to advertising, I’m here to transform your vision into a reality. By combining my expertise in video production, graphic design, and storytelling, I’ll craft content that elevates your brand and sets it apart from the competition.</p>
 
-    <p>So, why choose me? Because I don’t just create ads — I create experiences. Let’s work together to bring your brand to life and unlock new growth opportunities.</p>
-</main>
+        <p>So, why choose me? Because I don’t just create ads — I create experiences. Let’s work together to bring your brand to life and unlock new growth opportunities.</p>
+    </main>
 
-<footer class="container">
-    <small>© 2025 Innovate And Amplify • <a href="about.html">About</a> • <a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a></small>
-</footer>
+    <footer>
+        <small>© 2025 Innovate And Amplify • <a href="about.html">About</a> • <a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a></small>
+    </footer>
 
 </body>
 </html>
