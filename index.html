@@ -6,12 +6,13 @@
     <title>Innovate And Amplify</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     <style>
+        /* Global Styles */
         body {
-            background: linear-gradient(135deg, #f3ec78, #af4261);
+            background: linear-gradient(135deg, #0F172A, #3B82F6);
             background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            font-family: 'Arial', sans-serif;
-            color: black;
+            animation: gradientBG 10s ease infinite;
+            font-family: 'Inter', sans-serif;
+            color: #E5E7EB;
             margin: 0;
             padding: 0;
         }
@@ -22,76 +23,103 @@
             100% { background-position: 0% 50%; }
         }
 
+        /* Navbar */
         nav {
-            padding: 1.5em;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(12px);
+            padding: 1.2em 2em;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        nav ul li strong {
-            color: black;
+        nav ul {
+            display: flex;
+            gap: 1.5em;
         }
 
         nav ul li a {
-            color: black;
+            color: #E5E7EB;
+            font-weight: 600;
+            transition: color 0.3s ease;
         }
 
         nav ul li a:hover {
-            color: #af4261;
+            color: #60A5FA;
         }
 
-        h2, h3, p {
-            color: black;
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 6rem 2rem;
         }
 
-        img {
-            max-width: 50%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-            border-radius: 8px;
+        h1, h2, h3 {
+            color: #F9FAFB;
         }
 
-        footer small a {
-            color: black;
+        p {
+            color: #9CA3AF;
+            font-size: 1.2rem;
         }
 
-        footer small a:hover {
-            color: #af4261;
-        }
-
-        form {
-            background: white;
-            padding: 1.5em;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        form input, form button {
-            border-radius: 8px;
-        }
-
-        form button {
-            background: #af4261;
+        /* CTA Button */
+        .cta-button {
+            background: #2563EB;
             color: white;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        form button:hover {
-            background: #f3ec78;
-            color: black;
+        .cta-button:hover {
+            background: #3B82F6;
+            box-shadow: 0px 4px 12px rgba(59, 130, 246, 0.5);
         }
 
-        section[aria-label="Subscribe example"] h2, 
-        section[aria-label="Subscribe example"] h3 {
-            color: black; /* Set to white for visibility */
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8); /* Add shadow for better readability */
+        /* Hero Image */
+        .hero-image {
+            display: block;
+            max-width: 60%;
+            height: auto;
+            margin: 2rem auto;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: rgba(15, 23, 42, 0.95);
+            padding: 3rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 4rem auto;
+            width: 60%;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-section h2, .contact-section h3 {
+            color: #F9FAFB;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background: #0F172A;
+            color: #9CA3AF;
         }
     </style>
 </head>
 <body>
 
 <nav class="container-fluid">
-    <ul>
-        <li><strong><a href="./index.html">Innovate And Amplify</a></strong></li>
-    </ul>
+    <strong><a href="./index.html">Innovate And Amplify</a></strong>
     <ul>
         <li><a href="./about.html">About</a></li>
         <li><a href="#services">Services</a></li>
@@ -99,44 +127,25 @@
     </ul>
 </nav>
 
-<main class="container">
-    <div class="grid">
-        <section>
-            <hgroup>
-                <h2>Welcome to Innovate And Amplify</h2>
-                <h3>Your Partner in Growth and Advertising</h3>
-            </hgroup>
-            <p>At Innovate And Amplify, we specialize in helping businesses achieve remarkable growth through tailored advertising strategies and innovative marketing solutions. Partner with us to unlock your full potential.</p>
-            <figure>
-                <img src="Images/GraphGoingUp.webp" alt="This could be you ^^^">
-            </figure>
-
-            <h3>Why Work With Us?</h3>
-            <p>With years of experience in digital marketing and advertising, we bring a deep understanding of how to drive results for businesses of all sizes.</p>
-
-            <h3>Tailored Strategies</h3>
-            <p>Each business is unique, and we create customized strategies that align with your goals and target audience.</p>
-        </section>
-    </div>
-</main>
-
-<section aria-label="Subscribe example">
-    <div class="container">
-        <article>
-            <hgroup>
-                <h2>Contact Us</h2>
-                <h3>Let’s Build Something Great Together</h3>
-            </hgroup>
-            <form class="grid">
-                <input type="text" id="firstname" name="firstname" placeholder="Your Name" aria-label="Your Name" required />
-                <input type="email" id="email" name="email" placeholder="Your Email" aria-label="Your Email" required />
-                <button type="submit" onclick="event.preventDefault()">Get in Touch</button>
-            </form>
-        </article>
-    </div>
+<section class="hero">
+    <h1>Welcome to Innovate And Amplify</h1>
+    <h3>Your Partner in Growth and Advertising</h3>
+    <p>At Innovate And Amplify, we specialize in helping businesses achieve remarkable growth through tailored advertising strategies and innovative marketing solutions. Partner with us to unlock your full potential.</p>
+    <button class="cta-button">Get Started</button>
+    <img src="GraphGoingUp.webp" alt="Innovative Business Growth" class="hero-image">
 </section>
 
-<footer class="container">
+<section class="contact-section" id="contact">
+    <h2>Contact Us</h2>
+    <h3>Let’s Build Something Great Together</h3>
+    <form>
+        <input type="text" id="firstname" name="firstname" placeholder="Your Name" required />
+        <input type="email" id="email" name="email" placeholder="Your Email" required />
+        <button type="submit" class="cta-button">Get in Touch</button>
+    </form>
+</section>
+
+<footer>
     <small>2025 Innovate And Amplify • <a href="./about.html">About</a> • <a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a></small>
 </footer>
 
