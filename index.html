@@ -8,8 +8,10 @@
     <style>
         /* Global Styles */
         body {
-            background: linear-gradient(135deg, #0F172A, #3B82F6);
-            background-size: 400% 400%;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(59, 130, 246, 0.85)), url('Images/GraphGoingUp.webp');
+            background-size: 400% 400%, cover;
+            background-position: 0% 50%, center;
+            background-attachment: scroll, fixed;
             animation: gradientBG 10s ease infinite;
             font-family: 'Inter', sans-serif;
             color: #E5E7EB;
@@ -18,9 +20,9 @@
         }
 
         @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% { background-position: 0% 50%, center; }
+            50% { background-position: 100% 50%, center; }
+            100% { background-position: 0% 50%, center; }
         }
 
         /* Navbar */
