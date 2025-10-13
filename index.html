@@ -222,6 +222,64 @@
             font-weight: 500;
         }
 
+        /* Added showcase section styles for images */
+        .showcase {
+            max-width: 1280px;
+            margin: 6rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .showcase-item {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: transform 0.3s;
+        }
+
+        .showcase-item:hover {
+            transform: scale(1.02);
+        }
+
+        .showcase-item.visible {
+            animation: scaleIn 0.6s ease forwards;
+        }
+
+        .showcase-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .showcase-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            padding: 2rem;
+            color: white;
+        }
+
+        .showcase-overlay h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .showcase-overlay p {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+
         /* Services Section */
         .services {
             max-width: 1280px;
@@ -440,6 +498,18 @@
             }
         }
 
+        /* Added scale-in animation for images */
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
         /* Mobile Menu */
         .mobile-menu-button {
             display: none;
@@ -470,6 +540,15 @@
 
             .stats {
                 grid-template-columns: 1fr;
+            }
+
+            /* Added responsive styles for showcase */
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .showcase-item img {
+                height: 300px;
             }
 
             .services-grid {
@@ -534,6 +613,32 @@
         <div class="stat-card">
             <div class="stat-number">98%</div>
             <div class="stat-label">Client Satisfaction</div>
+        </div>
+    </section>
+
+    <!-- Added showcase section with project images -->
+    <!-- Showcase Section -->
+    <section class="showcase">
+        <div class="section-header">
+            <div class="section-badge">Proven Results</div>
+            <h2 class="section-title">Driving Real Business Growth</h2>
+            <p class="section-description">See how we've helped businesses achieve remarkable growth through strategic marketing and data-driven insights.</p>
+        </div>
+        <div class="showcase-grid">
+            <div class="showcase-item">
+                <img src="modern-business-growth-chart-with-upward-trending-.jpg" alt="Business growth analytics showing upward trending charts and data visualization">
+                <div class="showcase-overlay">
+                    <h3>Data-Driven Results</h3>
+                    <p>Strategic insights that drive measurable business growth</p>
+                </div>
+            </div>
+            <div class="showcase-item">
+                <img src="business-team-celebrating-success-with-charts-and-.jpg" alt="Business team celebrating success with growth charts and analytics">
+                <div class="showcase-overlay">
+                    <h3>Client Success Stories</h3>
+                    <p>Celebrating milestones with our growing partners</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -682,7 +787,7 @@
         }, observerOptions);
 
         // Observe all animated elements
-        document.querySelectorAll('.stat-card, .service-card, .contact-form').forEach(el => {
+        document.querySelectorAll('.stat-card, .showcase-item, .service-card, .contact-form').forEach(el => {
             observer.observe(el);
         });
 
