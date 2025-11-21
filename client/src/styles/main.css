@@ -110,9 +110,8 @@ body {
 /* Hero */
 
 .hero {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 6rem 1.5rem 3rem;
+    width: 100%;
+    padding: 6rem 1.5rem 0; /* remove bottom padding here */
     text-align: center;
 }
 
@@ -145,6 +144,34 @@ body {
     gap: 1rem;
     flex-wrap: wrap;
 }
+
+/* layering for hero background */
+/* full-bleed hero with background */
+.hero.hero-with-bg {
+    position: relative;
+    overflow: hidden;
+    min-height: calc(100vh - 72px); /* entire screen minus nav height */
+}
+
+/* constrain content to 1280px while hero spans full width */
+.hero-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+/* background canvas layer */
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+/* content on top of background */
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
 
 /* Generic page layout */
 
@@ -238,7 +265,7 @@ body {
     background: var(--color-accent);
     color: var(--color-accent-foreground);
     padding: 2.5rem 1.5rem 1.5rem;
-    margin-top: 3rem;
+    margin-top: 0; /* remove the gap */
 }
 
 .footer-content {
