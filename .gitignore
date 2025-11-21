@@ -1,0 +1,12 @@
+# Visual Studio
+.vs/
+*.vsidx
+*.db
+*.db-shm
+*.db-wal
+slnx.sqlite
+
+# Node / Vite
+client/node_modules/
+client/dist/
+client/.vite/
