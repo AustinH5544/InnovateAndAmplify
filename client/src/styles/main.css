@@ -30,7 +30,7 @@ body {
 
 .app-main {
     flex: 1;
-    padding-top: 72px; /* space for fixed nav */
+    padding-top: 0; /* no need to offset fixed nav anymore */
 }
 
 /* Nav */
@@ -148,9 +148,7 @@ body {
 /* layering for hero background */
 /* full-bleed hero with background */
 .hero.hero-with-bg {
-    position: relative;
-    overflow: hidden;
-    min-height: calc(100vh - 72px); /* entire screen minus nav height */
+    min-height: 100vh; /* full viewport, nav floats on top */
 }
 
 /* constrain content to 1280px while hero spans full width */
