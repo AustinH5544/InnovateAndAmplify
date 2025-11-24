@@ -11,7 +11,7 @@ const values = [
         icon: <Zap className="h-6 w-6" />,
         title: "Innovation First",
         description:
-            "We stay ahead of the curve, leveraging cutting-edge technologies and creative approaches to solve complex problems.",
+            "I stay ahead of the curve, leveraging cutting-edge technologies and creative approaches to solve complex problems.",
     },
     {
         icon: <Users className="h-6 w-6" />,

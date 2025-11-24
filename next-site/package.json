@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "build:docs": "next build && powershell -Command \"Get-ChildItem ..\\docs\\ | Where-Object { $_.Name -ne 'CNAME' -and $_.Name -ne '.nojekyll' } | Remove-Item -Recurse -Force; Copy-Item .\\out\\* ..\\docs\\ -Recurse\"",
     "lint": "next lint"
   },
   "dependencies": {
