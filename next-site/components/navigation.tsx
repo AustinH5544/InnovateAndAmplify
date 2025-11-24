@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { useState } from "react"
 import { cn } from "@/lib/utils"
+import Image from "next/image"
 
 const navLinks = [
     { href: "/", label: "Home" },
@@ -23,8 +24,9 @@ export default function Navigation() {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
-                    <Link href="/" className="flex items-center space-x-2">
-                        <div className="text-2xl font-bold">
+                    <Link href="/" className="flex items-center gap-3">
+                        <Image src="/logo.png" alt="Innovate & Amplify Logo" width={40} height={40} className="w-10 h-10" />
+                        <div className="text-xl font-bold">
                             <span className="text-foreground">Innovate</span>
                             <span className="text-primary"> & </span>
                             <span className="subtext">Amplify</span>
