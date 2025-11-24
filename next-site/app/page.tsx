@@ -27,9 +27,9 @@ export default function HomePage() {
                             </span>
                         </h1>
 
-                        <p className="text-xl sm:text-2xl text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
+                        <p className="text-xl sm:text-2xl subtext max-w-2xl mx-auto text-pretty leading-relaxed">
                             {
-                                "We craft exceptional web experiences, build memorable brands, and amplify your digital presence with strategy-driven marketing."
+                                "I craft exceptional web experiences, build memorable brands, and amplify your digital presence with strategy-driven marketing."
                             }
                         </p>
 
@@ -41,7 +41,7 @@ export default function HomePage() {
                                 </Link>
                             </Button>
                             <Button size="lg" variant="outline" asChild>
-                                <Link href="/portfolio">{"View Our Work"}</Link>
+                                <Link href="/portfolio">{"View My Work"}</Link>
                             </Button>
                         </div>
                     </div>
@@ -52,8 +52,8 @@ export default function HomePage() {
             <section className="relative py-20 border-t border-border">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl sm:text-4xl font-bold mb-4">{"What We Do Best"}</h2>
-                        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                        <h2 className="text-3xl sm:text-4xl font-bold mb-4">{"What I Do Best"}</h2>
+                        <p className="text-lg subtext max-w-2xl mx-auto">
                             {"Three core services that drive results for ambitious businesses"}
                         </p>
                     </div>
@@ -63,24 +63,29 @@ export default function HomePage() {
                             {
                                 icon: <Zap className="h-8 w-8" />,
                                 title: "Web Development",
-                                description: "Lightning-fast, scalable websites built with cutting-edge technology and best practices.",
+                                description:
+                                    "Lightning-fast, scalable websites built with cutting-edge technology and best practices.",
                             },
                             {
                                 icon: <Target className="h-8 w-8" />,
                                 title: "Brand Identity",
-                                description: "Memorable visual identities that capture your essence and resonate with your audience.",
+                                description:
+                                    "Memorable visual identities that capture your essence and resonate with your audience.",
                             },
                             {
                                 icon: <Sparkles className="h-8 w-8" />,
                                 title: "Digital Marketing",
-                                description: "Data-driven strategies that amplify your reach and convert visitors into customers.",
+                                description:
+                                    "Data-driven strategies that amplify your reach and convert visitors into customers.",
                             },
                         ].map((service, index) => (
                             <div
                                 key={index}
                                 className="group p-8 rounded-xl bg-card/50 backdrop-blur border border-border hover:border-primary/50 transition-all duration-300 hover:scale-105"
                             >
-                                <div className="text-primary mb-4 group-hover:scale-110 transition-transform">{service.icon}</div>
+                                <div className="text-primary mb-4 group-hover:scale-110 transition-transform">
+                                    {service.icon}
+                                </div>
                                 <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
                                 <p className="text-muted-foreground leading-relaxed">{service.description}</p>
                             </div>
@@ -102,8 +107,10 @@ export default function HomePage() {
             <section className="relative py-20 border-t border-border">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-3xl mx-auto text-center space-y-6">
-                        <h2 className="text-3xl sm:text-4xl font-bold">{"Ready to Amplify Your Digital Presence?"}</h2>
-                        <p className="text-lg text-muted-foreground">
+                        <h2 className="text-3xl sm:text-4xl font-bold">
+                            {"Ready to Amplify Your Digital Presence?"}
+                        </h2>
+                        <p className="text-lg subtext">
                             {"Let's collaborate on something extraordinary. Get in touch to discuss your project."}
                         </p>
                         <Button size="lg" className="group" asChild>

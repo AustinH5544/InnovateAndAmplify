@@ -38,6 +38,7 @@
     --sidebar-accent-foreground: oklch(0.98 0.01 240); /* Light text on sidebar accent */
     --sidebar-border: oklch(0.3 0.03 250); /* Subtle sidebar borders */
     --sidebar-ring: oklch(0.75 0.15 195); /* Cyan sidebar focus */
+    --subtext: oklch();
 }
 
 .dark {

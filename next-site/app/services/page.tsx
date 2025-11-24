@@ -103,9 +103,9 @@ export default function ServicesPage() {
                                 {"Results"}
                             </span>
                         </h1>
-                        <p className="text-xl text-muted-foreground text-pretty leading-relaxed">
+                        <p className="text-xl subtext text-pretty leading-relaxed">
                             {
-                                "From concept to launch and beyond, we provide comprehensive digital solutions tailored to your business goals."
+                                "From concept to launch and beyond, I provide comprehensive digital solutions tailored to your business goals."
                             }
                         </p>
                     </div>
@@ -118,7 +118,7 @@ export default function ServicesPage() {
                                     <div className="p-3 rounded-lg bg-primary/10 text-primary">{service.icon}</div>
                                     <div>
                                         <h2 className="text-3xl font-bold">{service.category}</h2>
-                                        <p className="text-muted-foreground mt-1">{service.description}</p>
+                                        <p className="subtext mt-1">{service.description}</p>
                                     </div>
                                 </div>
 
@@ -132,7 +132,9 @@ export default function ServicesPage() {
                                                 {offering.icon}
                                             </div>
                                             <h3 className="text-lg font-semibold mb-2">{offering.title}</h3>
-                                            <p className="text-muted-foreground text-sm leading-relaxed">{offering.description}</p>
+                                            <p className="text-muted-foreground text-sm leading-relaxed">
+                                                {offering.description}
+                                            </p>
                                         </div>
                                     ))}
                                 </div>
@@ -143,9 +145,9 @@ export default function ServicesPage() {
                     {/* Process Section */}
                     <div className="max-w-4xl mx-auto mt-32">
                         <div className="text-center mb-12">
-                            <h2 className="text-3xl sm:text-4xl font-bold mb-4">{"Our Process"}</h2>
-                            <p className="text-lg text-muted-foreground">
-                                {"A proven methodology that delivers exceptional results"}
+                            <h2 className="text-3xl sm:text-4xl font-bold mb-4">{"My Process"}</h2>
+                            <p className="text-lg subtext">
+                                {"A clear, collaborative approach that delivers exceptional results"}
                             </p>
                         </div>
 
@@ -159,7 +161,7 @@ export default function ServicesPage() {
                                 <div key={index} className="text-center">
                                     <div className="text-4xl font-bold text-primary mb-4">{phase.step}</div>
                                     <h3 className="text-xl font-semibold mb-2">{phase.title}</h3>
-                                    <p className="text-sm text-muted-foreground">{phase.description}</p>
+                                    <p className="text-sm subtext">{phase.description}</p>
                                 </div>
                             ))}
                         </div>
@@ -169,7 +171,7 @@ export default function ServicesPage() {
                     <div className="max-w-3xl mx-auto text-center mt-32 p-12 rounded-2xl bg-card/50 backdrop-blur border border-border">
                         <h2 className="text-3xl font-bold mb-4">{"Ready to Get Started?"}</h2>
                         <p className="text-lg text-muted-foreground mb-8">
-                            {"Let's discuss how we can help achieve your digital goals."}
+                            {"Let's discuss how I can help you achieve your digital goals."}
                         </p>
                         <Button size="lg" className="group" asChild>
                             <Link href="/contact">

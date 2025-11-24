@@ -27,7 +27,7 @@ export default function Navigation() {
                         <div className="text-2xl font-bold">
                             <span className="text-foreground">Innovate</span>
                             <span className="text-primary"> & </span>
-                            <span className="text-secondary">Amplify</span>
+                            <span className="subtext">Amplify</span>
                         </div>
                     </Link>
 

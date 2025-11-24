@@ -10,61 +10,76 @@ import { useState } from "react"
 const projects = [
     {
         id: 1,
-        title: "TechFlow SaaS Platform",
+        title: "Starlit Stories",
         category: "Web Development",
-        description: "A comprehensive project management platform built with Next.js and real-time collaboration features.",
-        image: "/modern-saas-dashboard.png",
-        tags: ["Next.js", "TypeScript", "WebSockets"],
+        description: "A personaized children's storybook web app that let's parents generate custom unique bed time stories with their kids.",
+        image: "/PlaceHolder.png",
+        tags: ["React", "Vite", "Axios"],
         link: "#",
     },
     {
         id: 2,
-        title: "GreenLeaf Wellness",
-        category: "Brand Identity",
-        description: "Complete rebrand for a wellness startup including logo, visual system, and marketing materials.",
-        image: "/wellness-brand-logo-and-identity.jpg",
-        tags: ["Branding", "Logo Design", "Print"],
+        title: "HRV Monitoring App for St. Luke's Hospital",
+        category: "App Development",
+        description:
+            "A prototype iOS and Apple Watch app for monitoring heart rate variability (HRV), streaming watch data and storing it securely for clinical review.",
+        image: "/PlaceHolder.png",
+        tags: ["Swift", "watchOS", "HealthKit"],
         link: "#",
     },
     {
         id: 3,
-        title: "Urban Eats",
+        title: "SmartPark",
         category: "Web Development",
-        description: "Food delivery app with seamless ordering, payment processing, and real-time order tracking.",
-        image: "/food-delivery-app.png",
-        tags: ["React Native", "Node.js", "Stripe"],
+        description:
+            "A parking lot management web app that allows drivers to reserve and pay for spots, with tools for owners to track availability and usage.",
+        image: "/PlaceHolder.png",
+        tags: ["React", "Node.js", "Stripe"],
         link: "#",
     },
     {
         id: 4,
-        title: "Momentum Fitness",
-        category: "Digital Marketing",
-        description: "360-degree digital marketing campaign that increased memberships by 200% in 6 months.",
-        image: "/fitness-marketing-campaign-social-media.jpg",
-        tags: ["SEO", "Social Media", "Content"],
+        title: "Brand Identity Concept",
+        category: "Brand Identity",
+        description:
+            "A concept brand identity exploring logo design, typography, and mockup applications for a modern lifestyle brand.",
+        image: "/PlaceHolder.png",
+        tags: ["Logo Design", "Brand Guidelines", "Mockups"],
         link: "#",
     },
     {
         id: 5,
-        title: "CloudSync Analytics",
-        category: "Web Development",
-        description: "Enterprise analytics dashboard with advanced data visualization and reporting capabilities.",
-        image: "/analytics-dashboard.png",
-        tags: ["React", "D3.js", "Python"],
+        title: "Cozy Curations",
+        category: "Digital Marketing",
+        description:
+            "A print-on-demand online store where I manage product listings, TikTok content, and ongoing marketing experiments to drive traffic and sales.",
+        image: "/PlaceHolder.png",
+        tags: ["E-commerce", "TikTok Marketing", "Content Strategy"],
         link: "#",
     },
     {
         id: 6,
-        title: "Artisan Coffee Co.",
-        category: "Brand Identity",
-        description: "Artisanal brand identity and packaging design for a premium coffee roastery.",
-        image: "/coffee-brand-packaging-and-identity-design.jpg",
-        tags: ["Packaging", "Illustration", "Print"],
+        title: "Innovate and Amplify",
+        category: "Web Development",
+        description:
+            "My own studio portfolio site, built to showcase services, case studies, and a clear path for potential clients to get in touch.",
+        image: "/PlaceHolder.png",
+        tags: ["Next.js", "Tailwind CSS", "Static Export"],
         link: "#",
     },
 ]
 
-const categories = ["All", "Web Development", "Brand Identity", "Digital Marketing"]
+//{
+//    id: 5,
+//    title: "CloudSync Analytics",
+//    category: "Web Development",
+//    description: "Enterprise analytics dashboard with advanced data visualization and reporting capabilities.",
+//    image: "/PlaceHolder.png",
+//    tags: ["React", "D3.js", "Python"],
+//    link: "#",
+//},
+
+const categories = ["All", "Web Development", "App Development", "Digital Marketing", "Brand Identity"]
 
 export default function PortfolioPage() {
     const [selectedCategory, setSelectedCategory] = useState("All")
@@ -81,13 +96,13 @@ export default function PortfolioPage() {
                     {/* Header */}
                     <div className="max-w-3xl mx-auto text-center mb-16">
                         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-balance">
-                            {"Our "}
+                            {"My "}
                             <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
                                 {"Portfolio"}
                             </span>
                         </h1>
-                        <p className="text-xl text-muted-foreground text-pretty leading-relaxed">
-                            {"Explore our latest work and see how we help businesses transform their digital presence."}
+                        <p className="text-xl subtext text-pretty leading-relaxed">
+                            {"Explore my latest work and see how we help businesses transform their digital presence."}
                         </p>
                     </div>
 

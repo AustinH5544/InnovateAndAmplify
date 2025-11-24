@@ -66,8 +66,8 @@ export default function ContactPage() {
                                 {"Connect"}
                             </span>
                         </h1>
-                        <p className="text-xl text-muted-foreground text-pretty leading-relaxed">
-                            {"Have a project in mind? We'd love to hear about it. Fill out the form below or reach out directly."}
+                        <p className="text-xl subtext text-pretty leading-relaxed">
+                            {"Have a project in mind? I'd love to hear about it. Fill out the form below or reach out directly."}
                         </p>
                     </div>
 
@@ -138,7 +138,6 @@ export default function ContactPage() {
                                             <option value="web-development">{"Web Development"}</option>
                                             <option value="brand-identity">{"Brand Identity"}</option>
                                             <option value="digital-marketing">{"Digital Marketing"}</option>
-                                            <option value="consulting">{"Consulting"}</option>
                                         </select>
                                     </div>
 
@@ -152,6 +151,7 @@ export default function ContactPage() {
                                             className="flex h-10 w-full rounded-md border border-input bg-background/50 px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                                         >
                                             <option value="">{"Select budget range"}</option>
+                                            <option value="0k-5k">{"$0k - $5k"}</option>
                                             <option value="5k-10k">{"$5k - $10k"}</option>
                                             <option value="10k-25k">{"$10k - $25k"}</option>
                                             <option value="25k-50k">{"$25k - $50k"}</option>
@@ -197,7 +197,7 @@ export default function ContactPage() {
                                                 href="mailto:hello@innovateamplify.com"
                                                 className="text-muted-foreground hover:text-primary transition-colors"
                                             >
-                                                {"hello@innovateamplify.com"}
+                                                {"InnovateAndAmplify@gmail.com"}
                                             </a>
                                         </div>
                                     </div>
@@ -209,22 +209,8 @@ export default function ContactPage() {
                                         <div>
                                             <div className="font-medium mb-1">{"Phone"}</div>
                                             <a href="tel:+1234567890" className="text-muted-foreground hover:text-primary transition-colors">
-                                                {"+1 (234) 567-890"}
+                                                {"+1 (425) 582-1003"}
                                             </a>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-start gap-4">
-                                        <div className="p-3 rounded-lg bg-primary/10 text-primary">
-                                            <MapPin className="h-5 w-5" />
-                                        </div>
-                                        <div>
-                                            <div className="font-medium mb-1">{"Office"}</div>
-                                            <div className="text-muted-foreground">
-                                                {"123 Innovation Street"}
-                                                <br />
-                                                {"San Francisco, CA 94103"}
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -250,7 +236,7 @@ export default function ContactPage() {
 
                             <div className="p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20">
                                 <h3 className="text-xl font-bold mb-2">{"Quick Response"}</h3>
-                                <p className="text-muted-foreground">
+                                <p className="subtext">
                                     {"We typically respond to all inquiries within 24 hours during business days."}
                                 </p>
                             </div>
