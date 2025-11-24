@@ -163,7 +163,7 @@ export default function PortfolioPage() {
 
                     {/* CTA */}
                     <div className="max-w-3xl mx-auto text-center mt-32 p-12 rounded-2xl bg-card/50 backdrop-blur border border-border">
-                        <h2 className="text-3xl font-bold mb-4">{"Like What You See?"}</h2>
+                        <h2 className="text-3xl font-bold mb-4">{"Interested In What You See?"}</h2>
                         <p className="text-lg text-muted-foreground mb-8">
                             {"Let's create something amazing together. Start your project today."}
                         </p>
