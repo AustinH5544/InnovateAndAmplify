@@ -39,28 +39,10 @@ const stats = [
 
 const team = [
     {
-        name: "Alex Rivera",
-        role: "Founder & Creative Director",
-        image: "/placeholder.svg?height=400&width=400",
-        bio: "Visionary leader with 10+ years in digital strategy and design.",
-    },
-    {
-        name: "Jordan Chen",
-        role: "Lead Developer",
-        image: "/placeholder.svg?height=400&width=400",
-        bio: "Full-stack expert passionate about building scalable solutions.",
-    },
-    {
-        name: "Taylor Brooks",
-        role: "Brand Strategist",
-        image: "/placeholder.svg?height=400&width=400",
-        bio: "Creative mind crafting memorable brand experiences.",
-    },
-    {
-        name: "Morgan Davis",
-        role: "Marketing Director",
-        image: "/placeholder.svg?height=400&width=400",
-        bio: "Data-driven marketer focused on measurable growth.",
+        name: "Austin Harrison",
+        role: "Founder & Developer",
+        image: "/austin.jpg",
+        bio: "Visionary leader with a passion for digital strategy and design.",
     },
 ]
 
