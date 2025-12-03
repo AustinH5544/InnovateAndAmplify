@@ -7,13 +7,15 @@ import { ArrowRight, ExternalLink } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 
+const PROJECT_LINKS_ENABLED = false
+
 const projects = [
     {
         id: 1,
         title: "Starlit Stories",
         category: "Web Development",
-        description: "A personaized children's storybook web app that let's parents generate custom unique bed time stories with their kids.",
-        image: "/PlaceHolder.png",
+        description: "A personaized children's storybook generator that let's parents generate custom unique bed time stories with their kids.",
+        image: "/Starlit_Port.png",
         tags: ["React", "Vite", "Axios"],
         link: "#",
     },
@@ -23,17 +25,17 @@ const projects = [
         category: "App Development",
         description:
             "A prototype iOS and Apple Watch app for monitoring heart rate variability (HRV), streaming watch data and storing it securely for clinical review.",
-        image: "/PlaceHolder.png",
+        image: "/StLuke_PortV2.png",
         tags: ["Swift", "watchOS", "HealthKit"],
         link: "#",
     },
     {
         id: 3,
-        title: "SmartPark",
+        title: "Park Smart",
         category: "Web Development",
         description:
             "A parking lot management web app that allows drivers to reserve and pay for spots, with tools for owners to track availability and usage.",
-        image: "/PlaceHolder.png",
+        image: "/ParkSmart_Port.png",
         tags: ["React", "Node.js", "Stripe"],
         link: "#",
     },
@@ -53,7 +55,7 @@ const projects = [
         category: "Digital Marketing",
         description:
             "A print-on-demand online store where I manage product listings, TikTok content, and ongoing marketing experiments to drive traffic and sales.",
-        image: "/PlaceHolder.png",
+        image: "/CC_Port.png",
         tags: ["E-commerce", "TikTok Marketing", "Content Strategy"],
         link: "#",
     },
@@ -63,7 +65,7 @@ const projects = [
         category: "Web Development",
         description:
             "My own studio portfolio site, built to showcase services, case studies, and a clear path for potential clients to get in touch.",
-        image: "/PlaceHolder.png",
+        image: "/IAA_PortV2.png",
         tags: ["Next.js", "Tailwind CSS", "Static Export"],
         link: "#",
     },
@@ -102,7 +104,7 @@ export default function PortfolioPage() {
                             </span>
                         </h1>
                         <p className="text-xl subtext text-pretty leading-relaxed">
-                            {"Explore my latest work and see how we help businesses transform their digital presence."}
+                            {"Explore my latest work and see how I help businesses transform their digital presence."}
                         </p>
                     </div>
 
@@ -127,31 +129,38 @@ export default function PortfolioPage() {
                                 key={project.id}
                                 className="group rounded-xl overflow-hidden bg-card/50 backdrop-blur border border-border hover:border-primary/50 transition-all duration-300"
                             >
-                                <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+                                <div className="relative aspect-[4/3] overflow-hidden bg-muted flex items-center justify-center">
                                     <img
                                         src={project.image || "/placeholder.svg"}
                                         alt={project.title}
-                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                        className="max-w-full max-h-full object-contain scale-90 group-hover:scale-100 origin-center transition-transform duration-500"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
-                                        <Button size="sm" variant="secondary" asChild>
-                                            <a href={project.link}>
-                                                {"View Project"}
-                                                <ExternalLink className="ml-2 h-4 w-4" />
-                                            </a>
-                                        </Button>
-                                    </div>
-                                </div>
+                                    {PROJECT_LINKS_ENABLED && project.link && project.link !== "#" && (
+                                        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
+                                            <Button size="sm" variant="secondary" asChild>
+                                                <a href={project.link}>
+                                                    {"View Project"}
+                                                    <ExternalLink className="ml-2 h-4 w-4" />
+                                                </a>
+                                            </Button>
+                                        </div>
+                                    )}
+                                </div> 
 
                                 <div className="p-6">
                                     <div className="text-sm text-primary font-medium mb-2">{project.category}</div>
                                     <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors">
                                         {project.title}
                                     </h3>
-                                    <p className="text-muted-foreground text-sm leading-relaxed mb-4">{project.description}</p>
+                                    <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                                        {project.description}
+                                    </p>
                                     <div className="flex flex-wrap gap-2">
                                         {project.tags.map((tag, index) => (
-                                            <span key={index} className="px-3 py-1 text-xs rounded-full bg-muted text-muted-foreground">
+                                            <span
+                                                key={index}
+                                                className="px-3 py-1 text-xs rounded-full bg-muted text-muted-foreground"
+                                            >
                                                 {tag}
                                             </span>
                                         ))}
@@ -160,6 +169,7 @@ export default function PortfolioPage() {
                             </div>
                         ))}
                     </div>
+
 
                     {/* CTA */}
                     <div className="max-w-3xl mx-auto text-center mt-32 p-12 rounded-2xl bg-card/50 backdrop-blur border border-border">
