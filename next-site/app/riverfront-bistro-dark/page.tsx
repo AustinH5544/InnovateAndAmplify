@@ -7,29 +7,29 @@ export const metadata: Metadata = {
 
 export default function RiverfrontBistroPage() {
     return (
-        <main className="min-h-screen bg-stone-50 text-slate-900">
+        <main className="min-h-screen bg-slate-950 text-slate-50">
             {/* If you already have a site-wide nav in layout.tsx, you can remove this header */}
-            <header className="sticky top-0 z-30 border-b border-slate-200/80 bg-white/80 backdrop-blur-lg">
+            <header className="sticky top-0 z-30 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-lg">
                 <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-                    <div className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-700">
-                        Riverfront <span className="text-amber-600">Bistro</span>
+                    <div className="text-xs font-semibold uppercase tracking-[0.25em]">
+                        Riverfront <span className="text-amber-400">Bistro</span>
                     </div>
-                    <nav className="hidden items-center gap-6 text-sm text-slate-500 sm:flex">
-                        <a href="#about" className="hover:text-slate-900">
+                    <nav className="hidden items-center gap-6 text-sm text-slate-300 sm:flex">
+                        <a href="#about" className="hover:text-slate-50">
                             About
                         </a>
-                        <a href="#dishes" className="hover:text-slate-900">
+                        <a href="#dishes" className="hover:text-slate-50">
                             Signature Dishes
                         </a>
-                        <a href="#menu" className="hover:text-slate-900">
+                        <a href="#menu" className="hover:text-slate-50">
                             Menu
                         </a>
-                        <a href="#reservations" className="hover:text-slate-900">
+                        <a href="#reservations" className="hover:text-slate-50">
                             Reservations
                         </a>
                         <a
                             href="#contact"
-                            className="rounded-full border border-slate-300/80 px-3 py-1 text-xs uppercase tracking-[0.2em] text-slate-700 hover:border-amber-500/70 hover:text-amber-700"
+                            className="rounded-full border border-slate-700/70 px-3 py-1 text-xs uppercase tracking-[0.2em] text-slate-200 hover:border-slate-500 hover:text-slate-50"
                         >
                             Contact
                         </a>
@@ -38,13 +38,13 @@ export default function RiverfrontBistroPage() {
             </header>
 
             {/* Hero */}
-            <section className="border-b border-slate-200/80 bg-gradient-to-b from-amber-50 via-stone-50 to-white py-14 sm:py-16">
+            <section className="border-b border-slate-900/70 bg-gradient-to-b from-slate-950 via-slate-950 to-black py-14 sm:py-16">
                 <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1.5fr_minmax(0,1fr)] lg:items-center lg:px-8">
                     <div>
-                        <h1 className="text-balance text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+                        <h1 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
                             Modern comfort food on the river.
                         </h1>
-                        <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-600 sm:text-base">
+                        <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-300 sm:text-base">
                             Riverfront Bistro blends locally sourced ingredients with bold, modern flavors.
                             Join us for craft cocktails, seasonal plates, and a warm, relaxed atmosphere.
                         </p>
@@ -52,35 +52,35 @@ export default function RiverfrontBistroPage() {
                         <div className="mt-6 flex flex-wrap gap-3">
                             <a
                                 href="#reservations"
-                                className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-amber-500 to-amber-400 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_25px_rgba(251,191,36,0.35)] transition hover:translate-y-0.5 hover:shadow-[0_16px_35px_rgba(251,191,36,0.5)]"
+                                className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-amber-400 to-amber-300 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-[0_12px_35px_rgba(251,191,36,0.35)] transition hover:translate-y-0.5 hover:shadow-[0_18px_45px_rgba(251,191,36,0.45)]"
                             >
                                 Reserve a Table
                             </a>
                             <a
                                 href="#menu"
-                                className="inline-flex items-center justify-center rounded-full border border-slate-300/80 bg-white/70 px-5 py-2.5 text-sm font-medium text-slate-800 shadow-sm transition hover:border-amber-400/80 hover:bg-amber-50/80"
+                                className="inline-flex items-center justify-center rounded-full border border-slate-700/70 bg-slate-950/60 px-5 py-2.5 text-sm font-medium text-slate-100 transition hover:border-slate-500 hover:bg-slate-900"
                             >
                                 View Menu
                             </a>
                         </div>
 
-                        <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-slate-500">
+                        <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-slate-400">
                             <span>Open daily • 4 PM – 11 PM</span>
-                            <span className="text-slate-300">•</span>
+                            <span className="text-slate-600">•</span>
                             <span>Downtown Riverside</span>
                         </div>
                     </div>
 
                     {/* Hero image card */}
-                    <div className="relative rounded-3xl border border-slate-200 bg-white/90 p-2 shadow-[0_18px_45px_rgba(15,23,42,0.18)]">
+                    <div className="relative rounded-3xl border border-slate-800/70 bg-slate-950/80 p-2 shadow-[0_18px_50px_rgba(0,0,0,0.75)]">
                         <div
                             className="h-64 rounded-2xl bg-cover bg-center sm:h-72"
                             style={{
                                 backgroundImage:
-                                    "linear-gradient(to top, rgba(0,0,0,0.35), rgba(0,0,0,0.05)), url('/restaurant-hero.png')",
+                                    "linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.1)), url('/restaurant-hero.png')",
                             }}
                         />
-                        <div className="absolute bottom-4 left-4 inline-flex items-center rounded-full border border-white/80 bg-white/90 px-3 py-1 text-xs font-medium text-amber-700 shadow-sm backdrop-blur">
+                        <div className="absolute bottom-4 left-4 inline-flex items-center rounded-full border border-white/20 bg-slate-950/90 px-3 py-1 text-xs font-medium text-amber-300 backdrop-blur">
                             ★ Rated 4.8/5 by local diners
                         </div>
                     </div>
@@ -90,43 +90,43 @@ export default function RiverfrontBistroPage() {
             {/* About */}
             <section
                 id="about"
-                className="border-b border-slate-200/80 bg-white py-12 sm:py-14"
+                className="border-b border-slate-900/60 bg-slate-950/70 py-12 sm:py-14"
             >
                 <div className="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-[1.3fr_minmax(0,1fr)] lg:px-8">
                     <div>
-                        <h2 className="text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
+                        <h2 className="text-xl font-semibold tracking-tight sm:text-2xl">
                             About Riverfront Bistro
                         </h2>
-                        <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
+                        <p className="mt-3 text-sm leading-relaxed text-slate-300 sm:text-base">
                             We&apos;re a neighborhood restaurant focused on elevated comfort food, seasonal
                             ingredients, and genuine hospitality. From slow-braised short ribs to scratch-made
                             desserts, every plate is crafted with care.
                         </p>
-                        <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
+                        <p className="mt-3 text-sm leading-relaxed text-slate-300 sm:text-base">
                             Our bar features small-batch spirits, local beers, and a rotating cocktail list that
                             changes with the seasons.
                         </p>
                     </div>
 
-                    <div className="rounded-2xl border border-slate-200 bg-amber-50/60 p-5 shadow-[0_12px_32px_rgba(148,163,184,0.22)]">
-                        <h3 className="text-sm font-semibold tracking-wide text-slate-900">
+                    <div className="rounded-2xl border border-slate-800 bg-slate-950/80 p-5 shadow-[0_16px_40px_rgba(0,0,0,0.8)]">
+                        <h3 className="text-sm font-semibold tracking-wide text-slate-100">
                             Highlights
                         </h3>
-                        <ul className="mt-3 space-y-2 text-sm text-slate-700">
+                        <ul className="mt-3 space-y-2 text-sm text-slate-300">
                             <li className="flex gap-2">
-                                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-amber-500" />
+                                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-amber-400" />
                                 <span>Locally sourced ingredients</span>
                             </li>
                             <li className="flex gap-2">
-                                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-amber-500" />
+                                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-amber-400" />
                                 <span>Seasonal, rotating menu</span>
                             </li>
                             <li className="flex gap-2">
-                                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-amber-500" />
+                                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-amber-400" />
                                 <span>Craft cocktails &amp; mocktails</span>
                             </li>
                             <li className="flex gap-2">
-                                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-amber-500" />
+                                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-amber-400" />
                                 <span>Cozy river-view seating</span>
                             </li>
                         </ul>
@@ -137,19 +137,19 @@ export default function RiverfrontBistroPage() {
             {/* Signature Dishes */}
             <section
                 id="dishes"
-                className="border-b border-slate-200/80 bg-stone-50 py-12 sm:py-14"
+                className="border-b border-slate-900/60 bg-slate-950 py-12 sm:py-14"
             >
                 <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                     <div className="max-w-xl">
-                        <h2 className="text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
+                        <h2 className="text-xl font-semibold tracking-tight sm:text-2xl">
                             Signature Dishes
                         </h2>
-                        <p className="mt-2 text-sm text-slate-600 sm:text-base">
+                        <p className="mt-2 text-sm text-slate-300 sm:text-base">
                             A few guest favorites from our current seasonal menu.
                         </p>
                     </div>
 
-                    <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                    <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                         {[
                             {
                                 name: "Smoked Maple Glazed Salmon",
@@ -172,15 +172,15 @@ export default function RiverfrontBistroPage() {
                         ].map((dish) => (
                             <article
                                 key={dish.name}
-                                className="flex flex-col rounded-2xl border border-slate-200 bg-white p-4 shadow-[0_10px_28px_rgba(148,163,184,0.28)]"
+                                className="flex flex-col rounded-2xl border border-slate-800 bg-slate-950/90 p-4 shadow-[0_14px_36px_rgba(0,0,0,0.7)]"
                             >
-                                <h3 className="text-sm font-semibold text-slate-900 sm:text-base">
+                                <h3 className="text-sm font-semibold text-slate-50 sm:text-base">
                                     {dish.name}
                                 </h3>
-                                <p className="mt-2 text-xs leading-relaxed text-slate-600 sm:text-sm">
+                                <p className="mt-2 text-xs leading-relaxed text-slate-300 sm:text-sm">
                                     {dish.description}
                                 </p>
-                                <span className="mt-3 inline-flex w-fit rounded-full bg-amber-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-amber-700">
+                                <span className="mt-3 inline-flex w-fit rounded-full bg-amber-500/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-amber-300">
                                     {dish.tag}
                                 </span>
                             </article>
@@ -190,16 +190,13 @@ export default function RiverfrontBistroPage() {
             </section>
 
             {/* Menu Preview */}
-            <section
-                id="menu"
-                className="border-b border-slate-200/80 bg-white py-12 sm:py-14"
-            >
+            <section id="menu" className="border-b border-slate-900/60 bg-slate-950/70 py-12 sm:py-14">
                 <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                     <div className="max-w-xl">
-                        <h2 className="text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
+                        <h2 className="text-xl font-semibold tracking-tight sm:text-2xl">
                             Menu Preview
                         </h2>
-                        <p className="mt-2 text-sm text-slate-600 sm:text-base">
+                        <p className="mt-2 text-sm text-slate-300 sm:text-base">
                             Our full menu changes seasonally — here&apos;s a sample of what we&apos;re
                             serving this month.
                         </p>
@@ -208,7 +205,7 @@ export default function RiverfrontBistroPage() {
                     <div className="mt-6 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                         {/* Column: Starters */}
                         <div>
-                            <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
+                            <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-300">
                                 Starters
                             </h3>
                             <div className="mt-4 space-y-3">
@@ -232,7 +229,7 @@ export default function RiverfrontBistroPage() {
 
                         {/* Column: Mains */}
                         <div>
-                            <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
+                            <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-300">
                                 Mains
                             </h3>
                             <div className="mt-4 space-y-3">
@@ -256,7 +253,7 @@ export default function RiverfrontBistroPage() {
 
                         {/* Column: Cocktails */}
                         <div>
-                            <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
+                            <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-300">
                                 Cocktails
                             </h3>
                             <div className="mt-4 space-y-3">
@@ -279,7 +276,7 @@ export default function RiverfrontBistroPage() {
                         </div>
                     </div>
 
-                    <p className="mt-5 text-xs text-slate-500">
+                    <p className="mt-5 text-xs text-slate-400">
                         *Menu items and pricing are subject to change based on seasonal availability.
                     </p>
                 </div>
@@ -288,37 +285,37 @@ export default function RiverfrontBistroPage() {
             {/* Reservations */}
             <section
                 id="reservations"
-                className="border-b border-slate-200/80 bg-amber-50/60 py-12 sm:py-14"
+                className="border-b border-slate-900/70 bg-gradient-to-br from-slate-950 via-slate-950 to-slate-900 py-12 sm:py-14"
             >
                 <div className="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
                     <div>
-                        <h2 className="text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
+                        <h2 className="text-xl font-semibold tracking-tight sm:text-2xl">
                             Reserve Your Table
                         </h2>
-                        <p className="mt-3 text-sm leading-relaxed text-slate-700 sm:text-base">
+                        <p className="mt-3 text-sm leading-relaxed text-slate-300 sm:text-base">
                             Date night, celebration, or casual drinks with friends — we&apos;d love to host
                             you. Use the form to request a reservation and we&apos;ll confirm by email or
                             text.
                         </p>
-                        <ul className="mt-4 space-y-2 text-xs text-slate-700 sm:text-sm">
+                        <ul className="mt-4 space-y-2 text-xs text-slate-300 sm:text-sm">
                             <li className="flex gap-2">
-                                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-amber-500" />
+                                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-amber-400" />
                                 <span>Parties of 8+ — please call the restaurant directly.</span>
                             </li>
                             <li className="flex gap-2">
-                                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-amber-500" />
+                                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-amber-400" />
                                 <span>Walk-ins are welcome based on availability.</span>
                             </li>
                         </ul>
                     </div>
 
-                    <form className="space-y-4 rounded-2xl border border-amber-200 bg-white p-5 shadow-[0_16px_40px_rgba(251,191,36,0.28)]">
+                    <form className="space-y-4 rounded-2xl border border-slate-800 bg-slate-950/95 p-5 shadow-[0_18px_44px_rgba(0,0,0,0.85)]">
                         <Field label="Name" id="name">
                             <input
                                 id="name"
                                 type="text"
                                 placeholder="Alex Smith"
-                                className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-0 transition focus:border-amber-400 focus:ring-2 focus:ring-amber-300/60"
+                                className="w-full rounded-xl border border-slate-700/80 bg-slate-950 px-3 py-2 text-sm text-slate-50 outline-none ring-0 transition focus:border-amber-300 focus:ring-2 focus:ring-amber-400/50"
                             />
                         </Field>
 
@@ -327,7 +324,7 @@ export default function RiverfrontBistroPage() {
                                 id="email"
                                 type="email"
                                 placeholder="you@example.com"
-                                className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-0 transition focus:border-amber-400 focus:ring-2 focus:ring-amber-300/60"
+                                className="w-full rounded-xl border border-slate-700/80 bg-slate-950 px-3 py-2 text-sm text-slate-50 outline-none ring-0 transition focus:border-amber-300 focus:ring-2 focus:ring-amber-400/50"
                             />
                         </Field>
 
@@ -336,14 +333,14 @@ export default function RiverfrontBistroPage() {
                                 <input
                                     id="date"
                                     type="date"
-                                    className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-0 transition focus:border-amber-400 focus:ring-2 focus:ring-amber-300/60"
+                                    className="w-full rounded-xl border border-slate-700/80 bg-slate-950 px-3 py-2 text-sm text-slate-50 outline-none ring-0 transition focus:border-amber-300 focus:ring-2 focus:ring-amber-400/50"
                                 />
                             </Field>
                             <Field label="Time" id="time">
                                 <input
                                     id="time"
                                     type="time"
-                                    className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-0 transition focus:border-amber-400 focus:ring-2 focus:ring-amber-300/60"
+                                    className="w-full rounded-xl border border-slate-700/80 bg-slate-950 px-3 py-2 text-sm text-slate-50 outline-none ring-0 transition focus:border-amber-300 focus:ring-2 focus:ring-amber-400/50"
                                 />
                             </Field>
                         </div>
@@ -351,7 +348,7 @@ export default function RiverfrontBistroPage() {
                         <Field label="Guests" id="guests">
                             <select
                                 id="guests"
-                                className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-0 transition focus:border-amber-400 focus:ring-2 focus:ring-amber-300/60"
+                                className="w-full rounded-xl border border-slate-700/80 bg-slate-950 px-3 py-2 text-sm text-slate-50 outline-none ring-0 transition focus:border-amber-300 focus:ring-2 focus:ring-amber-400/50"
                             >
                                 <option>2</option>
                                 <option>3–4</option>
@@ -366,13 +363,13 @@ export default function RiverfrontBistroPage() {
                                 id="notes"
                                 rows={3}
                                 placeholder="Allergies, special occasion, seating preference..."
-                                className="w-full resize-none rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-0 transition focus:border-amber-400 focus:ring-2 focus:ring-amber-300/60"
+                                className="w-full resize-none rounded-xl border border-slate-700/80 bg-slate-950 px-3 py-2 text-sm text-slate-50 outline-none ring-0 transition focus:border-amber-300 focus:ring-2 focus:ring-amber-400/50"
                             />
                         </Field>
 
                         <button
                             type="submit"
-                            className="mt-2 inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-amber-500 to-amber-400 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_25px_rgba(251,191,36,0.35)] transition hover:translate-y-0.5 hover:shadow-[0_16px_35px_rgba(251,191,36,0.5)]"
+                            className="mt-2 inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-amber-400 to-amber-300 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-[0_12px_35px_rgba(251,191,36,0.35)] transition hover:translate-y-0.5 hover:shadow-[0_18px_45px_rgba(251,191,36,0.45)]"
                         >
                             Request Reservation
                         </button>
@@ -383,39 +380,39 @@ export default function RiverfrontBistroPage() {
             {/* Contact / footer-ish section (can be removed if you use your global footer) */}
             <section
                 id="contact"
-                className="bg-slate-50 py-10 text-sm text-slate-700 sm:text-[0.9rem]"
+                className="bg-black/95 py-10 text-sm text-slate-300 sm:text-[0.9rem]"
             >
                 <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                     <div className="grid gap-8 md:grid-cols-3">
                         <div>
-                            <div className="text-xs font-semibold uppercase tracking-[0.26em] text-slate-700">
-                                Riverfront <span className="text-amber-600">Bistro</span>
+                            <div className="text-xs font-semibold uppercase tracking-[0.26em] text-slate-200">
+                                Riverfront <span className="text-amber-400">Bistro</span>
                             </div>
-                            <p className="mt-3 max-w-xs text-xs text-slate-500 sm:text-sm">
+                            <p className="mt-3 max-w-xs text-xs text-slate-400 sm:text-sm">
                                 Modern comfort food and cocktails on the river. Gather, unwind, and stay
                                 awhile.
                             </p>
                         </div>
                         <div>
-                            <h4 className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-700">
+                            <h4 className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-200">
                                 Visit Us
                             </h4>
-                            <p className="mt-3 text-xs text-slate-500 sm:text-sm">
+                            <p className="mt-3 text-xs text-slate-400 sm:text-sm">
                                 123 Riverfront Way
                                 <br />
                                 Riverside, WA 99201
                             </p>
-                            <p className="mt-2 text-xs text-slate-500 sm:text-sm">
+                            <p className="mt-2 text-xs text-slate-400 sm:text-sm">
                                 Phone: (509) 555-0123
                                 <br />
                                 Email: hello@riverfrontbistro.com
                             </p>
                         </div>
                         <div>
-                            <h4 className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-700">
+                            <h4 className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-200">
                                 Hours
                             </h4>
-                            <p className="mt-3 text-xs text-slate-500 sm:text-sm">
+                            <p className="mt-3 text-xs text-slate-400 sm:text-sm">
                                 Mon–Thu: 4 PM – 10 PM
                                 <br />
                                 Fri–Sat: 4 PM – 11 PM
@@ -425,7 +422,7 @@ export default function RiverfrontBistroPage() {
                         </div>
                     </div>
 
-                    <div className="mt-6 border-t border-slate-200 pt-4 text-xs text-slate-500">
+                    <div className="mt-6 border-t border-slate-800/70 pt-4 text-xs text-slate-500">
                         © {new Date().getFullYear()} Riverfront Bistro (Demo). Built for Innovate &amp;
                         Amplify.
                     </div>
@@ -448,7 +445,7 @@ function Field({ label, id, children }: FieldProps) {
         <div className="space-y-1.5">
             <label
                 htmlFor={id}
-                className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500"
+                className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400"
             >
                 {label}
             </label>
@@ -465,12 +462,12 @@ type MenuItemProps = {
 
 function MenuItem({ name, price, description }: MenuItemProps) {
     return (
-        <div className="border-b border-slate-200 pb-3 last:border-none last:pb-0">
-            <div className="flex items-baseline justify-between gap-3 text-[13px] font-medium text-slate-900">
+        <div className="border-b border-slate-800/70 pb-3 last:border-none last:pb-0">
+            <div className="flex items-baseline justify-between gap-3 text-[13px] font-medium text-slate-100">
                 <span>{name}</span>
-                <span className="text-xs font-semibold text-amber-700">{price}</span>
+                <span className="text-xs font-semibold text-amber-300">{price}</span>
             </div>
-            <p className="mt-1 text-xs text-slate-600">{description}</p>
+            <p className="mt-1 text-xs text-slate-400">{description}</p>
         </div>
     );
 }
