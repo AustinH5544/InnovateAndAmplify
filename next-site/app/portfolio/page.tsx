@@ -7,87 +7,85 @@ import { ArrowRight, ExternalLink } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 
-const PROJECT_LINKS_ENABLED = false
+const isExternalLink = (href: string) => href.startsWith("http");
 
 const projects = [
     {
         id: 1,
         title: "Starlit Stories",
-        category: "Web Development",
-        description: "A personaized children's storybook generator that let's parents generate custom unique bed time stories with their kids.",
+        categories: ["App Development", "Web Development"],
+        description:
+            "A personaized children's storybook generator that let's parents generate custom unique bed time stories with their kids.",
         image: "/Starlit_Port.png",
-        tags: ["React", "Vite", "Axios"],
-        link: "#",
+        tags: ["React", "Azure", "OpenAI"],
+        link: "https://staging.starlitstories.app", // <- full URL, with https
+        showLink: true,
     },
     {
         id: 2,
         title: "HRV Monitoring App for St. Luke's Hospital",
-        category: "App Development",
+        categories: ["App Development"],
         description:
             "A prototype iOS and Apple Watch app for monitoring heart rate variability (HRV), streaming watch data and storing it securely for clinical review.",
         image: "/StLuke_PortV2.png",
         tags: ["Swift", "watchOS", "HealthKit"],
-        link: "#",
+        link: undefined,               // no destination yet
+        showLink: false,               // <- hide button
     },
     {
         id: 3,
         title: "Park Smart",
-        category: "Web Development",
+        categories: ["App Development", "Web Development"],
         description:
             "A parking lot management web app that allows drivers to reserve and pay for spots, with tools for owners to track availability and usage.",
         image: "/ParkSmart_Port.png",
         tags: ["React", "Node.js", "Stripe"],
-        link: "#",
+        link: undefined,
+        showLink: false,
     },
     {
         id: 4,
-        title: "Brand Identity Concept",
-        category: "Brand Identity",
-        description:
-            "A concept brand identity exploring logo design, typography, and mockup applications for a modern lifestyle brand.",
-        image: "/PlaceHolder.png",
+        title: "Restaurant AI Agent/Chatbot (In-Progress)",
+        categories: ["AI Agents", "Web Development"],
+        description: "AI agent for restaurants",
+        image: "/Rest_Port.png",
         tags: ["Logo Design", "Brand Guidelines", "Mockups"],
-        link: "#",
+        link: "/restaurant-demo",      // <- your new page
+        showLink: true,
     },
     {
         id: 5,
         title: "Cozy Curations",
-        category: "Digital Marketing",
+        categories: ["Digital Marketing"],
         description:
             "A print-on-demand online store where I manage product listings, TikTok content, and ongoing marketing experiments to drive traffic and sales.",
         image: "/CC_Port.png",
         tags: ["E-commerce", "TikTok Marketing", "Content Strategy"],
-        link: "#",
+        link: undefined,
+        showLink: false,
     },
     {
         id: 6,
         title: "Innovate and Amplify",
-        category: "Web Development",
+        categories: ["Web Development"],
         description:
             "My own studio portfolio site, built to showcase services, case studies, and a clear path for potential clients to get in touch.",
         image: "/IAA_PortV2.png",
         tags: ["Next.js", "Tailwind CSS", "Static Export"],
-        link: "#",
+        link: "/",                     // maybe your homepage
+        showLink: true,
     },
-]
+];
 
-//{
-//    id: 5,
-//    title: "CloudSync Analytics",
-//    category: "Web Development",
-//    description: "Enterprise analytics dashboard with advanced data visualization and reporting capabilities.",
-//    image: "/PlaceHolder.png",
-//    tags: ["React", "D3.js", "Python"],
-//    link: "#",
-//},
-
-const categories = ["All", "Web Development", "App Development", "Digital Marketing", "Brand Identity"]
+const categories = ["All", "Web Development", "App Development", "Digital Marketing", "AI Agents"]
 
 export default function PortfolioPage() {
     const [selectedCategory, setSelectedCategory] = useState("All")
 
     const filteredProjects =
-        selectedCategory === "All" ? projects : projects.filter((project) => project.category === selectedCategory)
+        selectedCategory === "All"
+            ? projects
+            : projects.filter((project) => project.categories.includes(selectedCategory));
 
     return (
         <ShaderBackground>
@@ -104,7 +102,7 @@ export default function PortfolioPage() {
                             </span>
                         </h1>
                         <p className="text-xl subtext text-pretty leading-relaxed">
-                            {"Explore my latest work and see how I help businesses transform their digital presence."}
+                            {"Explore the projects I have worked on and see how I help businesses transform their digital presence."}
                         </p>
                     </div>
 
@@ -135,20 +133,31 @@ export default function PortfolioPage() {
                                         alt={project.title}
                                         className="max-w-full max-h-full object-contain scale-90 group-hover:scale-100 origin-center transition-transform duration-500"
                                     />
-                                    {PROJECT_LINKS_ENABLED && project.link && project.link !== "#" && (
-                                        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
+                                    {project.showLink && project.link && (
+                                        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent
+                  opacity-100 md:opacity-0 md:group-hover:opacity-100
+                  transition-opacity duration-300 flex items-end justify-center pb-4">
                                             <Button size="sm" variant="secondary" asChild>
-                                                <a href={project.link}>
-                                                    {"View Project"}
-                                                    <ExternalLink className="ml-2 h-4 w-4" />
-                                                </a>
+                                                {isExternalLink(project.link) ? (
+                                                    <a href={project.link} target="_blank" rel="noreferrer">
+                                                        {"View Project"}
+                                                        <ExternalLink className="ml-2 h-4 w-4" />
+                                                    </a>
+                                                ) : (
+                                                    <Link href={project.link}>
+                                                        {"View Project"}
+                                                        <ExternalLink className="ml-2 h-4 w-4" />
+                                                    </Link>
+                                                )}
                                             </Button>
                                         </div>
                                     )}
                                 </div> 
 
                                 <div className="p-6">
-                                    <div className="text-sm text-primary font-medium mb-2">{project.category}</div>
+                                    <div className="text-sm text-primary font-medium mb-2">
+                                        {project.categories.join(" - ")}
+                                    </div>
                                     <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors">
                                         {project.title}
                                     </h3>
