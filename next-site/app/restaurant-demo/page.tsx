@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import "../app/restaurant.css"
+import "./restaurant.css"
 import { Header } from "@/components/restaurant/header"
 import { Hero } from "@/components/restaurant/hero"
 import { About } from "@/components/restaurant/about"
