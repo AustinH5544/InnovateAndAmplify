@@ -143,7 +143,7 @@ export default function ContactPage() {
                                             >
                                                 <option value="">{"Select a service"}</option>
                                                 <option value="web-development">{"Web Development"}</option>
-                                                <option value="brand-identity">{"Brand Identity"}</option>
+                                                <option value="ai-automation">{"AI Automation"}</option>
                                                 <option value="digital-marketing">{"Digital Marketing"}</option>
                                             </select>
                                         </div>

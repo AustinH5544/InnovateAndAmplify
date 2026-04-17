@@ -67,7 +67,7 @@ export default function AboutPage() {
                         </h1>
                         <p className="subtext mt-5 text-lg leading-8 sm:text-xl">
                             {
-                                "A one-person studio blending modern web development, brand identity, and digital marketing to help small businesses and creators punch above their weight online."
+                                "A one-person studio blending modern web development, AI automation, and digital marketing to help small businesses and creators punch above their weight online."
                             }
                         </p>
                     </section>

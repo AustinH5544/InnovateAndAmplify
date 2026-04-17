@@ -3,7 +3,7 @@
 import Navigation from "@/components/navigation"
 import ShaderBackground from "@/components/shader-background"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Sparkles, Target, Zap } from "lucide-react"
+import { ArrowRight, Bot, Sparkles, Zap } from "lucide-react"
 import Link from "next/link"
 
 const services = [
@@ -13,9 +13,9 @@ const services = [
         description: "Lightning-fast, scalable websites built with cutting-edge technology and best practices.",
     },
     {
-        icon: <Target className="h-6 w-6" />,
-        title: "Brand Identity",
-        description: "Memorable visual identities that capture your essence and resonate with your audience.",
+        icon: <Bot className="h-6 w-6" />,
+        title: "AI Automation",
+        description: "Automations and agents that remove busywork, tighten operations, and scale what already works.",
     },
     {
         icon: <Sparkles className="h-6 w-6" />,
@@ -59,7 +59,7 @@ export default function HomePage() {
                                     </Link>
                                 </Button>
                                 <Button size="lg" variant="outline" asChild>
-                                    <Link href="/portfolio">{"View My Work"}</Link>
+                                    <Link href="/services">{"View Services"}</Link>
                                 </Button>
                             </div>
 

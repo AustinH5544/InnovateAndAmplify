@@ -10,7 +10,6 @@ import Image from "next/image"
 const navLinks = [
     { href: "/", label: "Home" },
     { href: "/services", label: "Services" },
-    { href: "/portfolio", label: "Portfolio" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
 ]
@@ -39,7 +38,7 @@ export default function Navigation() {
                                 <span className="px-1.5 text-primary">&amp;</span>
                                 <span>Amplify</span>
                             </div>
-                            <div className="eyebrow hidden sm:block">Digital Product Systems</div>
+                            <div className="eyebrow hidden sm:block">Digital Products &amp; AI Automation</div>
                         </div>
                     </Link>
 

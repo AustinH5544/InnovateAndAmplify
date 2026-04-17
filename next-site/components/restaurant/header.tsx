@@ -21,7 +21,7 @@ export function Header() {
                 <div className="flex items-center gap-5">
                     {/* Back to Innovate & Amplify */}
                     <Link
-                        href="/portfolio" // change to "/" if you prefer going to the homepage
+                        href="/"
                         className="group inline-flex items-center gap-2 rounded-full border border-[oklch(0.75_0.15_75_/_0.35)] px-3 py-1 text-[9px] sm:text-[10px] tracking-[0.25em] text-[oklch(0.75_0.15_75)] transition-colors hover:bg-[oklch(0.18_0.03_80)] hover:text-[oklch(0.97_0_0)]"
                     >
                         <ArrowLeft className="h-3 w-3 sm:h-3.5 sm:w-3.5 transition-transform group-hover:-translate-x-0.5" />
