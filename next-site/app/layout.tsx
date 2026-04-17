@@ -1,21 +1,6 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({
-    subsets: ["latin"],
-    weight: ["300", "400", "500", "600", "700"],
-    variable: "--font-sans",
-    display: "swap",
-});
-
-const cormorant = Cormorant_Garamond({
-    subsets: ["latin"],
-    weight: ["400", "500", "600", "700"],
-    variable: "--font-serif",
-    display: "swap",
-});
 
 export const metadata: Metadata = {
     title: "Innovate & Amplify | Creative Digital Solutions",
@@ -39,8 +24,8 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <body className={`${inter.className} ${cormorant.variable} antialiased`}>
+        <html lang="en" className="dark">
+            <body className="font-sans antialiased">
                 {children}
                 {/* If you ever move to Vercel and install @vercel/analytics:
             <Analytics /> 

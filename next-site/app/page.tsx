@@ -6,119 +6,173 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Sparkles, Target, Zap } from "lucide-react"
 import Link from "next/link"
 
+const services = [
+    {
+        icon: <Zap className="h-6 w-6" />,
+        title: "Web Development",
+        description: "Lightning-fast, scalable websites built with cutting-edge technology and best practices.",
+    },
+    {
+        icon: <Target className="h-6 w-6" />,
+        title: "Brand Identity",
+        description: "Memorable visual identities that capture your essence and resonate with your audience.",
+    },
+    {
+        icon: <Sparkles className="h-6 w-6" />,
+        title: "Digital Marketing",
+        description: "Data-driven strategies that amplify your reach and convert visitors into customers.",
+    },
+]
+
 export default function HomePage() {
     return (
         <ShaderBackground>
             <Navigation />
 
-            {/* Hero Section */}
-            <main className="relative min-h-screen flex items-center justify-center pt-16">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
-                    <div className="max-w-4xl mx-auto text-center space-y-8">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-4">
-                            <Sparkles size={16} />
-                            <span>{"Premium Digital Solutions"}</span>
+            <main className="page-main flex items-center">
+                <div className="site-container">
+                    <section className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(340px,0.95fr)] lg:items-center lg:gap-14">
+                        <div className="space-y-8">
+                            <div className="section-badge motion-safe-enter">
+                                <Sparkles className="h-3.5 w-3.5 text-primary" />
+                                <span>{"Premium Digital Solutions"}</span>
+                            </div>
+
+                            <div className="space-y-6">
+                                <h1 className="hero-title max-w-4xl motion-safe-enter motion-safe-delay-1">
+                                    <span className="text-foreground">{"Transform Your Vision Into "}</span>
+                                    <span className="gradient-text">{"Digital Reality"}</span>
+                                </h1>
+
+                                <p className="subtext max-w-2xl text-lg leading-8 sm:text-xl">
+                                    {
+                                        "I craft exceptional web experiences, build memorable brands, and amplify your digital presence with strategy-driven marketing."
+                                    }
+                                </p>
+                            </div>
+
+                            <div className="flex flex-col gap-4 pt-2 sm:flex-row">
+                                <Button size="lg" className="group" asChild>
+                                    <Link href="/contact">
+                                        {"Get Started"}
+                                        <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                                    </Link>
+                                </Button>
+                                <Button size="lg" variant="outline" asChild>
+                                    <Link href="/portfolio">{"View My Work"}</Link>
+                                </Button>
+                            </div>
+
+                            <div className="flex flex-wrap gap-3 pt-2">
+                                {services.map((service) => (
+                                    <span key={service.title} className="stat-chip">
+                                        {service.title}
+                                    </span>
+                                ))}
+                            </div>
                         </div>
 
-                        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-balance leading-tight">
-                            <span className="text-foreground">{"Transform Your Vision Into "}</span>
-                            <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
-                                {"Digital Reality"}
-                            </span>
-                        </h1>
+                        <div className="tech-frame p-5 sm:p-6 lg:p-7">
+                            <div className="mb-6 flex items-center justify-between gap-3">
+                                <div>
+                                    <p className="eyebrow">{"Capability Stack"}</p>
+                                    <p className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-foreground">
+                                        {"What I Do Best"}
+                                    </p>
+                                </div>
+                                <div className="rounded-full border border-white/12 bg-white/[0.04] px-3 py-1 font-mono text-[0.72rem] uppercase tracking-[0.22em] text-muted-foreground">
+                                    {"01-03"}
+                                </div>
+                            </div>
 
-                        <p className="text-xl sm:text-2xl subtext max-w-2xl mx-auto text-pretty leading-relaxed">
-                            {
-                                "I craft exceptional web experiences, build memorable brands, and amplify your digital presence with strategy-driven marketing."
-                            }
-                        </p>
-
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-                            <Button size="lg" className="group" asChild>
-                                <Link href="/contact">
-                                    {"Get Started"}
-                                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                                </Link>
-                            </Button>
-                            <Button size="lg" variant="outline" asChild>
-                                <Link href="/portfolio">{"View My Work"}</Link>
-                            </Button>
+                            <div className="grid gap-4">
+                                {services.map((service, index) => (
+                                    <div
+                                        key={service.title}
+                                        className="glass-panel interactive-panel rounded-[1.35rem] p-5"
+                                    >
+                                        <div className="mb-4 flex items-start justify-between gap-4">
+                                            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 text-primary">
+                                                {service.icon}
+                                            </div>
+                                            <span className="eyebrow text-[0.68rem]">{`0${index + 1}`}</span>
+                                        </div>
+                                        <h2 className="text-xl font-semibold tracking-[-0.03em] text-foreground">
+                                            {service.title}
+                                        </h2>
+                                        <p className="subtext mt-3 text-sm leading-7">{service.description}</p>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                    </div>
+                    </section>
                 </div>
             </main>
 
-            {/* Services Preview */}
-            <section className="relative py-20 border-t border-border">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl sm:text-4xl font-bold mb-4">{"What I Do Best"}</h2>
-                        <p className="text-lg subtext max-w-2xl mx-auto">
+            <section className="page-section">
+                <div className="site-container">
+                    <div className="section-rule mb-10" />
+
+                    <div className="mx-auto max-w-3xl text-center">
+                        <div className="section-badge">
+                            <span>{"Focused Services"}</span>
+                        </div>
+                        <h2 className="page-title mt-6">{"What I Do Best"}</h2>
+                        <p className="subtext mx-auto mt-4 max-w-2xl text-lg leading-8">
                             {"Three core services that drive results for ambitious businesses"}
                         </p>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                        {[
-                            {
-                                icon: <Zap className="h-8 w-8" />,
-                                title: "Web Development",
-                                description:
-                                    "Lightning-fast, scalable websites built with cutting-edge technology and best practices.",
-                            },
-                            {
-                                icon: <Target className="h-8 w-8" />,
-                                title: "Brand Identity",
-                                description:
-                                    "Memorable visual identities that capture your essence and resonate with your audience.",
-                            },
-                            {
-                                icon: <Sparkles className="h-8 w-8" />,
-                                title: "Digital Marketing",
-                                description:
-                                    "Data-driven strategies that amplify your reach and convert visitors into customers.",
-                            },
-                        ].map((service, index) => (
-                            <div
-                                key={index}
-                                className="group p-8 rounded-xl bg-card/50 backdrop-blur border border-border hover:border-primary/50 transition-all duration-300 hover:scale-105"
-                            >
-                                <div className="text-primary mb-4 group-hover:scale-110 transition-transform">
-                                    {service.icon}
+                    <div className="mt-12 grid gap-6 md:grid-cols-3">
+                        {services.map((service, index) => (
+                            <div key={service.title} className="glass-panel interactive-panel p-7">
+                                <div className="mb-6 flex items-center justify-between">
+                                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 text-primary">
+                                        {service.icon}
+                                    </div>
+                                    <span className="eyebrow">{`0${index + 1}`}</span>
                                 </div>
-                                <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
-                                <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+                                <h3 className="text-2xl font-semibold tracking-[-0.04em] text-foreground">
+                                    {service.title}
+                                </h3>
+                                <p className="subtext mt-4 leading-8">{service.description}</p>
                             </div>
                         ))}
                     </div>
 
-                    <div className="text-center mt-12">
+                    <div className="mt-10 text-center">
                         <Button variant="outline" size="lg" asChild>
                             <Link href="/services">
                                 {"Explore All Services"}
-                                <ArrowRight className="ml-2 h-4 w-4" />
+                                <ArrowRight className="ml-1 h-4 w-4" />
                             </Link>
                         </Button>
                     </div>
                 </div>
             </section>
 
-            {/* CTA Section */}
-            <section className="relative py-20 border-t border-border">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="max-w-3xl mx-auto text-center space-y-6">
-                        <h2 className="text-3xl sm:text-4xl font-bold">
-                            {"Ready to Amplify Your Digital Presence?"}
-                        </h2>
-                        <p className="text-lg subtext">
-                            {"Let's collaborate on something extraordinary. Get in touch to discuss your project."}
-                        </p>
-                        <Button size="lg" className="group" asChild>
-                            <Link href="/contact">
-                                {"Start Your Project"}
-                                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                            </Link>
-                        </Button>
+            <section className="page-section pt-0">
+                <div className="site-container">
+                    <div className="glass-panel-strong px-6 py-10 text-center sm:px-10 sm:py-12 lg:px-14">
+                        <div className="mx-auto max-w-3xl">
+                            <div className="section-badge">
+                                <span>{"Project Intake"}</span>
+                            </div>
+                            <h2 className="page-title mt-6">{"Ready to Amplify Your Digital Presence?"}</h2>
+                            <p className="subtext mt-4 text-lg leading-8">
+                                {
+                                    "Let's collaborate on something extraordinary. Get in touch to discuss your project."
+                                }
+                            </p>
+                            <div className="mt-8">
+                                <Button size="lg" className="group" asChild>
+                                    <Link href="/contact">
+                                        {"Start Your Project"}
+                                        <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                                    </Link>
+                                </Button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>

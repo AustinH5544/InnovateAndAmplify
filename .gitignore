@@ -6,6 +6,9 @@
 *.db-wal
 slnx.sqlite
 
+# Codex local config
+.codex/
+
 # Node / Vite
 client/node_modules/
 client/dist/

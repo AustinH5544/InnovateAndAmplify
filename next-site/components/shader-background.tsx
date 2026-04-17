@@ -12,8 +12,15 @@ interface ShaderBackgroundProps {
 export default function ShaderBackground({ children }: ShaderBackgroundProps) {
     const containerRef = useRef<HTMLDivElement>(null)
     const [isActive, setIsActive] = useState(false)
+    const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
 
     useEffect(() => {
+        const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
+        const updateMotionPreference = () => setPrefersReducedMotion(mediaQuery.matches)
+
+        updateMotionPreference()
+        mediaQuery.addEventListener("change", updateMotionPreference)
+
         const handleMouseEnter = () => setIsActive(true)
         const handleMouseLeave = () => setIsActive(false)
 
@@ -24,6 +31,7 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
         }
 
         return () => {
+            mediaQuery.removeEventListener("change", updateMotionPreference)
             if (container) {
                 container.removeEventListener("mouseenter", handleMouseEnter)
                 container.removeEventListener("mouseleave", handleMouseLeave)
@@ -32,28 +40,28 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
     }, [])
 
     return (
-        <div ref={containerRef} className="min-h-screen bg-black relative overflow-hidden">
+        <div ref={containerRef} className="site-shell relative min-h-screen overflow-hidden bg-[#040814]">
             {/* SVG Filters */}
             <svg className="absolute inset-0 w-0 h-0">
                 <defs>
                     <filter id="glass-effect" x="-50%" y="-50%" width="200%" height="200%">
-                        <feTurbulence baseFrequency="0.005" numOctaves="1" result="noise" />
-                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.3" />
+                        <feTurbulence baseFrequency="0.004" numOctaves="1" result="noise" />
+                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.25" />
                         <feColorMatrix
                             type="matrix"
                             values="1 0 0 0 0.02
-                      0 1 0 0 0.02
-                      0 0 1 0 0.05
-                      0 0 0 0.9 0"
+                      0 1 0 0 0.04
+                      0 0 1 0 0.08
+                      0 0 0 0.92 0"
                             result="tint"
                         />
                     </filter>
                     <filter id="gooey-filter" x="-50%" y="-50%" width="200%" height="200%">
-                        <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
+                        <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
                         <feColorMatrix
                             in="blur"
                             mode="matrix"
-                            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
+                            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 24 -9"
                             result="gooey"
                         />
                         <feComposite in="SourceGraphic" in2="gooey" operator="atop" />
@@ -63,17 +71,26 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
 
             {/* Background Shaders */}
             <MeshGradient
-                className="absolute inset-0 w-full h-full"
-                colors={["#000000", "#8b5cf6", "#ffffff", "#1e1b4b", "#4c1d95"]}
-                speed={0.3}
+                className="absolute inset-0 h-full w-full opacity-95"
+                colors={["#030712", "#08101f", "#0b1835", "#1a2d63", "#050918"]}
+                speed={prefersReducedMotion ? 0.03 : isActive ? 0.22 : 0.12}
             />
             <MeshGradient
-                className="absolute inset-0 w-full h-full opacity-60"
-                colors={["#000000", "#ffffff", "#8b5cf6", "#000000"]}
-                speed={0.2}
+                className="absolute inset-0 h-full w-full opacity-70 mix-blend-screen"
+                colors={["#071121", "#0d2046", "#153575", "#0f1830"]}
+                speed={prefersReducedMotion ? 0.02 : isActive ? 0.15 : 0.08}
             />
 
-            {children}
+            <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                <div className="tech-orbit -left-32 top-0 h-[28rem] w-[28rem] bg-[#587dff]" />
+                <div className="tech-orbit right-[-6rem] top-28 h-[22rem] w-[22rem] bg-[#51d7ff]" />
+                <div className="tech-orbit bottom-[-12rem] left-[28%] h-[24rem] w-[24rem] bg-[#7a5cff]" />
+                <div className="absolute inset-y-0 left-[7%] hidden w-px bg-gradient-to-b from-transparent via-white/12 to-transparent lg:block" />
+                <div className="absolute inset-y-0 right-[8%] hidden w-px bg-gradient-to-b from-transparent via-sky-300/18 to-transparent lg:block" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_28%),linear-gradient(135deg,rgba(87,125,255,0.12),transparent_30%,rgba(81,215,255,0.1)_62%,transparent)]" />
+            </div>
+
+            <div className="relative z-10">{children}</div>
         </div>
     )
 }
