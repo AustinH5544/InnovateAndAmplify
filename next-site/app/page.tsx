@@ -46,7 +46,7 @@ export default function HomePage() {
 
                                 <p className="subtext max-w-2xl text-lg leading-8 sm:text-xl">
                                     {
-                                        "I craft exceptional web experiences, build memorable brands, and amplify your digital presence with strategy-driven marketing."
+                                        "I craft exceptional web experiences, automate workflows with AI, build memorable brands, and amplify your digital presence with strategy-driven marketing."
                                     }
                                 </p>
                             </div>

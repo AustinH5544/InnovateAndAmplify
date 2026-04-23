@@ -36,8 +36,8 @@ const values = [
 
 const stats = [
     { value: "2024", label: "Founded" },
-    { value: "5+", label: "Projects Shipped" },
-    { value: "3+", label: "Client Collaborations" },
+    { value: "7+", label: "Products Shipped" },
+    { value: "6+", label: "Client Collaborations" },
     { value: "1", label: "Person Studio" },
 ]
 
@@ -46,7 +46,7 @@ const team = [
         name: "Austin Harrison",
         role: "Founder & Developer",
         image: "/austin.jpg",
-        bio: "I'm a freelance developer and designer working across web, branding, and digital marketing for small businesses and creators.",
+        bio: "I run Innovate & Amplify as a founder-led studio, partnering with clients across web, AI automation, branding, and digital marketing to ship polished work that performs.",
     },
 ]
 
@@ -67,7 +67,7 @@ export default function AboutPage() {
                         </h1>
                         <p className="subtext mt-5 text-lg leading-8 sm:text-xl">
                             {
-                                "A one-person studio blending modern web development, AI automation, and digital marketing to help small businesses and creators punch above their weight online."
+                                "A founder-led studio blending modern web development, AI automation, and digital marketing to help small businesses and creators grow with clarity and confidence."
                             }
                         </p>
                     </section>
@@ -82,17 +82,17 @@ export default function AboutPage() {
                                 <div className="subtext mt-6 space-y-4 leading-8">
                                     <p>
                                         {
-                                            "Founded in 2024, Innovate & Amplify started as my personal studio with a simple mission: to help people with big ideas show up online with clarity, confidence, and modern, cohesive visuals."
+                                            "Founded in 2024, Innovate & Amplify is my studio for building high-performing websites, modern brand systems, and AI-powered workflows that help clients show up online with clarity and confidence."
                                         }
                                     </p>
                                     <p>
                                         {
-                                            "Instead of a large agency with layers of handoffs, you work directly with me - from early strategy and messaging, to brand foundations, to design and development, to launch and iteration."
+                                            "Instead of a large agency with layers of handoffs, you work directly with me end-to-end - from strategy and messaging, to design and development, to launch, optimization, and ongoing improvement."
                                         }
                                     </p>
                                     <p>
                                         {
-                                            "I'm still early in my freelance journey, but I've already shipped a growing handful of websites, apps, and digital experiments. The goal isn't to inflate project counts - it's to build a tight portfolio of work I'm proud of and long-term relationships with clients who value thoughtful craft."
+                                            "Since launching, I've shipped 7+ products and collaborated with 6+ clients - delivering websites, apps, and automations built to scale, easy to maintain, and aligned with real business goals."
                                         }
                                     </p>
                                 </div>

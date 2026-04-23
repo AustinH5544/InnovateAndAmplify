@@ -1,4 +1,4 @@
-:HL["/_next/static/chunks/9906d3d9fe86c843.css","style"]
+:HL["/_next/static/chunks/21ac31ad48c76341.css","style"]
 :HL["/_next/static/chunks/43b492ff33ac1ed7.css","style"]
 :HL["/elegant-fine-dining-restaurant-interior-with-warm-.jpg","image"]
-0:{"buildId":"EVjknmaK8ysku12eoG7Ti","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"restaurant-demo","paramType":null,"paramKey":"restaurant-demo","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
+0:{"buildId":"-Dz3mJETl_nLmEWewlBLX","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"restaurant-demo","paramType":null,"paramKey":"restaurant-demo","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}

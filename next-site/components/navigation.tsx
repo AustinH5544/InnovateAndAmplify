@@ -38,7 +38,7 @@ export default function Navigation() {
                                 <span className="px-1.5 text-primary">&amp;</span>
                                 <span>Amplify</span>
                             </div>
-                            <div className="eyebrow hidden sm:block">Digital Products &amp; AI Automation</div>
+                            <div className="eyebrow hidden sm:block">AI Automation &amp; Digital Products</div>
                         </div>
                     </Link>
 
