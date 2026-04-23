@@ -30,7 +30,7 @@ const values = [
         icon: <Heart className="h-6 w-6" />,
         title: "Passion Driven",
         description:
-            "I genuinely love building for the web, shaping brands, and refining digital experiencesâ€”and that energy shows up in the care I bring to every project.",
+            "I genuinely love building for the web, shaping brands, and refining digital experiences - and that energy shows up in the care I bring to every project.",
     },
 ]
 
@@ -46,7 +46,7 @@ const team = [
         name: "Austin Harrison",
         role: "Founder & Developer",
         image: "/austin.jpg",
-        bio: "Iâ€™m a freelance developer and designer working across web, branding, and digital marketing for small businesses and creators.",
+        bio: "I'm a freelance developer and designer working across web, branding, and digital marketing for small businesses and creators.",
     },
 ]
 
@@ -87,12 +87,12 @@ export default function AboutPage() {
                                     </p>
                                     <p>
                                         {
-                                            "Instead of a large agency with layers of handoffs, you work directly with meâ€”from early strategy and messaging, to brand foundations, to design and development, to launch and iteration."
+                                            "Instead of a large agency with layers of handoffs, you work directly with me - from early strategy and messaging, to brand foundations, to design and development, to launch and iteration."
                                         }
                                     </p>
                                     <p>
                                         {
-                                            "Iâ€™m still early in my freelance journey, but Iâ€™ve already shipped a growing handful of websites, apps, and digital experiments. The goal isnâ€™t to inflate project countsâ€”itâ€™s to build a tight portfolio of work Iâ€™m proud of and long-term relationships with clients who value thoughtful craft."
+                                            "I'm still early in my freelance journey, but I've already shipped a growing handful of websites, apps, and digital experiments. The goal isn't to inflate project counts - it's to build a tight portfolio of work I'm proud of and long-term relationships with clients who value thoughtful craft."
                                         }
                                     </p>
                                 </div>
