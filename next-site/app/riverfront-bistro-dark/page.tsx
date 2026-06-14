@@ -1,4 +1,5 @@
 ﻿import type { Metadata } from "next";
+import { BistroReservationForm } from "@/components/restaurant/bistro-reservation-form";
 
 export const metadata: Metadata = {
     title: "Riverfront Bistro | Demo Restaurant",
@@ -309,71 +310,7 @@ export default function RiverfrontBistroPage() {
                         </ul>
                     </div>
 
-                    <form className="space-y-4 rounded-2xl border border-slate-800 bg-slate-950/95 p-5 shadow-[0_18px_44px_rgba(0,0,0,0.85)]">
-                        <Field label="Name" id="name">
-                            <input
-                                id="name"
-                                type="text"
-                                placeholder="Alex Smith"
-                                className="w-full rounded-xl border border-slate-700/80 bg-slate-950 px-3 py-2 text-sm text-slate-50 outline-none ring-0 transition focus:border-amber-300 focus:ring-2 focus:ring-amber-400/50"
-                            />
-                        </Field>
-
-                        <Field label="Email" id="email">
-                            <input
-                                id="email"
-                                type="email"
-                                placeholder="you@example.com"
-                                className="w-full rounded-xl border border-slate-700/80 bg-slate-950 px-3 py-2 text-sm text-slate-50 outline-none ring-0 transition focus:border-amber-300 focus:ring-2 focus:ring-amber-400/50"
-                            />
-                        </Field>
-
-                        <div className="grid gap-4 sm:grid-cols-2">
-                            <Field label="Date" id="date">
-                                <input
-                                    id="date"
-                                    type="date"
-                                    className="w-full rounded-xl border border-slate-700/80 bg-slate-950 px-3 py-2 text-sm text-slate-50 outline-none ring-0 transition focus:border-amber-300 focus:ring-2 focus:ring-amber-400/50"
-                                />
-                            </Field>
-                            <Field label="Time" id="time">
-                                <input
-                                    id="time"
-                                    type="time"
-                                    className="w-full rounded-xl border border-slate-700/80 bg-slate-950 px-3 py-2 text-sm text-slate-50 outline-none ring-0 transition focus:border-amber-300 focus:ring-2 focus:ring-amber-400/50"
-                                />
-                            </Field>
-                        </div>
-
-                        <Field label="Guests" id="guests">
-                            <select
-                                id="guests"
-                                className="w-full rounded-xl border border-slate-700/80 bg-slate-950 px-3 py-2 text-sm text-slate-50 outline-none ring-0 transition focus:border-amber-300 focus:ring-2 focus:ring-amber-400/50"
-                            >
-                                <option>2</option>
-                                <option>3–4</option>
-                                <option>5–6</option>
-                                <option>7–8</option>
-                                <option>9+</option>
-                            </select>
-                        </Field>
-
-                        <Field label="Notes (optional)" id="notes">
-                            <textarea
-                                id="notes"
-                                rows={3}
-                                placeholder="Allergies, special occasion, seating preference..."
-                                className="w-full resize-none rounded-xl border border-slate-700/80 bg-slate-950 px-3 py-2 text-sm text-slate-50 outline-none ring-0 transition focus:border-amber-300 focus:ring-2 focus:ring-amber-400/50"
-                            />
-                        </Field>
-
-                        <button
-                            type="submit"
-                            className="mt-2 inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-amber-400 to-amber-300 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-[0_12px_35px_rgba(251,191,36,0.35)] transition hover:translate-y-0.5 hover:shadow-[0_18px_45px_rgba(251,191,36,0.45)]"
-                        >
-                            Request Reservation
-                        </button>
-                    </form>
+                    <BistroReservationForm variant="dark" />
                 </div>
             </section>
 
@@ -433,26 +370,6 @@ export default function RiverfrontBistroPage() {
 }
 
 /* --- Small presentational components --- */
-
-type FieldProps = {
-    label: string;
-    id: string;
-    children: React.ReactNode;
-};
-
-function Field({ label, id, children }: FieldProps) {
-    return (
-        <div className="space-y-1.5">
-            <label
-                htmlFor={id}
-                className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400"
-            >
-                {label}
-            </label>
-            {children}
-        </div>
-    );
-}
 
 type MenuItemProps = {
     name: string;

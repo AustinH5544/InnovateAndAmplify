@@ -1,4 +1,8 @@
+"use client"
+
 import type React from "react"
+import { useState } from "react"
+
 type FieldProps = {
   label: string
   id: string
@@ -17,6 +21,14 @@ function Field({ label, id, children }: FieldProps) {
 }
 
 export function ReservationForm() {
+  const [submitted, setSubmitted] = useState(false)
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setSubmitted(true)
+    setTimeout(() => setSubmitted(false), 5000)
+  }
+
   return (
     <section id="reservations" className="bg-luxury-dark py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -56,7 +68,12 @@ export function ReservationForm() {
           </div>
 
           {/* Form */}
-          <form className="reservation-form border border-[oklch(0.3_0_0)] p-8 sm:p-10">
+          <form onSubmit={handleSubmit} className="reservation-form border border-[oklch(0.3_0_0)] p-8 sm:p-10">
+            {submitted && (
+              <p className="mb-6 rounded border border-[oklch(0.75_0.15_75)] px-4 py-3 text-sm text-[oklch(0.75_0.15_75)]">
+                Your reservation request has been received. We will confirm within 24 hours.
+              </p>
+            )}
             <div className="space-y-6">
               <Field label="Full Name" id="name">
                 <input

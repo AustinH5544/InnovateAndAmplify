@@ -1,6 +1,20 @@
+"use client"
+
+import type React from "react"
+import { useState } from "react"
 import { MapPin, Phone, Mail, Clock } from "lucide-react"
 
 export function Footer() {
+  const [email, setEmail] = useState("")
+  const [subscribed, setSubscribed] = useState(false)
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email) return
+    setSubscribed(true)
+    setEmail("")
+    setTimeout(() => setSubscribed(false), 4000)
+  }
   return (
     <footer className="bg-[oklch(0.08_0_0)] py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -68,10 +82,16 @@ export function Footer() {
             <p className="mt-6 text-sm text-[oklch(0.5_0_0)]">
               Subscribe for exclusive events, seasonal menus, and special offers.
             </p>
-            <form className="mt-4 flex flex-col gap-3">
+            {subscribed && (
+              <p className="mt-4 text-sm text-[oklch(0.75_0.15_75)]">Thank you for subscribing!</p>
+            )}
+            <form onSubmit={handleSubscribe} className="mt-4 flex flex-col gap-3">
               <input
                 type="email"
                 placeholder="Your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
                 className="border border-[oklch(0.3_0_0)] bg-transparent px-4 py-3 text-sm text-[oklch(0.8_0_0)] outline-none transition focus:border-[oklch(0.75_0.15_75)]"
               />
               <button type="submit" className="btn-gold py-3 text-[10px] tracking-[0.2em]">

@@ -203,10 +203,10 @@ export default function ContactPage() {
                                             <div>
                                                 <div className="font-medium text-foreground">{"Email"}</div>
                                                 <a
-                                                    href="mailto:hello@innovateamplify.com"
+                                                    href="mailto:innovateandamplify@gmail.com"
                                                     className="subtext mt-1 inline-block text-sm transition-colors hover:text-primary"
                                                 >
-                                                    {"InnovateAndAmplify@gmail.com"}
+                                                    {"innovateandamplify@gmail.com"}
                                                 </a>
                                             </div>
                                         </div>

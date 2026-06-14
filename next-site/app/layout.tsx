@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     description:
         "Premium web development, branding, and digital marketing services for ambitious businesses",
     generator: "v0.app",
+    referrer: "strict-origin-when-cross-origin",
     // Optional: if you copy the icons into /public, you can add:
     // icons: {
     //   icon: [
