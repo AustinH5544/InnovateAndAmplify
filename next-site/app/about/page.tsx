@@ -45,7 +45,7 @@ const team = [
     {
         name: "Austin Harrison",
         role: "Founder & Developer",
-        image: "/austin.jpg",
+        image: "/austin.webp",
         bio: "I build websites, AI automations, and digital marketing systems for small businesses and solo operators who want professional results without the overhead. On the technical side, that means Next.js, React, and TypeScript for web, and n8n, the OpenAI API, and Anthropic's Claude for automation workflows. I've been building for the web since before AI was mainstream — and now that it is, I help clients put it to work on problems that actually matter to their business.",
     },
 ]
