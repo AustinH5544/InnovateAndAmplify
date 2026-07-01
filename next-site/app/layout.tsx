@@ -25,11 +25,16 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" className="dark">
+            <head>
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+                    rel="stylesheet"
+                />
+            </head>
             <body className="font-sans antialiased">
                 {children}
-                {/* If you ever move to Vercel and install @vercel/analytics:
-            <Analytics /> 
-        */}
             </body>
         </html>
     );

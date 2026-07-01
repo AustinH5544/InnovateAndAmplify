@@ -13,6 +13,7 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
     const containerRef = useRef<HTMLDivElement>(null)
     const [isActive, setIsActive] = useState(false)
     const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+    const [isPageVisible, setIsPageVisible] = useState(true)
 
     useEffect(() => {
         const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
@@ -20,6 +21,9 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
 
         updateMotionPreference()
         mediaQuery.addEventListener("change", updateMotionPreference)
+
+        const handleVisibilityChange = () => setIsPageVisible(!document.hidden)
+        document.addEventListener("visibilitychange", handleVisibilityChange)
 
         const handleMouseEnter = () => setIsActive(true)
         const handleMouseLeave = () => setIsActive(false)
@@ -32,12 +36,15 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
 
         return () => {
             mediaQuery.removeEventListener("change", updateMotionPreference)
+            document.removeEventListener("visibilitychange", handleVisibilityChange)
             if (container) {
                 container.removeEventListener("mouseenter", handleMouseEnter)
                 container.removeEventListener("mouseleave", handleMouseLeave)
             }
         }
     }, [])
+
+    const shaderSpeed = prefersReducedMotion || !isPageVisible ? 0 : isActive ? 0.18 : 0.08
 
     return (
         <div ref={containerRef} className="site-shell relative min-h-screen overflow-hidden bg-[#040814]">
@@ -69,16 +76,11 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
                 </defs>
             </svg>
 
-            {/* Background Shaders */}
+            {/* Single background shader — pauses when tab is hidden or reduced-motion requested */}
             <MeshGradient
                 className="absolute inset-0 h-full w-full opacity-95"
                 colors={["#030712", "#08101f", "#0b1835", "#1a2d63", "#050918"]}
-                speed={prefersReducedMotion ? 0.03 : isActive ? 0.22 : 0.12}
-            />
-            <MeshGradient
-                className="absolute inset-0 h-full w-full opacity-70 mix-blend-screen"
-                colors={["#071121", "#0d2046", "#153575", "#0f1830"]}
-                speed={prefersReducedMotion ? 0.02 : isActive ? 0.15 : 0.08}
+                speed={shaderSpeed}
             />
 
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
