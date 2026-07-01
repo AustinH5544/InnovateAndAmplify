@@ -46,7 +46,7 @@ const team = [
         name: "Austin Harrison",
         role: "Founder & Developer",
         image: "/austin.jpg",
-        bio: "I run Innovate & Amplify as a founder-led studio, partnering with clients across web, AI automation, branding, and digital marketing to ship polished work that performs.",
+        bio: "I build websites, AI automations, and digital marketing systems for small businesses and solo operators who want professional results without the overhead. On the technical side, that means Next.js, React, and TypeScript for web, and n8n, the OpenAI API, and Anthropic's Claude for automation workflows. I've been building for the web since before AI was mainstream — and now that it is, I help clients put it to work on problems that actually matter to their business.",
     },
 ]
 
@@ -62,8 +62,8 @@ export default function AboutPage() {
                             <span>{"Studio Profile"}</span>
                         </div>
                         <h1 className="page-title mt-6">
-                            {"Meet "}
-                            <span className="gradient-text">{"Innovate & Amplify"}</span>
+                            {"Austin Harrison — "}
+                            <span className="gradient-text">{"Founder & Developer"}</span>
                         </h1>
                         <p className="subtext mt-5 text-lg leading-8 sm:text-xl">
                             {
@@ -95,6 +95,11 @@ export default function AboutPage() {
                                             "Since launching, I've shipped 7+ products and collaborated with 6+ clients - delivering websites, apps, and automations built to scale, easy to maintain, and aligned with real business goals."
                                         }
                                     </p>
+                                    <p>
+                                        {
+                                            "Based in the Pacific Northwest, I work with local service businesses, startups, and solo operators who need real results without bloated agency costs. On the web side, that means React, Next.js, and TypeScript. On the automation side, n8n, the OpenAI API, and Anthropic's Claude. If you want to see what that looks like in practice, check out the portfolio or reach out directly."
+                                        }
+                                    </p>
                                 </div>
                             </div>
 
@@ -119,7 +124,7 @@ export default function AboutPage() {
                                 <div className="section-badge">
                                     <span>{"Operating Principles"}</span>
                                 </div>
-                                <h2 className="page-title mt-6">{"My Values"}</h2>
+                                <h2 className="page-title mt-6">{"AI Automation & Web Development Studio"}</h2>
                                 <p className="subtext mt-4 text-lg leading-8">
                                     {"The principles that guide every project I take on"}
                                 </p>

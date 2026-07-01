@@ -40,13 +40,13 @@ export default function HomePage() {
 
                             <div className="space-y-6">
                                 <h1 className="hero-title max-w-4xl motion-safe-enter motion-safe-delay-1">
-                                    <span className="text-foreground">{"Transform Your Vision Into "}</span>
-                                    <span className="gradient-text">{"Digital Reality"}</span>
+                                    <span className="text-foreground">{"AI Automation & Web Development"}</span>
+                                    <span className="gradient-text">{" for Small Businesses"}</span>
                                 </h1>
 
                                 <p className="subtext max-w-2xl text-lg leading-8 sm:text-xl">
                                     {
-                                        "I craft exceptional web experiences, automate workflows with AI, build memorable brands, and amplify your digital presence with strategy-driven marketing."
+                                        "I build websites, AI automations, and digital marketing systems for small businesses and solo operators who want professional results without the agency overhead."
                                     }
                                 </p>
                             </div>
@@ -97,9 +97,9 @@ export default function HomePage() {
                                             </div>
                                             <span className="eyebrow text-[0.68rem]">{`0${index + 1}`}</span>
                                         </div>
-                                        <h2 className="text-xl font-semibold tracking-[-0.03em] text-foreground">
+                                        <p className="text-xl font-semibold tracking-[-0.03em] text-foreground">
                                             {service.title}
-                                        </h2>
+                                        </p>
                                         <p className="subtext mt-3 text-sm leading-7">{service.description}</p>
                                     </div>
                                 ))}
@@ -147,6 +147,23 @@ export default function HomePage() {
                                 <ArrowRight className="ml-1 h-4 w-4" />
                             </Link>
                         </Button>
+                    </div>
+                </div>
+            </section>
+
+            <section className="page-section pt-0">
+                <div className="site-container">
+                    <div className="glass-panel p-7 sm:p-9">
+                        <div className="mx-auto max-w-3xl">
+                            <div className="section-badge mb-4">
+                                <span>{"Why Work With Me"}</span>
+                            </div>
+                            <p className="subtext leading-8">
+                                {
+                                    "Every project is handled directly by me — no account managers, no handoffs, no markup on subcontracted work. I founded Innovate & Amplify in 2024 and have since shipped websites, automations, and marketing systems for clients including Evergreen Rain Gutters, a gutter contractor in Spokane, and MICRIST Environmental, a professional training company in Washington. I move fast, communicate clearly, and stay involved until the work is right."
+                                }
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>

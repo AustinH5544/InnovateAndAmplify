@@ -17,7 +17,7 @@ const projects = [
         categories: ["App Development", "Web Development"],
         description:
             "A personaized children's storybook generator that let's parents generate custom unique bed time stories with their kids.",
-        image: "/Starlit_Port.png",
+        image: "/Starlit_Port.webp",
         tags: ["React", "Azure", "OpenAI"],
         link: "https://staging.starlitstories.app",
         showLink: true,
@@ -28,7 +28,7 @@ const projects = [
         categories: ["App Development"],
         description:
             "A prototype iOS and Apple Watch app for monitoring heart rate variability (HRV), streaming watch data and storing it securely for clinical review.",
-        image: "/StLuke_PortV2.png",
+        image: "/StLuke_PortV2.webp",
         tags: ["Swift", "watchOS", "HealthKit"],
         link: undefined,
         showLink: false,
@@ -39,7 +39,7 @@ const projects = [
         categories: ["App Development", "Web Development"],
         description:
             "A parking lot management web app that allows drivers to reserve and pay for spots, with tools for owners to track availability and usage.",
-        image: "/ParkSmart_Port.png",
+        image: "/ParkSmart_Port.webp",
         tags: ["React", "Node.js", "Stripe"],
         link: undefined,
         showLink: false,
@@ -49,7 +49,7 @@ const projects = [
         title: "Restaurant AI Agent/Chatbot (In-Progress)",
         categories: ["AI Agents", "Web Development"],
         description: "AI agent for restaurants",
-        image: "/Rest_Port.png",
+        image: "/Rest_Port.webp",
         tags: ["Logo Design", "Brand Guidelines", "Mockups"],
         link: undefined,
         showLink: false,
@@ -60,7 +60,7 @@ const projects = [
         categories: ["Digital Marketing"],
         description:
             "A print-on-demand online store where I manage product listings, TikTok content, and ongoing marketing experiments to drive traffic and sales.",
-        image: "/CC_Port.png",
+        image: "/CC_Port.webp",
         tags: ["E-commerce", "TikTok Marketing", "Content Strategy"],
         link: undefined,
         showLink: false,
@@ -71,7 +71,7 @@ const projects = [
         categories: ["Web Development"],
         description:
             "My own studio portfolio site, built to showcase services, case studies, and a clear path for potential clients to get in touch.",
-        image: "/IAA_PortV2.png",
+        image: "/IAA_PortV2.webp",
         tags: ["Next.js", "Tailwind CSS", "Static Export"],
         link: "/",
         showLink: true,
