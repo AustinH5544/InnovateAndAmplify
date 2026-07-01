@@ -4,6 +4,7 @@ import type React from "react"
 
 import { useEffect, useRef, useState } from "react"
 import { MeshGradient } from "@paper-design/shaders-react"
+import Footer from "./footer"
 
 interface ShaderBackgroundProps {
     children: React.ReactNode
@@ -92,7 +93,10 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_28%),linear-gradient(135deg,rgba(87,125,255,0.12),transparent_30%,rgba(81,215,255,0.1)_62%,transparent)]" />
             </div>
 
-            <div className="relative z-10">{children}</div>
+            <div className="relative z-10">
+                {children}
+                <Footer />
+            </div>
         </div>
     )
 }
