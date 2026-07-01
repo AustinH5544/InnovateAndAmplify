@@ -63,10 +63,10 @@ export default function Footer() {
                                     +1 (425) 582-1003
                                 </a>
                                 <a
-                                    href="mailto:innovateandamplify@gmail.com"
+                                    href="mailto:contact@innovateandamplify.com"
                                     className="subtext w-fit text-sm transition-colors duration-150 hover:text-foreground"
                                 >
-                                    innovateandamplify@gmail.com
+                                    contact@innovateandamplify.com
                                 </a>
                             </div>
                             <Link

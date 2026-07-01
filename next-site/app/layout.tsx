@@ -49,7 +49,7 @@ const orgSchema = {
                 "@type": "ContactPoint",
                 telephone: "+1-425-582-1003",
                 contactType: "customer service",
-                email: "innovateandamplify@gmail.com",
+                email: "contact@innovateandamplify.com",
                 availableLanguage: "English",
             },
             areaServed: { "@type": "Country", name: "United States" },
