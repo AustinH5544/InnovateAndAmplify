@@ -22,25 +22,30 @@ export default function ContactPage() {
     })
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [submitted, setSubmitted] = useState(false)
+    const [error, setError] = useState<string | null>(null)
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         setIsSubmitting(true)
+        setError(null)
 
-        await new Promise((resolve) => setTimeout(resolve, 1500))
+        try {
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            })
 
-        setIsSubmitting(false)
-        setSubmitted(true)
-        setFormData({
-            name: "",
-            email: "",
-            company: "",
-            service: "",
-            budget: "",
-            message: "",
-        })
+            if (!res.ok) throw new Error("Failed to send")
 
-        setTimeout(() => setSubmitted(false), 5000)
+            setSubmitted(true)
+            setFormData({ name: "", email: "", company: "", service: "", budget: "", message: "" })
+            setTimeout(() => setSubmitted(false), 5000)
+        } catch {
+            setError("Something went wrong. Please try again or email us directly.")
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -89,6 +94,12 @@ export default function ContactPage() {
                                 {submitted && (
                                     <div className="mb-6 rounded-2xl border border-primary/20 bg-primary/10 px-4 py-3 text-sm text-primary">
                                         {"Thank you! We'll get back to you within 24 hours."}
+                                    </div>
+                                )}
+
+                                {error && (
+                                    <div className="mb-6 rounded-2xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+                                        {error}
                                     </div>
                                 )}
 
