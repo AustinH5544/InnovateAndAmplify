@@ -1,0 +1,8 @@
+name = "iaa-contact-form"
+main = "src/index.ts"
+compatibility_date = "2024-11-01"
+account_id = "4970804939d7f4e5d20795a9ae8047ab"
+
+[vars]
+RESEND_FROM_EMAIL = "contact@innovateandamplify.com"
+CONTACT_NOTIFY_EMAIL = "innovateandamplify@gmail.com"
