@@ -1,0 +1,27 @@
+# Fingerprinted Next.js chunks — cache forever (hash changes on rebuild)
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Static assets without content hash — 7 days
+/logo.png
+  Cache-Control: public, max-age=604800
+
+/*.png
+  Cache-Control: public, max-age=604800
+
+/*.jpg
+  Cache-Control: public, max-age=604800
+
+/*.svg
+  Cache-Control: public, max-age=604800
+
+/*.ico
+  Cache-Control: public, max-age=604800
+
+# Security headers for all routes
+/*
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()

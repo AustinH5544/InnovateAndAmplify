@@ -29,6 +29,7 @@ export default function Navigation() {
                                 alt="Innovate & Amplify Logo"
                                 width={40}
                                 height={40}
+                                priority
                                 className="h-9 w-9 rounded-xl object-contain"
                             />
                         </div>

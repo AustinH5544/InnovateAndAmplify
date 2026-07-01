@@ -51,8 +51,8 @@ const projects = [
         description: "AI agent for restaurants",
         image: "/Rest_Port.png",
         tags: ["Logo Design", "Brand Guidelines", "Mockups"],
-        link: "/restaurant-demo",
-        showLink: true,
+        link: undefined,
+        showLink: false,
     },
     {
         id: 5,

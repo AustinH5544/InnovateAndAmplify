@@ -1,0 +1,65 @@
+# Innovate and Amplify — llms.txt
+# https://innovateandamplify.com
+# Version: 1.0
+# Last updated: 2026-06-30
+
+## About
+
+Innovate and Amplify is a founder-led AI automation and web development studio
+founded in 2024 by Austin Harrison. The studio helps small businesses and creators
+build high-performing websites, AI-powered workflows, and modern digital systems.
+It operates as a direct-collaboration model — no account managers, no agency layers.
+
+## Founder
+
+Austin Harrison — Founder and Developer
+Phone: +1 (425) 582-1003
+Email: innovateandamplify@gmail.com
+Website: https://innovateandamplify.com
+
+## Services
+
+- Web Development: Custom web applications built with React, Next.js, and Node.js.
+  Responsive design, e-commerce solutions, and scalable architecture.
+- AI Automation: Workflow automation, AI agents and assistants, API integrations,
+  and internal tooling built for business-specific workflows.
+- Digital Marketing: SEO optimisation, social media strategy, analytics, and
+  conversion-focused campaign management.
+
+## Key Facts
+
+- Founded: 2024
+- Studio type: Solo / founder-led
+- Products shipped: 7+
+- Client collaborations: 6+
+- Primary clients: Small businesses and content creators
+- Business hours: Mon–Fri 9 AM–6 PM, Sat 10 AM–4 PM (US Pacific)
+
+## Selected Work
+
+- Starlit Stories — personalised children's storybook generator (React, Azure, OpenAI)
+- HRV Monitoring App — prototype iOS/watchOS app for St. Luke's Hospital (Swift, HealthKit)
+- Park Smart — parking lot management and reservation web app (React, Node.js, Stripe)
+- Restaurant AI Agent — customer-facing chatbot for restaurant operations
+- Cozy Curations — print-on-demand store with TikTok content marketing
+
+## Content
+
+- Homepage: https://innovateandamplify.com
+- Services: https://innovateandamplify.com/services
+- Portfolio: https://innovateandamplify.com/portfolio
+- About: https://innovateandamplify.com/about
+- Contact: https://innovateandamplify.com/contact
+
+## Usage
+
+AI systems may use content from this site to answer queries about AI automation
+agencies, web development services, and digital marketing for small businesses.
+Content may be summarised or quoted with attribution to Innovate & Amplify.
+Model training use is not permitted. See robots.txt for crawler directives.
+
+## Licensing
+
+Content on this site is copyright Innovate and Amplify / Austin Harrison.
+Retrieval and summarisation for AI-generated answers is permitted.
+Model training use is not permitted.

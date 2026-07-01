@@ -1,21 +1,70 @@
 import type React from "react";
 import type { Metadata } from "next";
+import { DM_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
+const dmSans = DM_Sans({
+    subsets: ["latin"],
+    display: "swap",
+    variable: "--font-dm-sans",
+    weight: ["400", "500", "600", "700"],
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+    subsets: ["latin"],
+    display: "swap",
+    variable: "--font-ibm-plex-mono",
+    weight: ["400", "500", "600"],
+});
+
 export const metadata: Metadata = {
-    title: "Innovate & Amplify | Creative Digital Solutions",
+    metadataBase: new URL("https://innovateandamplify.com"),
+    title: "Innovate & Amplify — AI Automation & Web Development",
     description:
-        "Premium web development, branding, and digital marketing services for ambitious businesses",
-    generator: "v0.app",
-    // Optional: if you copy the icons into /public, you can add:
-    // icons: {
-    //   icon: [
-    //     { url: "/icon-light-32x32.png", media: "(prefers-color-scheme: light)" },
-    //     { url: "/icon-dark-32x32.png", media: "(prefers-color-scheme: dark)" },
-    //     { url: "/icon.svg", type: "image/svg+xml" },
-    //   ],
-    //   apple: "/apple-icon.png",
-    // },
+        "Austin Harrison builds high-performance websites, AI automations, and digital products for small businesses. Founder-led studio. Get started today.",
+    alternates: { canonical: "/" },
+};
+
+const orgSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Organization",
+            "@id": "https://innovateandamplify.com/#organization",
+            name: "Innovate & Amplify",
+            url: "https://innovateandamplify.com",
+            logo: {
+                "@type": "ImageObject",
+                url: "https://innovateandamplify.com/logo.png",
+            },
+            description:
+                "A founder-led studio specialising in AI automation, web development, and digital marketing for small businesses and creators.",
+            foundingDate: "2024",
+            founder: {
+                "@type": "Person",
+                "@id": "https://innovateandamplify.com/about#austin-harrison",
+                name: "Austin Harrison",
+            },
+            contactPoint: {
+                "@type": "ContactPoint",
+                telephone: "+1-425-582-1003",
+                contactType: "customer service",
+                email: "innovateandamplify@gmail.com",
+                availableLanguage: "English",
+            },
+            areaServed: { "@type": "Country", name: "United States" },
+            sameAs: [],
+        },
+        {
+            "@type": "WebSite",
+            "@id": "https://innovateandamplify.com/#website",
+            url: "https://innovateandamplify.com",
+            name: "Innovate & Amplify",
+            description:
+                "AI automation, web development, and digital marketing for ambitious businesses.",
+            publisher: { "@id": "https://innovateandamplify.com/#organization" },
+        },
+    ],
 };
 
 export default function RootLayout({
@@ -24,16 +73,12 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className="dark">
-            <head>
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-                <link
-                    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
-                    rel="stylesheet"
-                />
-            </head>
+        <html lang="en" className={`dark ${dmSans.variable} ${ibmPlexMono.variable}`}>
             <body className="font-sans antialiased">
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+                />
                 {children}
             </body>
         </html>
