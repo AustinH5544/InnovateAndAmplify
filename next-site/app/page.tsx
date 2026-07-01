@@ -109,48 +109,6 @@ export default function HomePage() {
                 </div>
             </main>
 
-            <section className="page-section">
-                <div className="site-container">
-                    <div className="section-rule mb-10" />
-
-                    <div className="mx-auto max-w-3xl text-center">
-                        <div className="section-badge">
-                            <span>{"Focused Services"}</span>
-                        </div>
-                        <h2 className="page-title mt-6">{"What I Do Best"}</h2>
-                        <p className="subtext mx-auto mt-4 max-w-2xl text-lg leading-8">
-                            {"Three core services that drive results for ambitious businesses"}
-                        </p>
-                    </div>
-
-                    <div className="mt-12 grid gap-6 md:grid-cols-3">
-                        {services.map((service, index) => (
-                            <div key={service.title} className="glass-panel interactive-panel p-7">
-                                <div className="mb-6 flex items-center justify-between">
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 text-primary">
-                                        {service.icon}
-                                    </div>
-                                    <span className="eyebrow">{`0${index + 1}`}</span>
-                                </div>
-                                <h3 className="text-2xl font-semibold tracking-[-0.04em] text-foreground">
-                                    {service.title}
-                                </h3>
-                                <p className="subtext mt-4 leading-8">{service.description}</p>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="mt-10 text-center">
-                        <Button variant="outline" size="lg" asChild>
-                            <Link href="/services">
-                                {"Explore All Services"}
-                                <ArrowRight className="ml-1 h-4 w-4" />
-                            </Link>
-                        </Button>
-                    </div>
-                </div>
-            </section>
-
             <section className="page-section pt-0">
                 <div className="site-container">
                     <div className="glass-panel p-7 sm:p-9">
