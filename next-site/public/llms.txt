@@ -31,10 +31,10 @@ Website: https://innovateandamplify.com
 - Founded: 2024
 - Studio type: Solo / founder-led
 - Location: Spokane, WA
-- Client websites live: 2 (Evergreen Rain Gutters, MICRIST Environmental)
+- Client websites live: 3 (Evergreen Rain Gutters, MICRIST Environmental, SP-Archives)
 - Products in beta: 1 (Starlit Stories)
 - Every project is built by the founder, Austin Harrison
-- Published results: none yet; the two client sites are live and linked below
+- Published results: none yet; the three client sites are live and linked below
 - Primary clients: Local service businesses
 - Business hours: Mon–Fri 9 AM–6 PM, Sat 10 AM–4 PM (US Pacific)
 
@@ -42,7 +42,7 @@ Website: https://innovateandamplify.com
 
 - Evergreen Rain Gutters (client, Spokane) — website with an on-site AI assistant and instant lead alerts to the owner: https://evergreenrainguttersllc.com
 - MICRIST Environmental (client, Washington) — website with a course catalog, online payments, and a client-edited CMS: https://micristenviro.com
-- SP-Archives (photographer Skyelar Payne, Pacific Northwest and North Idaho) — photography archive website with session inquiries: https://sp-archives.com
+- SP-Archives (client, photographer Skyelar Payne, Pacific Northwest and North Idaho) — photography archive website with session inquiries: https://sp-archives.com
 - Starlit Stories (own product, in beta) — personalized children's storybook generator (React, Azure, OpenAI)
 
 ## Content

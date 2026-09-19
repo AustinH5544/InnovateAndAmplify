@@ -38,7 +38,7 @@ const projects = [
         title: "SP-Archives",
         categories: ["Web Development"],
         description:
-            "The website for Skyelar Payne, a photographer covering the Pacific Northwest and North Idaho: a catalogue-style archive of numbered photo series, the session types on offer, and a way to inquire about availability.",
+            "Client work. The website for Skyelar Payne, a photographer covering the Pacific Northwest and North Idaho: a catalogue-style archive of numbered photo series, the session types on offer, and a way to inquire about availability.",
         image: "/SPArchives_Port.webp",
         tags: ["Next.js", "Cloudflare", "Photography"],
         link: "https://sp-archives.com",

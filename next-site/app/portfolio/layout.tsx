@@ -5,7 +5,7 @@ import { pageMeta } from "@/lib/seo";
 export const metadata: Metadata = pageMeta({
     title: "Portfolio — Client Websites and Products | Innovate & Amplify",
     description:
-        "Work by Austin Harrison: websites for Evergreen Rain Gutters in Spokane and MICRIST Environmental, plus Starlit Stories, a product in beta. Every project built by me.",
+        "Work by Austin Harrison: websites for Evergreen Rain Gutters in Spokane, MICRIST Environmental, and photographer Skyelar Payne, plus Starlit Stories, a product in beta. Every project built by me.",
     path: "/portfolio",
 });
 
