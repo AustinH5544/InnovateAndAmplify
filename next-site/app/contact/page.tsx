@@ -69,11 +69,11 @@ export default function ContactPage() {
                         </div>
                         <h1 className="page-title mt-6">
                             {"Let's "}
-                            <span className="gradient-text">{"Connect"}</span>
+                            <span className="gradient-text">{"talk"}</span>
                         </h1>
                         <p className="subtext mt-5 text-lg leading-8 sm:text-xl">
                             {
-                                "Have a project in mind? I'd love to hear about it. Fill out the form below or reach out directly."
+                                "Have a project in mind? Fill out the form below, or call or email me directly."
                             }
                         </p>
                     </section>
@@ -140,13 +140,13 @@ export default function ContactPage() {
                                             name="company"
                                             value={formData.company}
                                             onChange={handleChange}
-                                            placeholder="Your Company Name"
+                                            placeholder="Your company"
                                         />
                                     </div>
 
                                     <div className="grid gap-6 sm:grid-cols-2">
                                         <div className="space-y-2.5">
-                                            <Label htmlFor="service">{"Service Interested In"}</Label>
+                                            <Label htmlFor="service">{"What do you need?"}</Label>
                                             <select
                                                 id="service"
                                                 name="service"
@@ -162,7 +162,7 @@ export default function ContactPage() {
                                         </div>
 
                                         <div className="space-y-2.5">
-                                            <Label htmlFor="budget">{"Project Budget"}</Label>
+                                            <Label htmlFor="budget">{"Budget"}</Label>
                                             <select
                                                 id="budget"
                                                 name="budget"
@@ -257,7 +257,7 @@ export default function ContactPage() {
                                 <div className="glass-panel p-7">
                                     <div className="eyebrow">{"Availability"}</div>
                                     <h3 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-foreground">
-                                        {"Business Hours"}
+                                        {"Business hours"}
                                     </h3>
                                     <div className="subtext mt-6 space-y-3 text-sm">
                                         <div className="flex justify-between gap-4">
@@ -278,7 +278,7 @@ export default function ContactPage() {
                                 <div className="glass-panel-strong p-7">
                                     <div className="eyebrow">{"Response Window"}</div>
                                     <h3 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-foreground">
-                                        {"Quick Response"}
+                                        {"Reply time"}
                                     </h3>
                                     <p className="subtext mt-4 leading-8">
                                         {"I reply to every inquiry by the next business day."}

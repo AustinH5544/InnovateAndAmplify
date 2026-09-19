@@ -21,9 +21,9 @@ const ibmPlexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
     metadataBase: new URL("https://innovateandamplify.com"),
     ...pageMeta({
-        title: "Innovate & Amplify — Websites, AI Automation & Digital Marketing in Spokane",
+        title: "Innovate & Amplify: Websites, AI Automation & Digital Marketing in Spokane",
         description:
-            "Austin Harrison builds websites, AI automations, and digital products for local service businesses from Spokane, WA. One developer, no handoffs.",
+            "Austin Harrison builds websites, AI automations, and digital products for local service businesses from Spokane, WA. One developer does all the work, so nothing gets handed off.",
         path: "/",
     }),
 };

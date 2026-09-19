@@ -3,9 +3,9 @@ import type { ReactNode } from "react";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-    title: "Portfolio — Client Websites and Products | Innovate & Amplify",
+    title: "Portfolio: Client Websites and Products | Innovate & Amplify",
     description:
-        "Work by Austin Harrison: websites for Evergreen Rain Gutters in Spokane, MICRIST Environmental, and photographer Skyelar Payne, plus Starlit Stories, a product in beta. Every project built by me.",
+        "Work by Austin Harrison: websites for Evergreen Rain Gutters in Spokane, MICRIST Environmental, and photographer Skyelar Payne, plus Starlit Stories, a product in beta. I built every one of them myself.",
     path: "/portfolio",
 });
 
@@ -16,7 +16,7 @@ const schema = {
             "@type": "WebPage",
             "@id": "https://innovateandamplify.com/portfolio#webpage",
             url: "https://innovateandamplify.com/portfolio",
-            name: "Portfolio — Innovate & Amplify",
+            name: "Portfolio | Innovate & Amplify",
             isPartOf: { "@id": "https://innovateandamplify.com/#website" },
             breadcrumb: { "@id": "https://innovateandamplify.com/portfolio#breadcrumb" },
         },

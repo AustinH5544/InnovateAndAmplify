@@ -79,7 +79,7 @@ export default function Footer() {
                                     boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08)",
                                 }}
                             >
-                                Start a Project
+                                Start a project
                             </Link>
                         </div>
                     </div>
@@ -92,7 +92,7 @@ export default function Footer() {
                 >
                     <div className="flex flex-col gap-2 pt-6 sm:flex-row sm:items-center sm:justify-between">
                         <p className="subtext text-xs">
-                            &copy; 2024&ndash;2026 Innovate &amp; Amplify. All rights reserved.
+                            &copy; 2024-2026 Innovate &amp; Amplify. All rights reserved.
                         </p>
                         <p className="subtext text-xs">Built by Austin Harrison</p>
                     </div>

@@ -162,7 +162,7 @@ export default {
         const autoReply = await sendEmail(env, {
             to: [email],
             reply_to: env.REPLY_TO_EMAIL,
-            subject: "Got your message - Innovate and Amplify",
+            subject: "Innovate and Amplify: I got your message",
             text: [
                 greeting,
                 "",

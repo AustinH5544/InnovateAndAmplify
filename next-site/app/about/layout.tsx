@@ -3,9 +3,9 @@ import type { ReactNode } from "react";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-    title: "About Austin Harrison — Founder of Innovate & Amplify",
+    title: "About Austin Harrison, Founder of Innovate & Amplify",
     description:
-        "Meet Austin Harrison, founder of Innovate & Amplify. A one-person studio in Spokane, founded in 2024. Three client websites live, one product in beta, every project built by me.",
+        "I'm Austin Harrison. I started Innovate & Amplify, a one-person studio in Spokane, in 2024. Three client websites are live, one product is in beta, and I build every project myself.",
     path: "/about",
 });
 
@@ -20,13 +20,13 @@ const schema = {
             worksFor: { "@id": "https://innovateandamplify.com/#organization" },
             url: "https://innovateandamplify.com/about",
             description:
-                "Founder of Innovate & Amplify, a studio specialising in web development, AI automation, and digital marketing.",
+                "Founder of Innovate & Amplify, a studio for web development, AI automation, and digital marketing.",
         },
         {
             "@type": "WebPage",
             "@id": "https://innovateandamplify.com/about#webpage",
             url: "https://innovateandamplify.com/about",
-            name: "About Austin Harrison — Founder of Innovate & Amplify",
+            name: "About Austin Harrison, Founder of Innovate & Amplify",
             isPartOf: { "@id": "https://innovateandamplify.com/#website" },
             breadcrumb: { "@id": "https://innovateandamplify.com/about#breadcrumb" },
         },

@@ -60,7 +60,7 @@ const projects = [
         title: "Innovate and Amplify",
         categories: ["Web Development"],
         description:
-            "This site. Built and hosted by me as a static Next.js site on Cloudflare Pages.",
+            "This site. I built it as a static Next.js site and host it on Cloudflare Pages.",
         image: "/IAA_PortV2.webp",
         tags: ["Next.js", "Tailwind CSS", "Static Export"],
         link: "/",
@@ -94,7 +94,7 @@ export default function PortfolioPage() {
                         </h1>
                         <p className="subtext mt-5 text-lg leading-8 sm:text-xl">
                             {
-                                "Explore the projects I have worked on and see how I help businesses transform their digital presence."
+                                "Client sites I've built, a product of my own, and this site. Every one is live and linked."
                             }
                         </p>
                     </section>
@@ -137,12 +137,12 @@ export default function PortfolioPage() {
                                                 <Button size="sm" variant="secondary" asChild className="w-full">
                                                     {isExternalLink(project.link) ? (
                                                         <a href={project.link} target="_blank" rel="noreferrer">
-                                                            {"View Project"}
+                                                            {"View project"}
                                                             <ExternalLink className="ml-1 h-4 w-4" />
                                                         </a>
                                                     ) : (
                                                         <Link href={project.link}>
-                                                            {"View Project"}
+                                                            {"View project"}
                                                             <ExternalLink className="ml-1 h-4 w-4" />
                                                         </Link>
                                                     )}
@@ -178,14 +178,14 @@ export default function PortfolioPage() {
                                 <div className="section-badge">
                                     <span>{"Open Engagements"}</span>
                                 </div>
-                                <h2 className="page-title mt-6">{"Interested In What You See?"}</h2>
+                                <h2 className="page-title mt-6">{"Like what you see?"}</h2>
                                 <p className="subtext mt-4 text-lg leading-8">
-                                    {"Let's create something amazing together. Start your project today."}
+                                    {"Tell me about your project, and I'll reply by the next business day."}
                                 </p>
                                 <div className="mt-8">
                                     <Button size="lg" className="group" asChild>
                                         <Link href="/contact">
-                                            {"Get In Touch"}
+                                            {"Get in touch"}
                                             <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
                                         </Link>
                                     </Button>

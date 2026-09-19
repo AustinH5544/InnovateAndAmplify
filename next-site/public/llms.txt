@@ -1,18 +1,18 @@
-# Innovate and Amplify — llms.txt
+# Innovate and Amplify: llms.txt
 # https://innovateandamplify.com
 # Version: 1.0
-# Last updated: 2026-09-18
+# Last updated: 2026-09-19
 
 ## About
 
-Innovate and Amplify is a founder-led AI automation and web development studio
-founded in 2024 by Austin Harrison. The studio helps small businesses and creators
-build high-performing websites, AI-powered workflows, and modern digital systems.
-It operates as a direct-collaboration model — no account managers, no agency layers.
+Innovate and Amplify is a one-person web development and AI automation studio in
+Spokane, WA, started in 2024 by Austin Harrison. It builds websites, AI workflows,
+and marketing systems for small businesses and creators. Clients work directly with
+Austin; there are no account managers or agency layers.
 
 ## Founder
 
-Austin Harrison — Founder and Developer
+Austin Harrison, founder and developer
 Phone: +1 (425) 582-1003
 Email: contact@innovateandamplify.com
 Website: https://innovateandamplify.com
@@ -20,30 +20,30 @@ Website: https://innovateandamplify.com
 ## Services
 
 - Web Development: Custom web applications built with React, Next.js, and Node.js.
-  Responsive design, e-commerce solutions, and scalable architecture.
+  Responsive design and online stores.
 - AI Automation: Workflow automation, AI agents and assistants, API integrations,
   and internal tooling built for business-specific workflows.
-- Digital Marketing: SEO optimisation, social media strategy, analytics, and
-  conversion-focused campaign management.
+- Digital Marketing: SEO, social media strategy, analytics, and campaign management
+  aimed at turning visitors into customers.
 
-## Key Facts
+## Key facts
 
 - Founded: 2024
-- Studio type: Solo / founder-led
+- Studio type: one person
 - Location: Spokane, WA
 - Client websites live: 3 (Evergreen Rain Gutters, MICRIST Environmental, SP-Archives)
 - Products in beta: 1 (Starlit Stories)
 - Every project is built by the founder, Austin Harrison
 - Published results: none yet; the three client sites are live and linked below
 - Primary clients: Local service businesses
-- Business hours: Mon–Fri 9 AM–6 PM, Sat 10 AM–4 PM (US Pacific)
+- Business hours: Mon to Fri 9 AM to 6 PM, Sat 10 AM to 4 PM (US Pacific)
 
-## Selected Work
+## Selected work
 
-- Evergreen Rain Gutters (client, Spokane) — website with an on-site AI assistant and instant lead alerts to the owner: https://evergreenrainguttersllc.com
-- MICRIST Environmental (client, Washington) — website with a course catalog, online payments, and a client-edited CMS: https://micristenviro.com
-- SP-Archives (client, photographer Skyelar Payne, Pacific Northwest and North Idaho) — photography archive website with session inquiries: https://sp-archives.com
-- Starlit Stories (own product, in beta) — personalized children's storybook generator (React, Azure, OpenAI)
+- Evergreen Rain Gutters (client, Spokane): website with an on-site AI assistant and instant lead alerts to the owner: https://evergreenrainguttersllc.com
+- MICRIST Environmental (client, Washington): website with a course catalog, online payments, and a client-edited CMS: https://micristenviro.com
+- SP-Archives (client, photographer Skyelar Payne, Pacific Northwest and North Idaho): photography archive website with session inquiries: https://sp-archives.com
+- Starlit Stories (own product, in beta): personalized children's storybook generator (React, Azure, OpenAI)
 
 ## Content
 

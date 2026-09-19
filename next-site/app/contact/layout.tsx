@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-    title: "Contact — Start Your Project | Innovate & Amplify",
+    title: "Contact: Start a Project | Innovate & Amplify",
     description:
         "Get in touch with Austin Harrison at Innovate and Amplify in Spokane about a website, lead follow-up, or content. I reply by the next business day.",
     path: "/contact",
@@ -16,7 +16,7 @@ const schema = {
             "@type": "ContactPage",
             "@id": "https://innovateandamplify.com/contact#webpage",
             url: "https://innovateandamplify.com/contact",
-            name: "Contact — Innovate & Amplify",
+            name: "Contact | Innovate & Amplify",
             description:
                 "Get in touch with Innovate & Amplify to discuss your web development, AI automation, or digital marketing project.",
             isPartOf: { "@id": "https://innovateandamplify.com/#website" },
