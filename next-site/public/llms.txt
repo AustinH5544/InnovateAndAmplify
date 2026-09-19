@@ -42,6 +42,7 @@ Website: https://innovateandamplify.com
 
 - Evergreen Rain Gutters (client, Spokane) — website with an on-site AI assistant and instant lead alerts to the owner: https://evergreenrainguttersllc.com
 - MICRIST Environmental (client, Washington) — website with a course catalog, online payments, and a client-edited CMS: https://micristenviro.com
+- SP-Archives (photographer Skyelar Payne, Pacific Northwest and North Idaho) — photography archive website with session inquiries: https://sp-archives.com
 - Starlit Stories (own product, in beta) — personalized children's storybook generator (React, Azure, OpenAI)
 
 ## Content

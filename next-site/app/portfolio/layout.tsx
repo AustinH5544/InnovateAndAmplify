@@ -60,6 +60,17 @@ const schema = {
                     position: 3,
                     item: {
                         "@type": "CreativeWork",
+                        name: "SP-Archives",
+                        description: "Website for Skyelar Payne, a photographer covering the Pacific Northwest and North Idaho, with a catalogue-style photo archive and session inquiries.",
+                        url: "https://sp-archives.com",
+                        creator: { "@id": "https://innovateandamplify.com/#organization" },
+                    },
+                },
+                {
+                    "@type": "ListItem",
+                    position: 4,
+                    item: {
+                        "@type": "CreativeWork",
                         name: "Starlit Stories",
                         description: "A personalized children's storybook generator built with React, Azure, and OpenAI. A product in beta.",
                         url: "https://staging.starlitstories.app",
