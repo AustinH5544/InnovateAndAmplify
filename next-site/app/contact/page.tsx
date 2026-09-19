@@ -19,6 +19,8 @@ export default function ContactPage() {
         service: "",
         budget: "",
         message: "",
+        // Honeypot: hidden from people, filled by bots. The Worker drops any submission that sets it.
+        website: "",
     })
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [submitted, setSubmitted] = useState(false)
@@ -39,10 +41,10 @@ export default function ContactPage() {
             if (!res.ok) throw new Error("Failed to send")
 
             setSubmitted(true)
-            setFormData({ name: "", email: "", company: "", service: "", budget: "", message: "" })
+            setFormData({ name: "", email: "", company: "", service: "", budget: "", message: "", website: "" })
             setTimeout(() => setSubmitted(false), 5000)
         } catch {
-            setError("Something went wrong. Please try again or email us directly.")
+            setError("Something went wrong. Please try again, or email me directly at contact@innovateandamplify.com.")
         } finally {
             setIsSubmitting(false)
         }
@@ -83,17 +85,17 @@ export default function ContactPage() {
                                     <div>
                                         <div className="eyebrow">{"Project Brief"}</div>
                                         <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-foreground">
-                                            {"Send us a message"}
+                                            {"Send me a message"}
                                         </h2>
                                     </div>
                                     <div className="hidden rounded-full border border-white/12 bg-white/[0.05] px-3 py-1 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-muted-foreground sm:block">
-                                        {"24h"}
+                                        {"Next business day"}
                                     </div>
                                 </div>
 
                                 {submitted && (
                                     <div className="mb-6 rounded-2xl border border-primary/20 bg-primary/10 px-4 py-3 text-sm text-primary">
-                                        {"Thank you! We'll get back to you within 24 hours."}
+                                        {"Thank you. I'll reply by the next business day."}
                                     </div>
                                 )}
 
@@ -185,10 +187,23 @@ export default function ContactPage() {
                                             name="message"
                                             value={formData.message}
                                             onChange={handleChange}
-                                            placeholder="Tell us about your project, goals, and timeline..."
+                                            placeholder="Tell me about your project, goals, and timeline..."
                                             required
                                             rows={6}
                                             className="resize-none"
+                                        />
+                                    </div>
+
+                                    <div aria-hidden="true" className="absolute -left-[10000px] h-px w-px overflow-hidden">
+                                        <label htmlFor="website">{"Leave this field empty"}</label>
+                                        <input
+                                            id="website"
+                                            name="website"
+                                            type="text"
+                                            tabIndex={-1}
+                                            autoComplete="off"
+                                            value={formData.website}
+                                            onChange={handleChange}
                                         />
                                     </div>
 
@@ -229,7 +244,7 @@ export default function ContactPage() {
                                             <div>
                                                 <div className="font-medium text-foreground">{"Phone"}</div>
                                                 <a
-                                                    href="tel:+1234567890"
+                                                    href="tel:+14255821003"
                                                     className="subtext mt-1 inline-block text-sm transition-colors hover:text-primary"
                                                 >
                                                     {"+1 (425) 582-1003"}
@@ -266,7 +281,7 @@ export default function ContactPage() {
                                         {"Quick Response"}
                                     </h3>
                                     <p className="subtext mt-4 leading-8">
-                                        {"We typically respond to all inquiries within 24 hours during business days."}
+                                        {"I reply to every inquiry by the next business day."}
                                     </p>
                                 </div>
                             </div>

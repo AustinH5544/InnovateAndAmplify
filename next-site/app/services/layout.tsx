@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
     title: "Services — Web Development, AI Automation & Digital Marketing | Innovate & Amplify",
     description:
-        "Custom web apps with React/Next.js, AI workflow automation, and data-driven digital marketing. Tailored solutions for ambitious businesses. Founder-led, no agency layers.",
-    alternates: { canonical: "/services" },
-};
+        "Custom websites with React and Next.js, AI assistants and workflow automation, and digital marketing for local service businesses. Built by one developer in Spokane, no agency layers.",
+    path: "/services",
+});
 
 const schema = {
     "@context": "https://schema.org",
@@ -98,7 +99,7 @@ const schema = {
                     name: "What's included in an ongoing retainer?",
                     acceptedAnswer: {
                         "@type": "Answer",
-                        text: "Retainers are structured around a set number of hours per month, applied to whatever the current priority is — new features, bug fixes, automation improvements, SEO work, or content updates. There are no rigid service buckets. We align briefly at the start of each month on what to tackle, and I report back on what shipped. It works well for clients who have ongoing technical needs but don't want to hire in-house.",
+                        text: "Retainers are structured around a set number of hours per month, applied to whatever the current priority is — new features, bug fixes, automation improvements, SEO work, or content updates. There are no rigid service buckets. At the start of each month you and I agree on what to tackle, and I report back on what shipped. It works well for clients who have ongoing technical needs but don't want to hire in-house.",
                     },
                 },
             ],

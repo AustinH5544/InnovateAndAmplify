@@ -36,8 +36,8 @@ const values = [
 
 const stats = [
     { value: "2024", label: "Founded" },
-    { value: "7+", label: "Products Shipped" },
-    { value: "6+", label: "Client Collaborations" },
+    { value: "2", label: "Client Sites Live" },
+    { value: "1", label: "Product in Beta" },
     { value: "1", label: "Person Studio" },
 ]
 
@@ -92,12 +92,12 @@ export default function AboutPage() {
                                     </p>
                                     <p>
                                         {
-                                            "Since launching, I've shipped 7+ products and collaborated with 6+ clients - delivering websites, apps, and automations built to scale, easy to maintain, and aligned with real business goals."
+                                            "Since launching in 2024, I've built two client websites that are live today: Evergreen Rain Gutters, a gutter contractor in Spokane, and MICRIST Environmental, a training company in Washington. I also have one product of my own, Starlit Stories, in beta. Every one of them was built by me."
                                         }
                                     </p>
                                     <p>
                                         {
-                                            "Based in the Pacific Northwest, I work with local service businesses, startups, and solo operators who need real results without bloated agency costs. On the web side, that means React, Next.js, and TypeScript. On the automation side, n8n, the OpenAI API, and Anthropic's Claude. If you want to see what that looks like in practice, check out the portfolio or reach out directly."
+                                            "Based in Spokane, I work with local service businesses and solo operators who need real results without bloated agency costs. On the web side, that means React, Next.js, and TypeScript. On the automation side, n8n, the OpenAI API, and Anthropic's Claude. If you want to see what that looks like in practice, check out the portfolio or reach out directly."
                                         }
                                     </p>
                                 </div>

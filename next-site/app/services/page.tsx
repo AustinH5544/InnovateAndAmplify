@@ -62,7 +62,7 @@ const services = [
                 icon: <Bot className="h-5 w-5" />,
                 title: "AI Agents & Assistants",
                 description:
-                    "Purpose-built AI agents using the OpenAI and Anthropic APIs — not generic chatbots, but agents trained on your specific products, services, and FAQs. For one client in Spokane, we built an AI agent that handles inbound customer questions about their gutter services 24/7, qualifying leads before anyone on the team sees them.",
+                    "Purpose-built AI agents using the OpenAI and Anthropic APIs — not generic chatbots, but agents trained on your specific products, services, and FAQs. For Evergreen Rain Gutters in Spokane, I built an AI assistant that answers homeowners' questions on their website around the clock, and the owner gets a text and an email the moment a lead comes in.",
             },
             {
                 icon: <Plug className="h-5 w-5" />,
@@ -105,13 +105,13 @@ const process = [
         step: "01",
         title: "Discovery",
         description:
-            "We start with a conversation — no forms to fill out, no RFP process. I want to understand your business, what you're trying to accomplish, and what's getting in the way. This usually takes 30–60 minutes and gives me enough to put together a clear scope. You'll leave knowing exactly what I'm thinking, not waiting on a black-box proposal.",
+            "It starts with a conversation — no forms to fill out, no RFP process. I want to understand your business, what you're trying to accomplish, and what's getting in the way. This usually takes 30–60 minutes and gives me enough to put together a clear scope. You'll leave knowing exactly what I'm thinking, not waiting on a black-box proposal.",
     },
     {
         step: "02",
         title: "Strategy",
         description:
-            "Once I understand the problem, I put together a plan: what to build, what tools to use, what order to do things in, and what to expect at each stage. For web projects this means wireframes and tech decisions. For automation projects it means a workflow map. You review it, push back, and we lock it in before any code gets written.",
+            "Once I understand the problem, I put together a plan: what to build, what tools to use, what order to do things in, and what to expect at each stage. For web projects this means wireframes and tech decisions. For automation projects it means a workflow map. You review it, push back, and the plan is locked in before any code gets written.",
     },
     {
         step: "03",
@@ -123,7 +123,7 @@ const process = [
         step: "04",
         title: "Growth",
         description:
-            "Launch isn't the end — it's the beginning. I offer retainer engagements for clients who want ongoing development, optimization, or new automation work as their business evolves. We review what's working, identify the next highest-leverage thing to build, and keep the system improving. Most of my best client relationships started with a single project.",
+            "Launch isn't the end — it's the beginning. I offer retainer engagements for clients who want ongoing development, optimization, or new automation work as their business evolves. Each month I review what's working with you, identify the next highest-leverage thing to build, and keep the system improving. Most of my best client relationships started with a single project.",
     },
 ]
 
@@ -151,7 +151,7 @@ const faqs = [
     {
         question: "What's included in an ongoing retainer?",
         answer:
-            "Retainers are structured around a set number of hours per month, applied to whatever the current priority is — new features, bug fixes, automation improvements, SEO work, or content updates. There are no rigid service buckets. We meet briefly at the start of each month to align on what to tackle, and I report back on what shipped. It works well for clients who have ongoing technical needs but don't want to hire in-house.",
+            "Retainers are structured around a set number of hours per month, applied to whatever the current priority is — new features, bug fixes, automation improvements, SEO work, or content updates. There are no rigid service buckets. At the start of each month you and I agree on what to tackle, and I report back on what shipped. It works well for clients who have ongoing technical needs but don't want to hire in-house.",
     },
 ]
 

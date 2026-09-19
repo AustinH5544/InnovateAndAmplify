@@ -1,0 +1,8 @@
+# Cloudflare Pages redirects. Removed demo routes (Phase 0).
+# /portfolio -> /work is added in Phase 1, once /work exists.
+/restaurant-demo            /   301
+/restaurant-demo/           /   301
+/riverfront-bistro          /   301
+/riverfront-bistro/         /   301
+/riverfront-bistro-dark     /   301
+/riverfront-bistro-dark/    /   301

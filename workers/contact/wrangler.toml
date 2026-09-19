@@ -6,3 +6,5 @@ account_id = "4970804939d7f4e5d20795a9ae8047ab"
 [vars]
 RESEND_FROM_EMAIL = "contact@innovateandamplify.com"
 CONTACT_NOTIFY_EMAIL = "innovateandamplify@gmail.com"
+# Where replies to the auto-reply go. Routed by Cloudflare Email Routing.
+REPLY_TO_EMAIL = "contact@innovateandamplify.com"

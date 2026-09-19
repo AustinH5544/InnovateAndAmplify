@@ -35,7 +35,7 @@ export default function HomePage() {
                         <div className="space-y-8">
                             <div className="section-badge motion-safe-enter">
                                 <Sparkles className="h-3.5 w-3.5 text-primary" />
-                                <span>{"Premium Digital Solutions"}</span>
+                                <span>{"Spokane, WA · Built by one developer"}</span>
                             </div>
 
                             <div className="space-y-6">
@@ -136,7 +136,7 @@ export default function HomePage() {
                             <h2 className="page-title mt-6">{"Ready to Amplify Your Digital Presence?"}</h2>
                             <p className="subtext mt-4 text-lg leading-8">
                                 {
-                                    "Let's collaborate on something extraordinary. Get in touch to discuss your project."
+                                    "Tell me what you're working on. I'll reply by the next business day."
                                 }
                             </p>
                             <div className="mt-8">

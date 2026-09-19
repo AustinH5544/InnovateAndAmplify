@@ -1,7 +1,7 @@
 # Innovate and Amplify — llms.txt
 # https://innovateandamplify.com
 # Version: 1.0
-# Last updated: 2026-06-30
+# Last updated: 2026-09-18
 
 ## About
 
@@ -30,18 +30,19 @@ Website: https://innovateandamplify.com
 
 - Founded: 2024
 - Studio type: Solo / founder-led
-- Products shipped: 7+
-- Client collaborations: 6+
-- Primary clients: Small businesses and content creators
+- Location: Spokane, WA
+- Client websites live: 2 (Evergreen Rain Gutters, MICRIST Environmental)
+- Products in beta: 1 (Starlit Stories)
+- Every project is built by the founder, Austin Harrison
+- Published results: none yet; the two client sites are live and linked below
+- Primary clients: Local service businesses
 - Business hours: Mon–Fri 9 AM–6 PM, Sat 10 AM–4 PM (US Pacific)
 
 ## Selected Work
 
-- Starlit Stories — personalised children's storybook generator (React, Azure, OpenAI)
-- HRV Monitoring App — prototype iOS/watchOS app for St. Luke's Hospital (Swift, HealthKit)
-- Park Smart — parking lot management and reservation web app (React, Node.js, Stripe)
-- Restaurant AI Agent — customer-facing chatbot for restaurant operations
-- Cozy Curations — print-on-demand store with TikTok content marketing
+- Evergreen Rain Gutters (client, Spokane) — website with an on-site AI assistant and instant lead alerts to the owner: https://evergreenrainguttersllc.com
+- MICRIST Environmental (client, Washington) — website with a course catalog, online payments, and a client-edited CMS: https://micristenviro.com
+- Starlit Stories (own product, in beta) — personalized children's storybook generator (React, Azure, OpenAI)
 
 ## Content
 

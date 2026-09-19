@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
     title: "About Austin Harrison — Founder of Innovate & Amplify",
     description:
-        "Meet Austin Harrison, founder of Innovate & Amplify. A one-person studio delivering web development, AI automation, and digital marketing since 2024. 7+ projects shipped.",
-    alternates: { canonical: "/about" },
-};
+        "Meet Austin Harrison, founder of Innovate & Amplify. A one-person studio in Spokane, founded in 2024. Two client websites live, one product in beta, every project built by me.",
+    path: "/about",
+});
 
 const schema = {
     "@context": "https://schema.org",

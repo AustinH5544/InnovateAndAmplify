@@ -32,7 +32,7 @@ export default function Footer() {
                                 Innovate &amp; Amplify
                             </span>
                             <p className="subtext max-w-[22rem] text-sm leading-relaxed">
-                                AI automation, web development &amp; digital marketing for ambitious businesses.
+                                Websites, AI automation &amp; digital marketing for local service businesses. Built by one developer in Spokane, WA.
                             </p>
                         </div>
 
