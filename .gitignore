@@ -13,3 +13,7 @@ slnx.sqlite
 client/node_modules/
 client/dist/
 client/.vite/
+
+# Local strategy and research docs. This repo is public; these stay on disk only.
+plans/
+research/
