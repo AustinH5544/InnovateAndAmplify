@@ -13,64 +13,54 @@ const isExternalLink = (href: string) => href.startsWith("http")
 const projects = [
     {
         id: 1,
+        title: "Evergreen Rain Gutters",
+        categories: ["Web Development", "AI Agents"],
+        description:
+            "Client work. The website for a roofing and gutter contractor in Spokane, with an AI assistant that answers homeowners on the site, instant alerts to the owner by text and email when a lead comes in, and a confirmation sent to the homeowner.",
+        image: "/Evergreen_Port.webp",
+        tags: ["Next.js", "AI Assistant", "Lead Alerts"],
+        link: "https://evergreenrainguttersllc.com",
+        showLink: true,
+    },
+    {
+        id: 2,
+        title: "MICRIST Environmental",
+        categories: ["Web Development"],
+        description:
+            "Client work. The website for an asbestos training and inspection company serving the Inland Northwest, with a course catalog, online payments, booking confirmations, and a content system the client edits themselves.",
+        image: "/Micrist_Port.webp",
+        tags: ["Next.js", "Sanity CMS", "Online Payments"],
+        link: "https://micristenviro.com",
+        showLink: true,
+    },
+    {
+        id: 3,
+        title: "SP-Archives",
+        categories: ["Web Development"],
+        description:
+            "Client work. The website for Skyelar Payne, a photographer covering the Pacific Northwest and North Idaho: a catalogue-style archive of numbered photo series, the session types on offer, and a way to inquire about availability.",
+        image: "/SPArchives_Port.webp",
+        tags: ["Next.js", "Cloudflare", "Photography"],
+        link: "https://sp-archives.com",
+        showLink: true,
+    },
+    {
+        id: 4,
         title: "Starlit Stories",
         categories: ["App Development", "Web Development"],
         description:
-            "A personaized children's storybook generator that let's parents generate custom unique bed time stories with their kids.",
+            "A product I built, now in beta. A personalized children's storybook generator that lets parents create unique bedtime stories with their kids.",
         image: "/Starlit_Port.webp",
         tags: ["React", "Azure", "OpenAI"],
         link: "https://staging.starlitstories.app",
         showLink: true,
     },
     {
-        id: 2,
-        title: "HRV Monitoring App for St. Luke's Hospital",
-        categories: ["App Development"],
-        description:
-            "A prototype iOS and Apple Watch app for monitoring heart rate variability (HRV), streaming watch data and storing it securely for clinical review.",
-        image: "/StLuke_PortV2.webp",
-        tags: ["Swift", "watchOS", "HealthKit"],
-        link: undefined,
-        showLink: false,
-    },
-    {
-        id: 3,
-        title: "Park Smart",
-        categories: ["App Development", "Web Development"],
-        description:
-            "A parking lot management web app that allows drivers to reserve and pay for spots, with tools for owners to track availability and usage.",
-        image: "/ParkSmart_Port.webp",
-        tags: ["React", "Node.js", "Stripe"],
-        link: undefined,
-        showLink: false,
-    },
-    {
-        id: 4,
-        title: "Restaurant AI Agent/Chatbot (In-Progress)",
-        categories: ["AI Agents", "Web Development"],
-        description: "AI agent for restaurants",
-        image: "/Rest_Port.webp",
-        tags: ["Logo Design", "Brand Guidelines", "Mockups"],
-        link: undefined,
-        showLink: false,
-    },
-    {
         id: 5,
-        title: "Cozy Curations",
-        categories: ["Digital Marketing"],
-        description:
-            "A print-on-demand online store where I manage product listings, TikTok content, and ongoing marketing experiments to drive traffic and sales.",
-        image: "/CC_Port.webp",
-        tags: ["E-commerce", "TikTok Marketing", "Content Strategy"],
-        link: undefined,
-        showLink: false,
-    },
-    {
-        id: 6,
         title: "Innovate and Amplify",
         categories: ["Web Development"],
         description:
-            "My own studio portfolio site, built to showcase services, case studies, and a clear path for potential clients to get in touch.",
+            "This site. I built it as a static Next.js site and host it on Cloudflare Pages.",
         image: "/IAA_PortV2.webp",
         tags: ["Next.js", "Tailwind CSS", "Static Export"],
         link: "/",
@@ -78,7 +68,7 @@ const projects = [
     },
 ]
 
-const categories = ["All", "Web Development", "App Development", "Digital Marketing", "AI Agents"]
+const categories = ["All", "Web Development", "App Development", "AI Agents"]
 
 export default function PortfolioPage() {
     const [selectedCategory, setSelectedCategory] = useState("All")
@@ -104,7 +94,7 @@ export default function PortfolioPage() {
                         </h1>
                         <p className="subtext mt-5 text-lg leading-8 sm:text-xl">
                             {
-                                "Explore the projects I have worked on and see how I help businesses transform their digital presence."
+                                "Client sites I've built, a product of my own, and this site. Every one is live and linked."
                             }
                         </p>
                     </section>
@@ -147,12 +137,12 @@ export default function PortfolioPage() {
                                                 <Button size="sm" variant="secondary" asChild className="w-full">
                                                     {isExternalLink(project.link) ? (
                                                         <a href={project.link} target="_blank" rel="noreferrer">
-                                                            {"View Project"}
+                                                            {"View project"}
                                                             <ExternalLink className="ml-1 h-4 w-4" />
                                                         </a>
                                                     ) : (
                                                         <Link href={project.link}>
-                                                            {"View Project"}
+                                                            {"View project"}
                                                             <ExternalLink className="ml-1 h-4 w-4" />
                                                         </Link>
                                                     )}
@@ -188,14 +178,14 @@ export default function PortfolioPage() {
                                 <div className="section-badge">
                                     <span>{"Open Engagements"}</span>
                                 </div>
-                                <h2 className="page-title mt-6">{"Interested In What You See?"}</h2>
+                                <h2 className="page-title mt-6">{"Like what you see?"}</h2>
                                 <p className="subtext mt-4 text-lg leading-8">
-                                    {"Let's create something amazing together. Start your project today."}
+                                    {"Tell me about your project, and I'll reply by the next business day."}
                                 </p>
                                 <div className="mt-8">
                                     <Button size="lg" className="group" asChild>
                                         <Link href="/contact">
-                                            {"Get In Touch"}
+                                            {"Get in touch"}
                                             <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
                                         </Link>
                                     </Button>

@@ -10,34 +10,34 @@ import Link from "next/link"
 const values = [
     {
         icon: <Zap className="h-6 w-6" />,
-        title: "Innovation First",
+        title: "Try new things",
         description:
-            "I stay ahead of the curve, experimenting with modern tools and creative approaches across web, brand, and digital campaigns.",
+            "I keep testing new tools and approaches in web, branding, and marketing, and I keep the ones that work.",
     },
     {
         icon: <Users className="h-6 w-6" />,
-        title: "Client Partnership",
+        title: "Work together",
         description:
-            "Your success is my focus. I treat every project as a collaboration, keeping you in the loop from first idea to final launch.",
+            "I treat every project as a collaboration and keep you in the loop from the first idea through launch.",
     },
     {
         icon: <Award className="h-6 w-6" />,
-        title: "Excellence Always",
+        title: "Sweat the details",
         description:
-            "I hold my work to a high standard, sweating the details so your site, brand, and content feel polished and consistent.",
+            "I hold my work to a high standard, so your site, brand, and content look polished and consistent.",
     },
     {
         icon: <Heart className="h-6 w-6" />,
-        title: "Passion Driven",
+        title: "Like the work",
         description:
-            "I genuinely love building for the web, shaping brands, and refining digital experiences - and that energy shows up in the care I bring to every project.",
+            "I love building for the web and working on brands. That's a big part of why I care about the small stuff.",
     },
 ]
 
 const stats = [
     { value: "2024", label: "Founded" },
-    { value: "7+", label: "Products Shipped" },
-    { value: "6+", label: "Client Collaborations" },
+    { value: "3", label: "Client Sites Live" },
+    { value: "1", label: "Product in Beta" },
     { value: "1", label: "Person Studio" },
 ]
 
@@ -46,7 +46,7 @@ const team = [
         name: "Austin Harrison",
         role: "Founder & Developer",
         image: "/austin.webp",
-        bio: "I build websites, AI automations, and digital marketing systems for small businesses and solo operators who want professional results without the overhead. On the technical side, that means Next.js, React, and TypeScript for web, and n8n, the OpenAI API, and Anthropic's Claude for automation workflows. I've been building for the web since before AI was mainstream — and now that it is, I help clients put it to work on problems that actually matter to their business.",
+        bio: "I build websites, AI automations, and marketing systems for small businesses and solo operators, without the agency overhead. For the web I use Next.js, React, and TypeScript. For automations I use n8n, the OpenAI API, and Anthropic's Claude. I was building for the web before AI went mainstream. Now I help clients use it on problems their business actually has.",
     },
 ]
 
@@ -62,12 +62,12 @@ export default function AboutPage() {
                             <span>{"Studio Profile"}</span>
                         </div>
                         <h1 className="page-title mt-6">
-                            {"Austin Harrison — "}
-                            <span className="gradient-text">{"Founder & Developer"}</span>
+                            {"Austin Harrison, "}
+                            <span className="gradient-text">{"founder and developer"}</span>
                         </h1>
                         <p className="subtext mt-5 text-lg leading-8 sm:text-xl">
                             {
-                                "A founder-led studio blending modern web development, AI automation, and digital marketing to help small businesses and creators grow with clarity and confidence."
+                                "A one-person studio doing web development, AI automation, and digital marketing for small businesses and creators."
                             }
                         </p>
                     </section>
@@ -82,22 +82,22 @@ export default function AboutPage() {
                                 <div className="subtext mt-6 space-y-4 leading-8">
                                     <p>
                                         {
-                                            "Founded in 2024, Innovate & Amplify is my studio for building high-performing websites, modern brand systems, and AI-powered workflows that help clients show up online with clarity and confidence."
+                                            "I started Innovate & Amplify in 2024. It's where I build fast websites, brand systems, and AI workflows for my clients."
                                         }
                                     </p>
                                     <p>
                                         {
-                                            "Instead of a large agency with layers of handoffs, you work directly with me end-to-end - from strategy and messaging, to design and development, to launch, optimization, and ongoing improvement."
+                                            "Instead of a large agency with layers of handoffs, you work with me the whole way through: strategy and messaging, design and development, launch, and the improvements that come after."
                                         }
                                     </p>
                                     <p>
                                         {
-                                            "Since launching, I've shipped 7+ products and collaborated with 6+ clients - delivering websites, apps, and automations built to scale, easy to maintain, and aligned with real business goals."
+                                            "Since launching in 2024, I've built three client websites that are live today: Evergreen Rain Gutters, a gutter contractor in Spokane; MICRIST Environmental, a training company in Washington; and SP-Archives, the portfolio of photographer Skyelar Payne. I also have one product of my own, Starlit Stories, in beta. I built every one of them myself."
                                         }
                                     </p>
                                     <p>
                                         {
-                                            "Based in the Pacific Northwest, I work with local service businesses, startups, and solo operators who need real results without bloated agency costs. On the web side, that means React, Next.js, and TypeScript. On the automation side, n8n, the OpenAI API, and Anthropic's Claude. If you want to see what that looks like in practice, check out the portfolio or reach out directly."
+                                            "I'm based in Spokane and work with local service businesses and solo operators who don't want to pay agency prices. If you want to see the work, look through the portfolio or get in touch."
                                         }
                                     </p>
                                 </div>
@@ -126,7 +126,7 @@ export default function AboutPage() {
                                 </div>
                                 <h2 className="page-title mt-6">{"AI Automation & Web Development Studio"}</h2>
                                 <p className="subtext mt-4 text-lg leading-8">
-                                    {"The principles that guide every project I take on"}
+                                    {"How I work on every project"}
                                 </p>
                             </div>
 
@@ -152,7 +152,7 @@ export default function AboutPage() {
                                 <div className="section-badge">
                                     <span>{"Team"}</span>
                                 </div>
-                                <h2 className="page-title mt-6">{"Meet The Founder"}</h2>
+                                <h2 className="page-title mt-6">{"Meet the founder"}</h2>
                                 <p className="subtext mt-4 text-lg leading-8">
                                     {"The person behind Innovate & Amplify"}
                                 </p>
@@ -194,13 +194,13 @@ export default function AboutPage() {
                                 <h2 className="page-title mt-6">{"Let's Work Together"}</h2>
                                 <p className="subtext mt-4 text-lg leading-8">
                                     {
-                                        "Ready to level up your website, brand, or digital presence? Get in touch today."
+                                        "Want help with your website, brand, or marketing? Get in touch."
                                     }
                                 </p>
                                 <div className="mt-8">
                                     <Button size="lg" className="group" asChild>
                                         <Link href="/contact">
-                                            {"Start a Conversation"}
+                                            {"Start a conversation"}
                                             <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
                                         </Link>
                                     </Button>

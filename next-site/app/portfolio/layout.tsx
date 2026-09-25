@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-    title: "Portfolio — Web, AI & App Projects | Innovate & Amplify",
+export const metadata: Metadata = pageMeta({
+    title: "Portfolio: Client Websites and Products | Innovate & Amplify",
     description:
-        "Selected work by Austin Harrison: Starlit Stories, HRV monitoring for St. Luke's Hospital, Park Smart, Restaurant AI Agent, and more. Real projects, real results.",
-    alternates: { canonical: "/portfolio" },
-};
+        "Work by Austin Harrison: websites for Evergreen Rain Gutters in Spokane, MICRIST Environmental, and photographer Skyelar Payne, plus Starlit Stories, a product in beta. I built every one of them myself.",
+    path: "/portfolio",
+});
 
 const schema = {
     "@context": "https://schema.org",
@@ -15,7 +16,7 @@ const schema = {
             "@type": "WebPage",
             "@id": "https://innovateandamplify.com/portfolio#webpage",
             url: "https://innovateandamplify.com/portfolio",
-            name: "Portfolio — Innovate & Amplify",
+            name: "Portfolio | Innovate & Amplify",
             isPartOf: { "@id": "https://innovateandamplify.com/#website" },
             breadcrumb: { "@id": "https://innovateandamplify.com/portfolio#breadcrumb" },
         },
@@ -37,9 +38,9 @@ const schema = {
                     position: 1,
                     item: {
                         "@type": "CreativeWork",
-                        name: "Starlit Stories",
-                        description: "A personalised children's storybook generator built with React, Azure, and OpenAI.",
-                        url: "https://staging.starlitstories.app",
+                        name: "Evergreen Rain Gutters",
+                        description: "Website for a roofing and gutter contractor in Spokane, with an on-site AI assistant and instant lead alerts to the owner.",
+                        url: "https://evergreenrainguttersllc.com",
                         creator: { "@id": "https://innovateandamplify.com/#organization" },
                     },
                 },
@@ -48,8 +49,9 @@ const schema = {
                     position: 2,
                     item: {
                         "@type": "CreativeWork",
-                        name: "HRV Monitoring App for St. Luke's Hospital",
-                        description: "A prototype iOS and Apple Watch app for monitoring heart rate variability for clinical review.",
+                        name: "MICRIST Environmental",
+                        description: "Website for an asbestos training and inspection company, with a course catalog, online payments, and a client-edited CMS.",
+                        url: "https://micristenviro.com",
                         creator: { "@id": "https://innovateandamplify.com/#organization" },
                     },
                 },
@@ -58,8 +60,9 @@ const schema = {
                     position: 3,
                     item: {
                         "@type": "CreativeWork",
-                        name: "Park Smart",
-                        description: "A parking lot management web app for reservations, payments, and availability tracking.",
+                        name: "SP-Archives",
+                        description: "Website for Skyelar Payne, a photographer covering the Pacific Northwest and North Idaho, with a catalogue-style photo archive and session inquiries.",
+                        url: "https://sp-archives.com",
                         creator: { "@id": "https://innovateandamplify.com/#organization" },
                     },
                 },
@@ -68,18 +71,9 @@ const schema = {
                     position: 4,
                     item: {
                         "@type": "CreativeWork",
-                        name: "Restaurant AI Agent",
-                        description: "An AI agent chatbot handling customer queries and operations for restaurants.",
-                        creator: { "@id": "https://innovateandamplify.com/#organization" },
-                    },
-                },
-                {
-                    "@type": "ListItem",
-                    position: 5,
-                    item: {
-                        "@type": "CreativeWork",
-                        name: "Cozy Curations",
-                        description: "A print-on-demand store with active TikTok content marketing and e-commerce strategy.",
+                        name: "Starlit Stories",
+                        description: "A personalized children's storybook generator built with React, Azure, and OpenAI. A product in beta.",
+                        url: "https://staging.starlitstories.app",
                         creator: { "@id": "https://innovateandamplify.com/#organization" },
                     },
                 },
