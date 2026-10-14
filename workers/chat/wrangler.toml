@@ -1,0 +1,24 @@
+name = "iaa-site-assistant"
+main = "src/index.ts"
+compatibility_date = "2024-11-01"
+account_id = "4970804939d7f4e5d20795a9ae8047ab"
+
+[vars]
+RESEND_FROM_EMAIL = "contact@innovateandamplify.com"
+CONTACT_NOTIFY_EMAIL = "innovateandamplify@gmail.com"
+REPLY_TO_EMAIL = "contact@innovateandamplify.com"
+# Kill switch. "true" uses the model; anything else serves the scripted capture
+# flow with no model call and no spend. Change it with:
+#   npx wrangler deploy --var CHAT_ENABLED:false
+CHAT_ENABLED = "false"
+MODEL = "claude-haiku-4-5-20251001"
+
+# Secrets, set once with `npx wrangler secret put <NAME>`:
+#   ANTHROPIC_API_KEY
+#   RESEND_API_KEY
+#
+# Optional per-IP rate limiting. Create the namespace, then uncomment:
+#   npx wrangler kv namespace create RATE_LIMIT
+# [[kv_namespaces]]
+# binding = "RATE_LIMIT"
+# id = "<id printed by the command above>"
