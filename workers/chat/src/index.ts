@@ -57,6 +57,9 @@ export function escapeHtml(value: string): string {
 
 const EMAIL_PATTERN = /^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/
 const PHONE_PATTERN = /^[+(]?[\d][\d\s().-]{6,19}$/
+// Same guard as the contact Worker. The confirmation email goes to an address the visitor chose,
+// so anything of theirs that reaches it has to look like a name and nothing else.
+export const SAFE_NAME = /^[\p{L}][\p{L} .'-]{0,59}$/u
 
 // Last line of defence on model output. A hit means the reply is thrown away, not edited, and the
 // notification to Austin records which rule tripped.
@@ -174,7 +177,7 @@ async function emailLead(env: Env, lead: Lead, messages: ChatMessage[], flagged:
             reply_to: env.REPLY_TO_EMAIL,
             subject: "Innovate and Amplify: I got your message",
             text: [
-                lead.name ? `Hi ${lead.name.split(" ")[0]},` : "Hi there,",
+                lead.name && SAFE_NAME.test(lead.name) ? `Hi ${lead.name.split(" ")[0]},` : "Hi there,",
                 "",
                 "Thanks for chatting with the assistant on my site. Your details came through to me.",
                 "",

@@ -284,4 +284,22 @@ for (let i = 0; i < LIMITS.ratePerHour + 5; i++) {
 }
 ok("an unbound namespace degrades to no throttling, not to an error")
 
+// 17. The visitor confirmation never carries attacker-chosen text.
+// The model can be talked into putting anything in `name`, and that email goes to an address the
+// visitor picked, from Austin's verified domain. So the greeting is guarded, not trusted.
+reset()
+modelReply = { lead: { name: "https://evil.example", email: "victim@example.com", what_they_need: "site" } }
+r = await post({ messages: say("hi") })
+await settle()
+let visitorMail = emails()[1].body
+assert.ok(visitorMail.text.startsWith("Hi there,"))
+assert.ok(!visitorMail.text.includes("evil.example"))
+
+reset()
+modelReply = { lead: { name: "Dana O'Neil-Reyes", email: "dana@example.com", what_they_need: "site" } }
+r = await post({ messages: say("hi") })
+await settle()
+assert.ok(emails()[1].body.text.startsWith("Hi Dana,"))
+ok("a real name is greeted, an attacker-chosen one is not")
+
 console.log("ALL PASS")
