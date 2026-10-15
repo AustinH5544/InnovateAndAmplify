@@ -237,4 +237,51 @@ const v = validateConversation([{ role: "user", content: "  hi  " }])
 assert.ok(v.ok && v.messages[0].content === "hi")
 ok("validator trims and accepts a good conversation")
 
+// 15. Per-IP rate limit, against a fake KV namespace.
+reset()
+const store = new Map<string, string>()
+const kv: any = {
+    get: async (k: string) => store.get(k) ?? null,
+    put: async (k: string, v: string) => void store.set(k, v),
+}
+const limitedEnv = { ...env, CHAT_ENABLED: "false", RATE_LIMIT: kv }
+const fromIp = (ip: string) =>
+    worker.fetch(
+        new Request("https://w.example/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Origin: "https://innovateandamplify.com",
+                "CF-Connecting-IP": ip,
+            },
+            body: JSON.stringify({ messages: say("hi") }),
+        }),
+        limitedEnv,
+        ctx,
+    )
+
+for (let i = 0; i < LIMITS.ratePerHour; i++) {
+    const res = await fromIp("203.0.113.7")
+    assert.equal(((await res.json()) as any).limited, undefined, `request ${i + 1} should pass`)
+}
+let over = await fromIp("203.0.113.7")
+let overBody = (await over.json()) as any
+assert.equal(over.status, 200)
+assert.equal(overBody.limited, true)
+assert.match(overBody.reply, /take a message/)
+
+// A different visitor is unaffected, and nothing reached the model.
+let other = await fromIp("203.0.113.8")
+assert.equal(((await other.json()) as any).limited, undefined)
+assert.equal(calls.length, 0)
+ok("a flood from one IP is throttled without affecting other visitors")
+
+// 16. With no namespace bound the Worker still serves, it just does not throttle.
+reset()
+for (let i = 0; i < LIMITS.ratePerHour + 5; i++) {
+    const res = await post({ messages: say("hi") }, "https://innovateandamplify.com", { ...env, CHAT_ENABLED: "false" })
+    assert.equal(((await res.json()) as any).limited, undefined)
+}
+ok("an unbound namespace degrades to no throttling, not to an error")
+
 console.log("ALL PASS")

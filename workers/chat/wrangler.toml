@@ -17,8 +17,8 @@ MODEL = "claude-haiku-4-5-20251001"
 #   ANTHROPIC_API_KEY
 #   RESEND_API_KEY
 #
-# Optional per-IP rate limiting. Create the namespace, then uncomment:
-#   npx wrangler kv namespace create RATE_LIMIT
-# [[kv_namespaces]]
-# binding = "RATE_LIMIT"
-# id = "<id printed by the command above>"
+# Per-IP rate limiting: LIMITS.ratePerHour messages per clock hour, keyed on CF-Connecting-IP.
+# A fixed window on a shared KV counter, so it is a speed bump against a flood, not a hard wall.
+[[kv_namespaces]]
+binding = "RATE_LIMIT"
+id = "5ffa5386261a483aa687adb3fc4840d3"
