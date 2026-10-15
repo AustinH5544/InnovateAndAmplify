@@ -49,7 +49,7 @@ const projects = [
         title: "Starlit Stories",
         categories: ["App Development", "Web Development"],
         description:
-            "A product I built, now in beta. A personalized children's storybook generator that lets parents create unique bedtime stories with their kids.",
+            "A product I built and run, live in production with subscriptions and payments. A personalized children's storybook generator that lets parents create unique bedtime stories with their kids.",
         image: "/Starlit_Port.webp",
         tags: ["React", "Azure", "OpenAI"],
         link: "https://staging.starlitstories.app",

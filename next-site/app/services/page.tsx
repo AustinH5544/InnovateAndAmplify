@@ -50,13 +50,13 @@ const services = [
         category: "AI Automation",
         icon: <Bot className="h-6 w-6" />,
         description:
-            "Some tasks in your business happen the same way every time: a new lead comes in, a form gets submitted, an appointment gets booked. Right now a person probably handles those by hand. I replace the manual steps with workflows built in n8n and connected to tools like OpenAI, your CRM, and your website through webhooks and APIs. You drop fewer balls and spend fewer hours on admin.",
+            "Some tasks in your business happen the same way every time: a new lead comes in, a form gets submitted, an appointment gets booked. Right now a person probably handles those by hand. I replace the manual steps with workflows built in n8n or Make and connected to tools like OpenAI, your CRM, and your website through webhooks and APIs. You drop fewer balls and spend fewer hours on admin.",
         offerings: [
             {
                 icon: <GitBranch className="h-5 w-5" />,
                 title: "Workflow automation",
                 description:
-                    "I use n8n to connect the tools you already use, like your CRM, email platform, website forms, and calendar. When something happens (a form submission, a new booking, a status change), the workflow takes care of the next steps, and you stop copying and pasting between systems.",
+                    "I use n8n or Make to connect the tools you already use, like your CRM, email platform, website forms, and calendar. When something happens (a form submission, a new booking, a status change), the workflow takes care of the next steps, and you stop copying and pasting between systems.",
             },
             {
                 icon: <Bot className="h-5 w-5" />,

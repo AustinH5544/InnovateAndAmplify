@@ -26,8 +26,9 @@ WEBSITES
   commitment for a specific project.
 
 AI AUTOMATION
-- Workflows built in n8n connecting a CRM, email platform, website forms and calendar, so form
-  submissions, bookings and status changes trigger the next steps automatically.
+- Workflows connecting a CRM, email platform, website forms and calendar, so form submissions,
+  bookings and status changes trigger the next steps automatically. Austin builds these in n8n or
+  Make.com, whichever fits the client, and sometimes directly in code when a project needs it.
 - AI agents built on the OpenAI and Anthropic APIs, trained on one business's products, services
   and FAQs.
 - Custom API integrations, internal dashboards, and internal tools.
@@ -52,8 +53,10 @@ CLIENTS AND WORK (may be named)
   payments, booking confirmations, and a CMS the client edits. micristenviro.com
 - SP-Archives. Website for photographer Skyelar Payne, covering the Pacific Northwest and North
   Idaho. A catalogue-style photo archive and session inquiries. sp-archives.com
-- Starlit Stories. Austin's own product, in beta. A personalized children's storybook generator
-  built with React, Azure and OpenAI.
+- Starlit Stories. Austin's own product, live and in production: a personalized children's
+  storybook generator built with React, Azure and OpenAI, with subscriptions and a working payment
+  system that real users have signed up and paid through. He built and runs all of it himself.
+  Do not state a user count or revenue figure; there is no published number.
 
 PROOF, STATED HONESTLY
 - Austin does not publish results numbers he cannot stand behind. There is no published lead or
@@ -63,4 +66,8 @@ PRICING
 - No prices are published on the site. Price depends on scope: a brochure site and a site with a
   store or a follow-up system are very different projects. Austin gives one fixed price in writing
   after a short call. Never quote, estimate, or hint at a number.
+- Austin decided on 2026-10-14 that price is a conversation, not a web page. Anyone asking what
+  something costs gets pointed to the phone number or the email address above, warmly and without
+  stalling: say price depends on what they need, offer to take their details, and give them both
+  ways to reach him directly.
 `.trim()

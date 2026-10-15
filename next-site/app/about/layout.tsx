@@ -5,7 +5,7 @@ import { pageMeta } from "@/lib/seo";
 export const metadata: Metadata = pageMeta({
     title: "About Austin Harrison, Founder of Innovate & Amplify",
     description:
-        "I'm Austin Harrison. I started Innovate & Amplify, a one-person studio in Spokane, in 2024. Three client websites are live, one product is in beta, and I build every project myself.",
+        "I'm Austin Harrison. I started Innovate & Amplify, a one-person studio in Spokane, in 2024. Three client websites are live, my own product is in production, and I build every project myself.",
     path: "/about",
 });
 
