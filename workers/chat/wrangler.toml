@@ -3,6 +3,21 @@ main = "src/index.ts"
 compatibility_date = "2024-11-01"
 account_id = "4970804939d7f4e5d20795a9ae8047ab"
 
+# Served from the site's own domain, not a public workers.dev URL. Worker routes take precedence
+# over the Pages project on the same zone, and the static export has no /api paths of its own.
+# On production the widget calls the relative path /api/chat and stays same-origin. A Pages preview
+# has no such route, so from a preview the widget must call the absolute production URL; that is
+# cross-origin, which the PREVIEW_ORIGIN entry in the CORS allowlist already permits.
+workers_dev = false
+
+[[routes]]
+pattern = "innovateandamplify.com/api/chat"
+zone_name = "innovateandamplify.com"
+
+[[routes]]
+pattern = "www.innovateandamplify.com/api/chat"
+zone_name = "innovateandamplify.com"
+
 [vars]
 RESEND_FROM_EMAIL = "contact@innovateandamplify.com"
 CONTACT_NOTIFY_EMAIL = "innovateandamplify@gmail.com"
@@ -16,6 +31,11 @@ MODEL = "claude-haiku-4-5-20251001"
 # Secrets, set once with `npx wrangler secret put <NAME>`:
 #   ANTHROPIC_API_KEY
 #   RESEND_API_KEY
+#   TURNSTILE_SECRET_KEY  (optional; while unset the challenge is skipped entirely)
+#
+# Turnstile guards the first message of a conversation only, and only on the path that calls the
+# model. Create the widget at Cloudflare dashboard > Turnstile, with innovateandamplify.com as the
+# hostname. The site key is public and belongs in the widget; the secret key goes here.
 #
 # Per-IP rate limiting: LIMITS.ratePerHour messages per clock hour, keyed on CF-Connecting-IP.
 # A fixed window on a shared KV counter, so it is a speed bump against a flood, not a hard wall.

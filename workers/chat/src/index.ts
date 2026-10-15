@@ -11,6 +11,9 @@ export interface Env {
     CHAT_ENABLED: string
     MODEL?: string
     RATE_LIMIT?: KVNamespace
+    // Turnstile secret. While unset, the challenge is skipped entirely, so the Worker runs
+    // unchanged until the widget is built and the key is in place.
+    TURNSTILE_SECRET_KEY?: string
 }
 
 // Same allowlist as the contact Worker: the live site and this project's Pages previews.
@@ -107,6 +110,27 @@ async function underRateLimit(env: Env, ip: string): Promise<boolean> {
     if (used >= LIMITS.ratePerHour) return false
     await env.RATE_LIMIT.put(key, String(used + 1), { expirationTtl: 3600 })
     return true
+}
+
+// Turnstile proves a browser solved a challenge. Only the first message is checked: that is where
+// a scripted flood begins, and re-challenging mid-conversation is hostile to a real visitor.
+// A failure here never errors at the visitor. They get the scripted message-taker instead, so a
+// Cloudflare outage degrades the assistant rather than breaking the page.
+export async function passesTurnstile(env: Env, token: unknown, ip: string): Promise<boolean> {
+    if (!env.TURNSTILE_SECRET_KEY) return true // not configured yet
+    if (typeof token !== "string" || token === "") return false
+    try {
+        const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ secret: env.TURNSTILE_SECRET_KEY, response: token, remoteip: ip }),
+        })
+        const data = (await res.json()) as { success?: boolean }
+        return data.success === true
+    } catch (err) {
+        console.error("Turnstile verification failed:", err instanceof Error ? err.message : err)
+        return false
+    }
 }
 
 async function sendEmail(env: Env, payload: Record<string, unknown>): Promise<Response> {
@@ -270,7 +294,7 @@ export default {
             return json({ reply: FALLBACK_REPLY, leadSaved: false, limited: true }, 200, origin)
         }
 
-        let body: { messages?: unknown; leadSaved?: unknown }
+        let body: { messages?: unknown; leadSaved?: unknown; turnstileToken?: unknown }
         try {
             body = (await request.json()) as typeof body
         } catch {
@@ -289,6 +313,12 @@ export default {
         // The model is off, over budget, or unconfigured: take a message instead.
         if (env.CHAT_ENABLED !== "true" || !env.ANTHROPIC_API_KEY) {
             return json({ reply: FALLBACK_REPLY, leadSaved: false, fallback: true }, 200, origin)
+        }
+
+        // Checked here rather than earlier so it only ever guards the path that costs money.
+        const firstMessage = messages.filter((m) => m.role === "user").length === 1
+        if (firstMessage && !(await passesTurnstile(env, body.turnstileToken, ip))) {
+            return json({ reply: FALLBACK_REPLY, leadSaved: false, unverified: true }, 200, origin)
         }
 
         const result = await callModel(env, messages)

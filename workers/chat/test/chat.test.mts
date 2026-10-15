@@ -9,10 +9,16 @@ let calls: Call[] = []
 let modelReply: { text?: string; lead?: Record<string, unknown> } = {}
 let modelStatus = 200
 let modelDelayMs = 0
+let turnstilePasses = true
+let turnstileThrows = false
 
 globalThis.fetch = (async (url: string, init: any) => {
     const body = init?.body ? JSON.parse(init.body) : {}
     calls.push({ url: String(url), body })
+    if (String(url).includes("challenges.cloudflare.com")) {
+        if (turnstileThrows) throw new Error("siteverify unreachable")
+        return new Response(JSON.stringify({ success: turnstilePasses }), { status: 200 })
+    }
     if (String(url).includes("api.anthropic.com")) {
         if (modelDelayMs) await new Promise((r) => setTimeout(r, modelDelayMs))
         if (modelStatus !== 200) return new Response("nope", { status: modelStatus })
@@ -56,8 +62,11 @@ const reset = () => {
     modelReply = {}
     modelStatus = 200
     modelDelayMs = 0
+    turnstilePasses = true
+    turnstileThrows = false
 }
 const emails = () => calls.filter((c) => c.url.includes("resend"))
+const modelCalls = () => calls.filter((c) => c.url.includes("api.anthropic.com"))
 const ok = (name: string) => console.log("PASS", name)
 
 // 1. Origin checks, matching the contact Worker.
@@ -301,5 +310,54 @@ r = await post({ messages: say("hi") })
 await settle()
 assert.ok(emails()[1].body.text.startsWith("Hi Dana,"))
 ok("a real name is greeted, an attacker-chosen one is not")
+
+// 18. Turnstile. Unconfigured it is invisible; configured it guards only the first message, and
+// only the path that spends money.
+reset()
+modelReply = { text: "Sure, I build sites." }
+r = await post({ messages: say("hi") }) // no TURNSTILE_SECRET_KEY in env
+assert.equal(modelCalls().length, 1)
+assert.equal(calls.filter((c) => c.url.includes("challenges.cloudflare.com")).length, 0)
+ok("with no Turnstile key the challenge is skipped entirely")
+
+const guarded = { ...env, TURNSTILE_SECRET_KEY: "secret" }
+
+reset()
+modelReply = { text: "Sure, I build sites." }
+r = await post({ messages: say("hi") }, "https://innovateandamplify.com", guarded)
+bodyJson = await r.json()
+assert.equal(bodyJson.unverified, true)
+assert.match(bodyJson.reply, /take a message/)
+assert.equal(modelCalls().length, 0)
+
+reset()
+turnstilePasses = false
+r = await post({ messages: say("hi"), turnstileToken: "forged" }, "https://innovateandamplify.com", guarded)
+assert.equal(((await r.json()) as any).unverified, true)
+assert.equal(modelCalls().length, 0)
+
+reset()
+turnstileThrows = true
+r = await post({ messages: say("hi"), turnstileToken: "real" }, "https://innovateandamplify.com", guarded)
+assert.equal(((await r.json()) as any).unverified, true)
+assert.equal(modelCalls().length, 0)
+ok("a missing, forged or unverifiable token never reaches the model")
+
+reset()
+modelReply = { text: "Sure, I build sites." }
+r = await post({ messages: say("hi"), turnstileToken: "real" }, "https://innovateandamplify.com", guarded)
+assert.match(((await r.json()) as any).reply, /build sites/)
+assert.equal(modelCalls().length, 1)
+const verify = calls.find((c) => c.url.includes("challenges.cloudflare.com"))!
+assert.equal(verify.body.secret, "secret")
+assert.equal(verify.body.response, "real")
+
+// Later turns carry no token: the visitor solved it once and is mid-conversation.
+reset()
+modelReply = { text: "It depends on scope." }
+r = await post({ messages: say("hi", "hello", "how long does it take?") }, "https://innovateandamplify.com", guarded)
+assert.equal(modelCalls().length, 1)
+assert.equal(calls.filter((c) => c.url.includes("challenges.cloudflare.com")).length, 0)
+ok("a solved challenge is checked once, not on every message")
 
 console.log("ALL PASS")
