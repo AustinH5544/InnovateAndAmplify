@@ -66,12 +66,32 @@ export const SAFE_NAME = /^[\p{L}][\p{L} .'-]{0,59}$/u
 
 // Last line of defence on model output. A hit means the reply is thrown away, not edited, and the
 // notification to Austin records which rule tripped.
+//
+// What this can and cannot do. It is a pattern match, so it catches a shape of sentence, never a
+// falsehood. "Austin has worked with HVAC companies" is invented and passes cleanly, because
+// nothing about it looks wrong. Only the system prompt argues against that, and a prompt is
+// persuasion, not enforcement. Keep that in mind before trusting this list to be a wall.
+//
+// Phone numbers must survive every rule here: the fallback and the lead confirmation both carry
+// one, and a guard that flags its own replacement text would loop.
 export function breaksRules(text: string): string | null {
     if (/\$\s?\d/.test(text)) return "quoted a dollar amount"
+    // Money written without a currency symbol: "3000 dollars", "2,500", "a few thousand dollars".
+    if (/\b\d[\d,]*\s*(dollars|bucks)\b/i.test(text)) return "quoted a dollar amount"
+    if (/\b\d{1,3}(,\d{3})+\b/.test(text)) return "quoted a number that reads as a price"
+    if (/\b(hundred|thousand)\s+dollars\b/i.test(text)) return "quoted a dollar amount"
+    if (/\b(one|two|three|four|five|six|seven|eight|nine|ten|fifteen|twenty|thirty|fifty)\s+(hundred|thousand)\b/i.test(text))
+        return "quoted a dollar amount"
     if (/\b\d+\s?%/.test(text)) return "quoted a percentage"
+    if (/\b(percent|per cent)\b/i.test(text)) return "quoted a percentage"
     if (/\bguarantee(d|s)?\b/i.test(text)) return "used the word guarantee"
     if (/\bdiscount(ed|s)?\b/i.test(text)) return "offered a discount"
-    if (/\bI promise\b/i.test(text)) return "made a promise"
+    if (/\bpromis(e|es|ed|ing)\b/i.test(text)) return "made a promise"
+    if (/\byou('ll| will| would)\s+(definitely|certainly|absolutely|for sure)\b/i.test(text)) return "promised an outcome"
+    // Claimed results for a client. Austin publishes none, so any of these is invented.
+    if (/\b(doubled?|tripled?|quadrupled?)\b/i.test(text)) return "claimed a result"
+    if (/\b(increased?|boost(ed)?|grew|grown)\b[^.]{0,40}\b(leads?|calls?|sales|revenue|traffic|bookings?|customers?)\b/i.test(text))
+        return "claimed a result"
     if (/https?:\/\/(?!(www\.)?(innovateandamplify\.com|evergreenrainguttersllc\.com|micristenviro\.com|sp-archives\.com))/i.test(text))
         return "linked somewhere off-site"
     return null

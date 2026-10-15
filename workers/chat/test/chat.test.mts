@@ -3,6 +3,7 @@
 //   node --experimental-strip-types --no-warnings test/chat.test.mts
 import assert from "node:assert/strict"
 import worker, { breaksRules, validateConversation, escapeHtml, transcriptHtml, LIMITS } from "../src/index.ts"
+import { FALLBACK_REPLY, LEAD_CONFIRMATION } from "../src/prompt.ts"
 
 type Call = { url: string; body: any }
 let calls: Call[] = []
@@ -359,5 +360,44 @@ r = await post({ messages: say("hi", "hello", "how long does it take?") }, "http
 assert.equal(modelCalls().length, 1)
 assert.equal(calls.filter((c) => c.url.includes("challenges.cloudflare.com")).length, 0)
 ok("a solved challenge is checked once, not on every message")
+
+// 19. The output guard, including the evasions a plain "$" check misses.
+for (const bad of [
+    "A site starts around 3000 dollars.",
+    "Somewhere around three thousand dollars.",
+    "Most clients pay about 2,500 to get started.",
+    "That works out about 30 percent cheaper.",
+    "I promise he will call you today.",
+    "You will definitely get more calls from this.",
+    "Evergreen saw their calls double after launch.",
+    "It increased their leads a lot.",
+]) {
+    assert.ok(breaksRules(bad), `should flag: ${bad}`)
+}
+
+// False positives matter as much: a tripped rule silently replaces a good answer. The replacement
+// text itself carries a phone number, so a guard that flagged it would replace its own output.
+for (const good of [
+    FALLBACK_REPLY,
+    LEAD_CONFIRMATION,
+    "If it is urgent, call or text (425) 582-1003.",
+    "Most website projects ship in 4 to 8 weeks depending on scope.",
+    "Videos are usually 15 to 30 seconds.",
+    "He has made short video ads for Evergreen from their own job photos.",
+    "Email him at contact@innovateandamplify.com and he replies by the next business day.",
+]) {
+    assert.equal(breaksRules(good), null, `should allow: ${good}`)
+}
+ok("the guard catches money and result claims without flagging its own replies")
+
+// 20. The honest limit of a pattern match, pinned so nobody mistakes it for a wall.
+// These are invented or off-topic and pass cleanly. Only the system prompt argues against them.
+for (const undetectable of [
+    "Austin has built sites for several HVAC companies in Spokane.",
+    "Sure, I can help you write that Python script.",
+]) {
+    assert.equal(breaksRules(undetectable), null)
+}
+ok("a pattern match cannot catch an invented fact, and this test says so out loud")
 
 console.log("ALL PASS")
