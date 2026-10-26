@@ -14,6 +14,9 @@ export interface Env {
     // Turnstile secret. While unset, the challenge is skipped entirely, so the Worker runs
     // unchanged until the widget is built and the key is in place.
     TURNSTILE_SECRET_KEY?: string
+    // Conversation transcripts, kept briefly so the daily digest can report the ones that did not
+    // produce a lead. Optional: with no namespace bound, nothing is stored and no digest is sent.
+    TRANSCRIPTS?: KVNamespace
 }
 
 // Same allowlist as the contact Worker: the live site and this project's Pages previews.
@@ -298,7 +301,106 @@ async function callModel(env: Env, messages: ChatMessage[]): Promise<ModelResult
     }
 }
 
+// A lead email already carries its own transcript, so the digest exists for the other kind of
+// conversation: the one where someone asked three questions, got an answer, and left. Without it
+// a wrong answer is invisible, which is the one failure the output guard cannot catch.
+export const TRANSCRIPT_TTL_DAYS = 8
+
+export interface StoredConversation {
+    at: string
+    leadSaved: boolean
+    flagged: string | null
+    messages: ChatMessage[]
+}
+
+export function dayKey(d: Date): string {
+    return d.toISOString().slice(0, 10)
+}
+
+// Stable across the turns of one conversation without trusting the client: the first thing the
+// visitor typed does not change, so every turn hashes to the same key and overwrites the last.
+// A client-supplied id is preferred when it looks sane, since it survives an edited first message.
+export async function conversationId(messages: ChatMessage[], supplied?: unknown): Promise<string> {
+    if (typeof supplied === "string" && /^[A-Za-z0-9_-]{8,64}$/.test(supplied)) return supplied
+    const first = messages.find((m) => m.role === "user")?.content ?? ""
+    const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(first))
+    return Array.from(new Uint8Array(digest).slice(0, 8))
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("")
+}
+
+export async function recordConversation(env: Env, id: string, record: StoredConversation): Promise<void> {
+    if (!env.TRANSCRIPTS) return
+    try {
+        await env.TRANSCRIPTS.put(`convo:${dayKey(new Date(record.at))}:${id}`, JSON.stringify(record), {
+            expirationTtl: TRANSCRIPT_TTL_DAYS * 24 * 60 * 60,
+        })
+    } catch (err) {
+        // Never let bookkeeping break a conversation that already succeeded.
+        console.error("Transcript write failed:", err instanceof Error ? err.message : err)
+    }
+}
+
+export function digestHtml(day: string, convos: StoredConversation[], leadCount: number): string {
+    const block = (c: StoredConversation, i: number) => {
+        const flag = c.flagged
+            ? `<p style="margin: 0 0 8px; color: #ffd38a; font-size: 13px;">A reply here was replaced because it ${escapeHtml(c.flagged)}.</p>`
+            : ""
+        const asked = c.messages.filter((m) => m.role === "user").length
+        return `
+            <div style="margin: 0 0 28px; padding: 16px; background: #141414; border-left: 2px solid #333;">
+                <p style="margin: 0 0 12px; color: #888; font-size: 12px;">Conversation ${i + 1} · ${asked} question${asked === 1 ? "" : "s"} · ${escapeHtml(new Date(c.at).toISOString().slice(11, 16))} UTC</p>
+                ${flag}
+                ${transcriptHtml(c.messages)}
+            </div>`
+    }
+    return `
+        <div style="font-family: sans-serif; max-width: 680px; margin: 0 auto; padding: 32px 24px; background: #0d0d0d; color: #e5e5e5;">
+            <h2 style="margin: 0 0 8px; font-size: 22px; color: #ffffff;">Assistant conversations that did not leave details</h2>
+            <p style="margin: 0 0 24px; color: #888; font-size: 14px;">${escapeHtml(day)} · ${convos.length} without a lead · ${leadCount} that did leave details, already emailed to you separately.</p>
+            ${convos.map(block).join("")}
+            <p style="margin: 28px 0 0; font-size: 12px; color: #555;">Read these for answers that were wrong, not just answers that were refused. The output guard catches the shape of a bad reply, never a false one.</p>
+        </div>`
+}
+
+// Runs on the cron trigger. Reports yesterday's conversations that produced no lead, and sends
+// nothing at all when there is nothing to report, so the mail stays worth opening.
+export async function sendDigest(env: Env, now: Date): Promise<"sent" | "nothing" | "unconfigured"> {
+    if (!env.TRANSCRIPTS) return "unconfigured"
+    const yesterday = new Date(now.getTime() - 24 * 60 * 60 * 1000)
+    const day = dayKey(yesterday)
+
+    const listed = await env.TRANSCRIPTS.list({ prefix: `convo:${day}:` })
+    const records: StoredConversation[] = []
+    for (const key of listed.keys) {
+        const raw = await env.TRANSCRIPTS.get(key.name)
+        if (!raw) continue
+        try {
+            records.push(JSON.parse(raw) as StoredConversation)
+        } catch {
+            console.error("Unreadable transcript:", key.name)
+        }
+    }
+
+    const withoutLead = records.filter((r) => !r.leadSaved).sort((a, b) => a.at.localeCompare(b.at))
+    if (withoutLead.length === 0) return "nothing"
+
+    const leadCount = records.length - withoutLead.length
+    const res = await sendEmail(env, {
+        to: [env.CONTACT_NOTIFY_EMAIL],
+        reply_to: env.REPLY_TO_EMAIL,
+        subject: `Assistant digest, ${day}: ${withoutLead.length} conversation${withoutLead.length === 1 ? "" : "s"} without a lead`,
+        html: digestHtml(day, withoutLead, leadCount),
+    })
+    if (!res.ok) console.error("Resend error (digest):", await res.text())
+    return "sent"
+}
+
 export default {
+    async scheduled(_event: ScheduledController, env: Env, ctx: ExecutionContext): Promise<void> {
+        ctx.waitUntil(sendDigest(env, new Date()))
+    },
+
     async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
         const origin = request.headers.get("Origin")
 
@@ -314,7 +416,7 @@ export default {
             return json({ reply: FALLBACK_REPLY, leadSaved: false, limited: true }, 200, origin)
         }
 
-        let body: { messages?: unknown; leadSaved?: unknown; turnstileToken?: unknown }
+        let body: { messages?: unknown; leadSaved?: unknown; turnstileToken?: unknown; sessionId?: unknown }
         try {
             body = (await request.json()) as typeof body
         } catch {
@@ -346,11 +448,25 @@ export default {
         // One lead per conversation. The client echoes leadSaved back so a later turn cannot
         // trigger a second email; a spoofed value only ever suppresses an email, never sends one.
         const alreadySaved = body.leadSaved === true
+        const full = [...messages, { role: "assistant" as const, content: result.text }]
         if (result.lead && !alreadySaved) {
-            const full = [...messages, { role: "assistant" as const, content: result.text }]
             ctx.waitUntil(emailLead(env, result.lead, full, result.flagged))
         }
 
-        return json({ reply: result.text, leadSaved: alreadySaved || !!result.lead }, 200, origin)
+        // Each turn overwrites the same key, so the stored copy is the whole conversation as it
+        // stands and the leadSaved flag on it is final.
+        const leadSaved = alreadySaved || !!result.lead
+        ctx.waitUntil(
+            conversationId(messages, (body as { sessionId?: unknown }).sessionId).then((id) =>
+                recordConversation(env, id, {
+                    at: new Date().toISOString(),
+                    leadSaved,
+                    flagged: result.flagged,
+                    messages: full,
+                }),
+            ),
+        )
+
+        return json({ reply: result.text, leadSaved }, 200, origin)
     },
 }

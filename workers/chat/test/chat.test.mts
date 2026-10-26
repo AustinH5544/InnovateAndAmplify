@@ -2,7 +2,16 @@
 // calls no model, and costs nothing. Run from workers/chat:
 //   node --experimental-strip-types --no-warnings test/chat.test.mts
 import assert from "node:assert/strict"
-import worker, { breaksRules, validateConversation, escapeHtml, transcriptHtml, LIMITS } from "../src/index.ts"
+import worker, {
+    breaksRules,
+    validateConversation,
+    escapeHtml,
+    transcriptHtml,
+    conversationId,
+    sendDigest,
+    dayKey,
+    LIMITS,
+} from "../src/index.ts"
 import { FALLBACK_REPLY, LEAD_CONFIRMATION } from "../src/prompt.ts"
 
 type Call = { url: string; body: any }
@@ -399,5 +408,148 @@ for (const undetectable of [
     assert.equal(breaksRules(undetectable), null)
 }
 ok("a pattern match cannot catch an invented fact, and this test says so out loud")
+
+// 21. Transcripts are stored per conversation, and every turn overwrites the same key.
+const makeKv = () => {
+    const inner = new Map<string, string>()
+    return {
+        store: inner,
+        kv: {
+            get: async (k: string) => inner.get(k) ?? null,
+            put: async (k: string, v: string) => void inner.set(k, v),
+            list: async ({ prefix }: { prefix: string }) => ({
+                keys: [...inner.keys()].filter((k) => k.startsWith(prefix)).map((name) => ({ name })),
+            }),
+        } as any,
+    }
+}
+
+reset()
+let { store: tstore, kv: tkv } = makeKv()
+let recording = { ...env, TRANSCRIPTS: tkv }
+modelReply = { text: "I build custom sites." }
+await post({ messages: say("do you build sites?") }, "https://innovateandamplify.com", recording)
+await settle()
+assert.equal(tstore.size, 1)
+let stored = JSON.parse([...tstore.values()][0])
+assert.equal(stored.leadSaved, false)
+assert.equal(stored.messages.length, 2) // the visitor's question and the reply
+assert.equal(stored.messages[1].content, "I build custom sites.")
+
+// A second turn of the same conversation replaces the first record rather than adding one.
+modelReply = { text: "Roofing, gutters, that kind of thing." }
+await post(
+    { messages: say("do you build sites?", "I build custom sites.", "what kind of businesses?") },
+    "https://innovateandamplify.com",
+    recording,
+)
+await settle()
+assert.equal(tstore.size, 1)
+stored = JSON.parse([...tstore.values()][0])
+assert.equal(stored.messages.length, 4)
+ok("a conversation is stored once and updated in place as it grows")
+
+// The id is stable across turns without the client supplying anything, and a sane client id wins.
+const a = await conversationId([{ role: "user", content: "hello there" }])
+const b = await conversationId([
+    { role: "user", content: "hello there" },
+    { role: "assistant", content: "hi" },
+    { role: "user", content: "and another thing" },
+])
+assert.equal(a, b)
+assert.notEqual(a, await conversationId([{ role: "user", content: "different opening" }]))
+assert.equal(await conversationId([{ role: "user", content: "x" }], "widget-session-123"), "widget-session-123")
+assert.notEqual(await conversationId([{ role: "user", content: "x" }], "../../etc/passwd"), "../../etc/passwd")
+ok("conversation ids are stable across turns and reject a malformed client id")
+
+// 22. The digest reports yesterday's leadless conversations and nothing else.
+reset()
+;({ store: tstore, kv: tkv } = makeKv())
+const now = new Date("2026-10-25T15:00:00Z")
+const yesterday = dayKey(new Date("2026-10-24T12:00:00Z"))
+const convo = (id: string, leadSaved: boolean, text: string, flagged: string | null = null) =>
+    tstore.set(
+        `convo:${yesterday}:${id}`,
+        JSON.stringify({
+            at: `${yesterday}T12:00:00.000Z`,
+            leadSaved,
+            flagged,
+            messages: [
+                { role: "user", content: text },
+                { role: "assistant", content: "An answer." },
+            ],
+        }),
+    )
+convo("aaa", false, "do you work with HVAC companies?")
+convo("bbb", true, "here is my email")
+convo("ccc", false, "how much for a site?", "quoted a dollar amount")
+tstore.set(`convo:${dayKey(now)}:ddd`, JSON.stringify({ at: now.toISOString(), leadSaved: false, flagged: null, messages: [] }))
+
+let outcome = await sendDigest({ ...env, TRANSCRIPTS: tkv }, now)
+assert.equal(outcome, "sent")
+assert.equal(emails().length, 1)
+const digest = emails()[0].body
+assert.deepEqual(digest.to, ["innovateandamplify@gmail.com"])
+assert.match(digest.subject, /2 conversations without a lead/)
+assert.match(digest.html, /HVAC companies/)
+assert.match(digest.html, /how much for a site\?/)
+assert.ok(!digest.html.includes("here is my email")) // the lead was emailed separately
+assert.ok(!digest.html.includes("ddd")) // today's conversation is not yesterday's business
+assert.match(digest.html, /replaced because it quoted a dollar amount/)
+ok("the digest carries yesterday's leadless conversations and flags replaced replies")
+
+// Nothing to say means nothing sent, so the mail stays worth opening.
+reset()
+;({ store: tstore, kv: tkv } = makeKv())
+convo("only-lead", true, "my email is dana@example.com")
+assert.equal(await sendDigest({ ...env, TRANSCRIPTS: tkv }, now), "nothing")
+assert.equal(emails().length, 0)
+
+reset()
+assert.equal(await sendDigest(env, now), "unconfigured") // no namespace bound
+assert.equal(emails().length, 0)
+ok("a quiet day and an unbound namespace both send no mail")
+
+// 23. The scheduled handler runs the digest. It reads the real clock, so the fixture is written
+// against the same "yesterday" the handler will compute rather than a hard-coded date.
+reset()
+;({ store: tstore, kv: tkv } = makeKv())
+const handlerYesterday = dayKey(new Date(Date.now() - 24 * 60 * 60 * 1000))
+tstore.set(
+    `convo:${handlerYesterday}:eee`,
+    JSON.stringify({
+        at: `${handlerYesterday}T12:00:00.000Z`,
+        leadSaved: false,
+        flagged: null,
+        messages: [
+            { role: "user", content: "just browsing" },
+            { role: "assistant", content: "An answer." },
+        ],
+    }),
+)
+const scheduledWaits: Promise<unknown>[] = []
+await worker.scheduled!({} as any, { ...env, TRANSCRIPTS: tkv }, {
+    waitUntil: (p: Promise<unknown>) => scheduledWaits.push(p),
+} as any)
+await Promise.all(scheduledWaits)
+assert.equal(emails().length, 1)
+assert.match(emails()[0].body.subject, /Assistant digest/)
+ok("the cron trigger sends the digest")
+
+// 24. Storage failures never break a conversation that already worked.
+reset()
+modelReply = { text: "Sure." }
+const brokenKv: any = {
+    get: async () => null,
+    put: async () => {
+        throw new Error("KV unavailable")
+    },
+    list: async () => ({ keys: [] }),
+}
+r = await post({ messages: say("hi") }, "https://innovateandamplify.com", { ...env, TRANSCRIPTS: brokenKv })
+await settle()
+assert.equal(r.status, 200)
+assert.match(((await r.json()) as any).reply, /Sure\./)
+ok("a failed transcript write does not reach the visitor")
 
 console.log("ALL PASS")

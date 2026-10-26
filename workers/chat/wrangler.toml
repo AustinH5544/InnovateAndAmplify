@@ -42,3 +42,14 @@ MODEL = "claude-haiku-4-5-20251001"
 [[kv_namespaces]]
 binding = "RATE_LIMIT"
 id = "5ffa5386261a483aa687adb3fc4840d3"
+
+# Conversation transcripts, kept TRANSCRIPT_TTL_DAYS and then expired by KV itself. They exist so
+# the daily digest can show the conversations that left no details; a lead already arrives with its
+# own transcript. Unbind this and the Worker stores nothing and sends no digest.
+[[kv_namespaces]]
+binding = "TRANSCRIPTS"
+id = "66eb076022f8478fb9df89f22ac85273"
+
+# 15:00 UTC is 8am Pacific in summer, 7am in winter: the digest is waiting at the start of the day.
+[triggers]
+crons = ["0 15 * * *"]
