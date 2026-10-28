@@ -1,0 +1,555 @@
+// Tests for the site assistant Worker. The model and Resend are mocked, so this sends no email,
+// calls no model, and costs nothing. Run from workers/chat:
+//   node --experimental-strip-types --no-warnings test/chat.test.mts
+import assert from "node:assert/strict"
+import worker, {
+    breaksRules,
+    validateConversation,
+    escapeHtml,
+    transcriptHtml,
+    conversationId,
+    sendDigest,
+    dayKey,
+    LIMITS,
+} from "../src/index.ts"
+import { FALLBACK_REPLY, LEAD_CONFIRMATION } from "../src/prompt.ts"
+
+type Call = { url: string; body: any }
+let calls: Call[] = []
+let modelReply: { text?: string; lead?: Record<string, unknown> } = {}
+let modelStatus = 200
+let modelDelayMs = 0
+let turnstilePasses = true
+let turnstileThrows = false
+
+globalThis.fetch = (async (url: string, init: any) => {
+    const body = init?.body ? JSON.parse(init.body) : {}
+    calls.push({ url: String(url), body })
+    if (String(url).includes("challenges.cloudflare.com")) {
+        if (turnstileThrows) throw new Error("siteverify unreachable")
+        return new Response(JSON.stringify({ success: turnstilePasses }), { status: 200 })
+    }
+    if (String(url).includes("api.anthropic.com")) {
+        if (modelDelayMs) await new Promise((r) => setTimeout(r, modelDelayMs))
+        if (modelStatus !== 200) return new Response("nope", { status: modelStatus })
+        const content: any[] = []
+        if (modelReply.text) content.push({ type: "text", text: modelReply.text })
+        if (modelReply.lead) content.push({ type: "tool_use", name: "save_lead", input: modelReply.lead })
+        return new Response(JSON.stringify({ content }), { status: 200 })
+    }
+    return new Response("{}", { status: 200 }) // Resend
+}) as any
+
+const env: any = {
+    ANTHROPIC_API_KEY: "test-key",
+    RESEND_API_KEY: "test-key",
+    RESEND_FROM_EMAIL: "contact@innovateandamplify.com",
+    CONTACT_NOTIFY_EMAIL: "innovateandamplify@gmail.com",
+    REPLY_TO_EMAIL: "contact@innovateandamplify.com",
+    CHAT_ENABLED: "true",
+}
+
+const waits: Promise<unknown>[] = []
+const ctx: any = { waitUntil: (p: Promise<unknown>) => waits.push(p) }
+const settle = async () => {
+    await Promise.all(waits)
+    waits.length = 0
+}
+
+const post = (body: unknown, origin: string | null = "https://innovateandamplify.com", e: any = env) =>
+    worker.fetch(
+        new Request("https://w.example/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", ...(origin ? { Origin: origin } : {}) },
+            body: JSON.stringify(body),
+        }),
+        e,
+        ctx,
+    )
+const say = (...texts: string[]) => texts.map((t, i) => ({ role: i % 2 === 0 ? "user" : "assistant", content: t }))
+const reset = () => {
+    calls = []
+    modelReply = {}
+    modelStatus = 200
+    modelDelayMs = 0
+    turnstilePasses = true
+    turnstileThrows = false
+}
+const emails = () => calls.filter((c) => c.url.includes("resend"))
+const modelCalls = () => calls.filter((c) => c.url.includes("api.anthropic.com"))
+const ok = (name: string) => console.log("PASS", name)
+
+// 1. Origin checks, matching the contact Worker.
+reset()
+let r = await post({ messages: say("hi") }, "https://evil.example")
+assert.equal(r.status, 403)
+r = await post({ messages: say("hi") }, null)
+assert.equal(r.status, 403)
+assert.equal(calls.length, 0)
+let pre = await worker.fetch(new Request("https://w.example/", { method: "OPTIONS", headers: { Origin: "https://evil.example" } }), env, ctx)
+assert.equal(pre.status, 403)
+for (const o of ["https://innovateandamplify.com", "https://phase-0-site.innovateandamplify.pages.dev"]) {
+    pre = await worker.fetch(new Request("https://w.example/", { method: "OPTIONS", headers: { Origin: o } }), env, ctx)
+    assert.equal(pre.status, 204)
+    assert.equal(pre.headers.get("Access-Control-Allow-Origin"), o)
+}
+ok("only the site and its previews may call the assistant")
+
+// 2. Caps.
+reset()
+r = await post({ messages: say("x".repeat(LIMITS.maxCharsPerMessage + 1)) })
+assert.equal(r.status, 413)
+const longConvo = Array.from({ length: LIMITS.maxUserTurns * 2 + 2 }, (_, i) => ({
+    role: i % 2 === 0 ? "user" : "assistant",
+    content: "hello",
+}))
+r = await post({ messages: longConvo })
+assert.equal(r.status, 200)
+assert.equal((await r.json() as any).capped, true)
+assert.equal(calls.length, 0)
+ok("message size and turn caps stop before any model call")
+
+// 3. Kill switch and missing key.
+reset()
+r = await post({ messages: say("hi") }, "https://innovateandamplify.com", { ...env, CHAT_ENABLED: "false" })
+let bodyJson = (await r.json()) as any
+assert.equal(bodyJson.fallback, true)
+assert.match(bodyJson.reply, /take a message/)
+assert.equal(calls.length, 0)
+r = await post({ messages: say("hi") }, "https://innovateandamplify.com", { ...env, ANTHROPIC_API_KEY: "" })
+assert.equal(((await r.json()) as any).fallback, true)
+assert.equal(calls.length, 0)
+ok("kill switch and missing key fall back with no model call")
+
+// 4. Normal reply passes through.
+reset()
+modelReply = { text: "I build custom sites in Next.js. What does your business do?" }
+r = await post({ messages: say("do you build websites?") })
+bodyJson = await r.json()
+assert.match(bodyJson.reply, /Next\.js/)
+assert.equal(bodyJson.leadSaved, false)
+assert.equal(emails().length, 0)
+ok("an ordinary answer is returned and sends no email")
+
+// 5. Lead captured: one notification, one confirmation, transcript included.
+reset()
+modelReply = { lead: { name: "Dana Reyes", email: "dana@example.com", business_type: "roofing", what_they_need: "a new site" } }
+r = await post({ messages: say("I need a site", "Sure, what's your email?", "dana@example.com") })
+bodyJson = await r.json()
+await settle()
+assert.equal(bodyJson.leadSaved, true)
+assert.match(bodyJson.reply, /next business day/)
+assert.equal(emails().length, 2)
+const notify = emails()[0].body
+const confirm = emails()[1].body
+assert.deepEqual(notify.to, ["innovateandamplify@gmail.com"])
+assert.equal(notify.reply_to, "dana@example.com")
+assert.match(notify.html, /Dana Reyes/)
+assert.match(notify.html, /a new site/)
+assert.match(notify.html, /I need a site/) // transcript present
+assert.deepEqual(confirm.to, ["dana@example.com"])
+assert.equal(confirm.reply_to, "contact@innovateandamplify.com")
+assert.ok(!confirm.text.includes("I need a site")) // never echoes the visitor
+ok("a captured lead emails Austin with the transcript and confirms to the visitor")
+
+// 6. No duplicate emails on later turns.
+reset()
+modelReply = { lead: { email: "dana@example.com", what_they_need: "a site" } }
+r = await post({ messages: say("hi", "hello", "still me"), leadSaved: true })
+await settle()
+assert.equal(emails().length, 0)
+assert.equal(((await r.json()) as any).leadSaved, true)
+ok("a second tool call in the same conversation sends nothing")
+
+// 7. A lead with no way to reach them is not a lead.
+reset()
+modelReply = { text: "Thanks!", lead: { name: "Nobody", what_they_need: "curious" } }
+r = await post({ messages: say("hi") })
+await settle()
+assert.equal(emails().length, 0)
+assert.equal(((await r.json()) as any).leadSaved, false)
+reset()
+modelReply = { lead: { email: "not-an-email", what_they_need: "x" } }
+r = await post({ messages: say("hi") })
+await settle()
+assert.equal(emails().length, 0)
+ok("no contact details and malformed emails do not trigger a lead")
+
+// 8. Phone-only lead works, and gets no confirmation email.
+reset()
+modelReply = { lead: { name: "Sam", phone: "(509) 555-0134", what_they_need: "gutters site" } }
+r = await post({ messages: say("call me") })
+await settle()
+assert.equal(emails().length, 1)
+assert.equal(emails()[0].body.reply_to, "contact@innovateandamplify.com")
+ok("a phone-only lead notifies Austin and sends no confirmation")
+
+// 9. Output guard replaces rule-breaking replies.
+for (const bad of [
+    "A site runs about $3,000 to start.",
+    "I guarantee more leads.",
+    "We can do a 20% discount this month.",
+    "Read more at https://some-other-site.example",
+]) {
+    assert.ok(breaksRules(bad), `should flag: ${bad}`)
+}
+for (const good of [
+    "Price depends on scope, so Austin gives one fixed number after a short call.",
+    "You can see the work at https://evergreenrainguttersllc.com",
+    "Most website projects ship in 4 to 8 weeks depending on scope.",
+]) {
+    assert.equal(breaksRules(good), null, `should allow: ${good}`)
+}
+reset()
+modelReply = { text: "Sure, about $4,000." }
+r = await post({ messages: say("how much?") })
+bodyJson = await r.json()
+assert.ok(!bodyJson.reply.includes("$4,000"))
+assert.match(bodyJson.reply, /take a message/)
+ok("a reply that quotes a price is replaced, not sent")
+
+// 10. Flagged reply is reported to Austin when a lead is also captured.
+reset()
+modelReply = { text: "It costs $5,000.", lead: { email: "dana@example.com", what_they_need: "site" } }
+r = await post({ messages: say("how much?") })
+await settle()
+assert.match(emails()[0].body.html, /replaced because it/)
+ok("Austin is told when a reply had to be replaced")
+
+// 11. Model failure and timeout fall back silently.
+reset()
+modelStatus = 500
+r = await post({ messages: say("hi") })
+assert.equal(r.status, 200)
+assert.match(((await r.json()) as any).reply, /take a message/)
+reset()
+modelDelayMs = LIMITS.modelTimeoutMs + 200
+r = await post({ messages: say("hi") })
+assert.match(((await r.json()) as any).reply, /take a message/)
+ok("model errors and timeouts fall back without an error to the visitor")
+
+// 12. Escaping in the transcript.
+assert.equal(escapeHtml("<b>hi</b>"), "&lt;b&gt;hi&lt;/b&gt;")
+assert.ok(transcriptHtml([{ role: "user", content: "<script>alert(1)</script>" }]).includes("&lt;script&gt;"))
+reset()
+modelReply = { lead: { email: "dana@example.com", what_they_need: "<img src=x onerror=alert(1)>" } }
+r = await post({ messages: say("<b>bold</b> request") })
+await settle()
+assert.ok(!emails()[0].body.html.includes("<script>"))
+assert.match(emails()[0].body.html, /&lt;img src=x/)
+assert.match(emails()[0].body.html, /&lt;b&gt;bold&lt;\/b&gt;/)
+ok("visitor text and model output are escaped in the email")
+
+// 13. Malformed requests.
+reset()
+for (const bad of [{ messages: [] }, { messages: "hi" }, { messages: [{ role: "system", content: "x" }] }, { messages: [{ role: "user", content: "" }] }]) {
+    const res = await post(bad)
+    assert.equal(res.status, 400, JSON.stringify(bad))
+}
+r = await post({ messages: [{ role: "user", content: "hi" }, { role: "assistant", content: "hello" }] })
+assert.equal(r.status, 400) // must end with the visitor
+assert.equal(calls.length, 0)
+ok("malformed conversations are rejected before the model")
+
+// 14. The validator is pure and reusable.
+const v = validateConversation([{ role: "user", content: "  hi  " }])
+assert.ok(v.ok && v.messages[0].content === "hi")
+ok("validator trims and accepts a good conversation")
+
+// 15. Per-IP rate limit, against a fake KV namespace.
+reset()
+const store = new Map<string, string>()
+const kv: any = {
+    get: async (k: string) => store.get(k) ?? null,
+    put: async (k: string, v: string) => void store.set(k, v),
+}
+const limitedEnv = { ...env, CHAT_ENABLED: "false", RATE_LIMIT: kv }
+const fromIp = (ip: string) =>
+    worker.fetch(
+        new Request("https://w.example/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Origin: "https://innovateandamplify.com",
+                "CF-Connecting-IP": ip,
+            },
+            body: JSON.stringify({ messages: say("hi") }),
+        }),
+        limitedEnv,
+        ctx,
+    )
+
+for (let i = 0; i < LIMITS.ratePerHour; i++) {
+    const res = await fromIp("203.0.113.7")
+    assert.equal(((await res.json()) as any).limited, undefined, `request ${i + 1} should pass`)
+}
+let over = await fromIp("203.0.113.7")
+let overBody = (await over.json()) as any
+assert.equal(over.status, 200)
+assert.equal(overBody.limited, true)
+assert.match(overBody.reply, /take a message/)
+
+// A different visitor is unaffected, and nothing reached the model.
+let other = await fromIp("203.0.113.8")
+assert.equal(((await other.json()) as any).limited, undefined)
+assert.equal(calls.length, 0)
+ok("a flood from one IP is throttled without affecting other visitors")
+
+// 16. With no namespace bound the Worker still serves, it just does not throttle.
+reset()
+for (let i = 0; i < LIMITS.ratePerHour + 5; i++) {
+    const res = await post({ messages: say("hi") }, "https://innovateandamplify.com", { ...env, CHAT_ENABLED: "false" })
+    assert.equal(((await res.json()) as any).limited, undefined)
+}
+ok("an unbound namespace degrades to no throttling, not to an error")
+
+// 17. The visitor confirmation never carries attacker-chosen text.
+// The model can be talked into putting anything in `name`, and that email goes to an address the
+// visitor picked, from Austin's verified domain. So the greeting is guarded, not trusted.
+reset()
+modelReply = { lead: { name: "https://evil.example", email: "victim@example.com", what_they_need: "site" } }
+r = await post({ messages: say("hi") })
+await settle()
+let visitorMail = emails()[1].body
+assert.ok(visitorMail.text.startsWith("Hi there,"))
+assert.ok(!visitorMail.text.includes("evil.example"))
+
+reset()
+modelReply = { lead: { name: "Dana O'Neil-Reyes", email: "dana@example.com", what_they_need: "site" } }
+r = await post({ messages: say("hi") })
+await settle()
+assert.ok(emails()[1].body.text.startsWith("Hi Dana,"))
+ok("a real name is greeted, an attacker-chosen one is not")
+
+// 18. Turnstile. Unconfigured it is invisible; configured it guards only the first message, and
+// only the path that spends money.
+reset()
+modelReply = { text: "Sure, I build sites." }
+r = await post({ messages: say("hi") }) // no TURNSTILE_SECRET_KEY in env
+assert.equal(modelCalls().length, 1)
+assert.equal(calls.filter((c) => c.url.includes("challenges.cloudflare.com")).length, 0)
+ok("with no Turnstile key the challenge is skipped entirely")
+
+const guarded = { ...env, TURNSTILE_SECRET_KEY: "secret" }
+
+reset()
+modelReply = { text: "Sure, I build sites." }
+r = await post({ messages: say("hi") }, "https://innovateandamplify.com", guarded)
+bodyJson = await r.json()
+assert.equal(bodyJson.unverified, true)
+assert.match(bodyJson.reply, /take a message/)
+assert.equal(modelCalls().length, 0)
+
+reset()
+turnstilePasses = false
+r = await post({ messages: say("hi"), turnstileToken: "forged" }, "https://innovateandamplify.com", guarded)
+assert.equal(((await r.json()) as any).unverified, true)
+assert.equal(modelCalls().length, 0)
+
+reset()
+turnstileThrows = true
+r = await post({ messages: say("hi"), turnstileToken: "real" }, "https://innovateandamplify.com", guarded)
+assert.equal(((await r.json()) as any).unverified, true)
+assert.equal(modelCalls().length, 0)
+ok("a missing, forged or unverifiable token never reaches the model")
+
+reset()
+modelReply = { text: "Sure, I build sites." }
+r = await post({ messages: say("hi"), turnstileToken: "real" }, "https://innovateandamplify.com", guarded)
+assert.match(((await r.json()) as any).reply, /build sites/)
+assert.equal(modelCalls().length, 1)
+const verify = calls.find((c) => c.url.includes("challenges.cloudflare.com"))!
+assert.equal(verify.body.secret, "secret")
+assert.equal(verify.body.response, "real")
+
+// Later turns carry no token: the visitor solved it once and is mid-conversation.
+reset()
+modelReply = { text: "It depends on scope." }
+r = await post({ messages: say("hi", "hello", "how long does it take?") }, "https://innovateandamplify.com", guarded)
+assert.equal(modelCalls().length, 1)
+assert.equal(calls.filter((c) => c.url.includes("challenges.cloudflare.com")).length, 0)
+ok("a solved challenge is checked once, not on every message")
+
+// 19. The output guard, including the evasions a plain "$" check misses.
+for (const bad of [
+    "A site starts around 3000 dollars.",
+    "Somewhere around three thousand dollars.",
+    "Most clients pay about 2,500 to get started.",
+    "That works out about 30 percent cheaper.",
+    "I promise he will call you today.",
+    "You will definitely get more calls from this.",
+    "Evergreen saw their calls double after launch.",
+    "It increased their leads a lot.",
+]) {
+    assert.ok(breaksRules(bad), `should flag: ${bad}`)
+}
+
+// False positives matter as much: a tripped rule silently replaces a good answer. The replacement
+// text itself carries a phone number, so a guard that flagged it would replace its own output.
+for (const good of [
+    FALLBACK_REPLY,
+    LEAD_CONFIRMATION,
+    "If it is urgent, call or text (425) 582-1003.",
+    "Most website projects ship in 4 to 8 weeks depending on scope.",
+    "Videos are usually 15 to 30 seconds.",
+    "He has made short video ads for Evergreen from their own job photos.",
+    "Email him at contact@innovateandamplify.com and he replies by the next business day.",
+]) {
+    assert.equal(breaksRules(good), null, `should allow: ${good}`)
+}
+ok("the guard catches money and result claims without flagging its own replies")
+
+// 20. The honest limit of a pattern match, pinned so nobody mistakes it for a wall.
+// These are invented or off-topic and pass cleanly. Only the system prompt argues against them.
+for (const undetectable of [
+    "Austin has built sites for several HVAC companies in Spokane.",
+    "Sure, I can help you write that Python script.",
+]) {
+    assert.equal(breaksRules(undetectable), null)
+}
+ok("a pattern match cannot catch an invented fact, and this test says so out loud")
+
+// 21. Transcripts are stored per conversation, and every turn overwrites the same key.
+const makeKv = () => {
+    const inner = new Map<string, string>()
+    return {
+        store: inner,
+        kv: {
+            get: async (k: string) => inner.get(k) ?? null,
+            put: async (k: string, v: string) => void inner.set(k, v),
+            list: async ({ prefix }: { prefix: string }) => ({
+                keys: [...inner.keys()].filter((k) => k.startsWith(prefix)).map((name) => ({ name })),
+            }),
+        } as any,
+    }
+}
+
+reset()
+let { store: tstore, kv: tkv } = makeKv()
+let recording = { ...env, TRANSCRIPTS: tkv }
+modelReply = { text: "I build custom sites." }
+await post({ messages: say("do you build sites?") }, "https://innovateandamplify.com", recording)
+await settle()
+assert.equal(tstore.size, 1)
+let stored = JSON.parse([...tstore.values()][0])
+assert.equal(stored.leadSaved, false)
+assert.equal(stored.messages.length, 2) // the visitor's question and the reply
+assert.equal(stored.messages[1].content, "I build custom sites.")
+
+// A second turn of the same conversation replaces the first record rather than adding one.
+modelReply = { text: "Roofing, gutters, that kind of thing." }
+await post(
+    { messages: say("do you build sites?", "I build custom sites.", "what kind of businesses?") },
+    "https://innovateandamplify.com",
+    recording,
+)
+await settle()
+assert.equal(tstore.size, 1)
+stored = JSON.parse([...tstore.values()][0])
+assert.equal(stored.messages.length, 4)
+ok("a conversation is stored once and updated in place as it grows")
+
+// The id is stable across turns without the client supplying anything, and a sane client id wins.
+const a = await conversationId([{ role: "user", content: "hello there" }])
+const b = await conversationId([
+    { role: "user", content: "hello there" },
+    { role: "assistant", content: "hi" },
+    { role: "user", content: "and another thing" },
+])
+assert.equal(a, b)
+assert.notEqual(a, await conversationId([{ role: "user", content: "different opening" }]))
+assert.equal(await conversationId([{ role: "user", content: "x" }], "widget-session-123"), "widget-session-123")
+assert.notEqual(await conversationId([{ role: "user", content: "x" }], "../../etc/passwd"), "../../etc/passwd")
+ok("conversation ids are stable across turns and reject a malformed client id")
+
+// 22. The digest reports yesterday's leadless conversations and nothing else.
+reset()
+;({ store: tstore, kv: tkv } = makeKv())
+const now = new Date("2026-10-25T15:00:00Z")
+const yesterday = dayKey(new Date("2026-10-24T12:00:00Z"))
+const convo = (id: string, leadSaved: boolean, text: string, flagged: string | null = null) =>
+    tstore.set(
+        `convo:${yesterday}:${id}`,
+        JSON.stringify({
+            at: `${yesterday}T12:00:00.000Z`,
+            leadSaved,
+            flagged,
+            messages: [
+                { role: "user", content: text },
+                { role: "assistant", content: "An answer." },
+            ],
+        }),
+    )
+convo("aaa", false, "do you work with HVAC companies?")
+convo("bbb", true, "here is my email")
+convo("ccc", false, "how much for a site?", "quoted a dollar amount")
+tstore.set(`convo:${dayKey(now)}:ddd`, JSON.stringify({ at: now.toISOString(), leadSaved: false, flagged: null, messages: [] }))
+
+let outcome = await sendDigest({ ...env, TRANSCRIPTS: tkv }, now)
+assert.equal(outcome, "sent")
+assert.equal(emails().length, 1)
+const digest = emails()[0].body
+assert.deepEqual(digest.to, ["innovateandamplify@gmail.com"])
+assert.match(digest.subject, /2 conversations without a lead/)
+assert.match(digest.html, /HVAC companies/)
+assert.match(digest.html, /how much for a site\?/)
+assert.ok(!digest.html.includes("here is my email")) // the lead was emailed separately
+assert.ok(!digest.html.includes("ddd")) // today's conversation is not yesterday's business
+assert.match(digest.html, /replaced because it quoted a dollar amount/)
+ok("the digest carries yesterday's leadless conversations and flags replaced replies")
+
+// Nothing to say means nothing sent, so the mail stays worth opening.
+reset()
+;({ store: tstore, kv: tkv } = makeKv())
+convo("only-lead", true, "my email is dana@example.com")
+assert.equal(await sendDigest({ ...env, TRANSCRIPTS: tkv }, now), "nothing")
+assert.equal(emails().length, 0)
+
+reset()
+assert.equal(await sendDigest(env, now), "unconfigured") // no namespace bound
+assert.equal(emails().length, 0)
+ok("a quiet day and an unbound namespace both send no mail")
+
+// 23. The scheduled handler runs the digest. It reads the real clock, so the fixture is written
+// against the same "yesterday" the handler will compute rather than a hard-coded date.
+reset()
+;({ store: tstore, kv: tkv } = makeKv())
+const handlerYesterday = dayKey(new Date(Date.now() - 24 * 60 * 60 * 1000))
+tstore.set(
+    `convo:${handlerYesterday}:eee`,
+    JSON.stringify({
+        at: `${handlerYesterday}T12:00:00.000Z`,
+        leadSaved: false,
+        flagged: null,
+        messages: [
+            { role: "user", content: "just browsing" },
+            { role: "assistant", content: "An answer." },
+        ],
+    }),
+)
+const scheduledWaits: Promise<unknown>[] = []
+await worker.scheduled!({} as any, { ...env, TRANSCRIPTS: tkv }, {
+    waitUntil: (p: Promise<unknown>) => scheduledWaits.push(p),
+} as any)
+await Promise.all(scheduledWaits)
+assert.equal(emails().length, 1)
+assert.match(emails()[0].body.subject, /Assistant digest/)
+ok("the cron trigger sends the digest")
+
+// 24. Storage failures never break a conversation that already worked.
+reset()
+modelReply = { text: "Sure." }
+const brokenKv: any = {
+    get: async () => null,
+    put: async () => {
+        throw new Error("KV unavailable")
+    },
+    list: async () => ({ keys: [] }),
+}
+r = await post({ messages: say("hi") }, "https://innovateandamplify.com", { ...env, TRANSCRIPTS: brokenKv })
+await settle()
+assert.equal(r.status, 200)
+assert.match(((await r.json()) as any).reply, /Sure\./)
+ok("a failed transcript write does not reach the visitor")
+
+console.log("ALL PASS")

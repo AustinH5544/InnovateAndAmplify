@@ -8,3 +8,9 @@ RESEND_FROM_EMAIL = "contact@innovateandamplify.com"
 CONTACT_NOTIFY_EMAIL = "innovateandamplify@gmail.com"
 # Where replies to the auto-reply go. Routed by Cloudflare Email Routing.
 REPLY_TO_EMAIL = "contact@innovateandamplify.com"
+
+# Shared with the site assistant Worker, under the "contact:" key prefix. RATE_PER_HOUR
+# submissions per IP per clock hour; a fixed window, so it is a speed bump, not a hard wall.
+[[kv_namespaces]]
+binding = "RATE_LIMIT"
+id = "5ffa5386261a483aa687adb3fc4840d3"

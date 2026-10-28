@@ -5,7 +5,7 @@ import { pageMeta } from "@/lib/seo";
 export const metadata: Metadata = pageMeta({
     title: "Portfolio: Client Websites and Products | Innovate & Amplify",
     description:
-        "Work by Austin Harrison: websites for Evergreen Rain Gutters in Spokane, MICRIST Environmental, and photographer Skyelar Payne, plus Starlit Stories, a product in beta. I built every one of them myself.",
+        "Work by Austin Harrison: websites for Evergreen Rain Gutters in Spokane, MICRIST Environmental, and photographer Skyelar Payne, plus Starlit Stories, my own product, live in production. I built every one of them myself.",
     path: "/portfolio",
 });
 
@@ -72,7 +72,7 @@ const schema = {
                     item: {
                         "@type": "CreativeWork",
                         name: "Starlit Stories",
-                        description: "A personalized children's storybook generator built with React, Azure, and OpenAI. A product in beta.",
+                        description: "A personalized children's storybook generator built with React, Azure, and OpenAI. My own product, live in production.",
                         url: "https://staging.starlitstories.app",
                         creator: { "@id": "https://innovateandamplify.com/#organization" },
                     },

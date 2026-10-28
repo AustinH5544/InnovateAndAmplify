@@ -1,8 +1,11 @@
-interface Env {
+export interface Env {
     RESEND_API_KEY: string
     RESEND_FROM_EMAIL: string
     CONTACT_NOTIFY_EMAIL: string
     REPLY_TO_EMAIL: string
+    // Shared with the site assistant, under a different key prefix. Optional: with no namespace
+    // bound the Worker still runs, it just does not throttle.
+    RATE_LIMIT?: KVNamespace
 }
 
 // Only the live site and this project's Cloudflare Pages previews may call the Worker.
@@ -10,6 +13,20 @@ const ALLOWED_ORIGINS = new Set(["https://innovateandamplify.com", "https://www.
 const PREVIEW_ORIGIN = /^https:\/\/[a-z0-9-]+\.innovateandamplify\.pages\.dev$/
 
 const LIMITS = { name: 120, email: 254, company: 160, service: 40, budget: 40, message: 5000 } as const
+
+// A real person does not send six enquiries in an hour. The cap matters because a submission
+// triggers an auto-reply to an address the sender chose, so without it the form is an uncapped way
+// to send mail from a verified domain to anyone.
+export const RATE_PER_HOUR = 5
+
+export async function underRateLimit(env: Env, ip: string): Promise<boolean> {
+    if (!env.RATE_LIMIT) return true // no namespace bound: every other check still applies
+    const key = `contact:${ip}:${new Date().toISOString().slice(0, 13)}`
+    const used = Number((await env.RATE_LIMIT.get(key)) ?? 0)
+    if (used >= RATE_PER_HOUR) return false
+    await env.RATE_LIMIT.put(key, String(used + 1), { expirationTtl: 3600 })
+    return true
+}
 
 export function isAllowedOrigin(origin: string | null): origin is string {
     return !!origin && (ALLOWED_ORIGINS.has(origin) || PREVIEW_ORIGIN.test(origin))
@@ -68,6 +85,12 @@ export default {
 
         if (request.method !== "POST") return json({ error: "Method not allowed" }, 405, origin)
         if (!isAllowedOrigin(origin)) return json({ error: "Forbidden" }, 403, origin)
+
+        // Before the body is parsed, so a flood cannot make the Worker do work first.
+        const ip = request.headers.get("CF-Connecting-IP") ?? "unknown"
+        if (!(await underRateLimit(env, ip))) {
+            return json({ error: "Too many messages from this connection. Please call (425) 582-1003." }, 429, origin)
+        }
 
         let body: Record<string, unknown>
         try {

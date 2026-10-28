@@ -46,7 +46,7 @@ const team = [
         name: "Austin Harrison",
         role: "Founder & Developer",
         image: "/austin.webp",
-        bio: "I build websites, AI automations, and marketing systems for small businesses and solo operators, without the agency overhead. For the web I use Next.js, React, and TypeScript. For automations I use n8n, the OpenAI API, and Anthropic's Claude. I was building for the web before AI went mainstream. Now I help clients use it on problems their business actually has.",
+        bio: "I build websites, AI automations, and marketing systems for small businesses and solo operators, without the agency overhead. For the web I use Next.js, React, and TypeScript. For automations I use n8n and Make, the OpenAI API, and Anthropic's Claude. I was building for the web before AI went mainstream. Now I help clients use it on problems their business actually has.",
     },
 ]
 
@@ -92,7 +92,7 @@ export default function AboutPage() {
                                     </p>
                                     <p>
                                         {
-                                            "Since launching in 2024, I've built three client websites that are live today: Evergreen Rain Gutters, a gutter contractor in Spokane; MICRIST Environmental, a training company in Washington; and SP-Archives, the portfolio of photographer Skyelar Payne. I also have one product of my own, Starlit Stories, in beta. I built every one of them myself."
+                                            "Since launching in 2024, I've built three client websites that are live today: Evergreen Rain Gutters, a gutter contractor in Spokane; MICRIST Environmental, a training company in Washington; and SP-Archives, the portfolio of photographer Skyelar Payne. I also run a product of my own, Starlit Stories, which is live in production with subscriptions and payments working. I built every one of them myself."
                                         }
                                     </p>
                                     <p>

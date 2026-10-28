@@ -17,3 +17,8 @@ client/.vite/
 # Local strategy and research docs. This repo is public; these stay on disk only.
 plans/
 research/
+
+# Wrangler local secrets. Never commit these; use `wrangler secret put`.
+.dev.vars
+.dev.vars.*
+.wrangler/
