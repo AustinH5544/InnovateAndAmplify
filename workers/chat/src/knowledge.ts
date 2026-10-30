@@ -4,7 +4,7 @@
 
 export const KNOWLEDGE = `
 THE BUSINESS
-- Innovate and Amplify is a one-person studio in Spokane, Washington, founded in 2024.
+- Innovate and Amplify is a one-person studio in Spokane, Washington, founded in 2025.
 - Austin Harrison is the founder and does all the work himself. No account managers, no handoffs,
   no markup on subcontracted work.
 - He builds websites, AI automations, and marketing systems for small businesses and solo operators.

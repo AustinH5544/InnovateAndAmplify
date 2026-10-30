@@ -35,7 +35,7 @@ const values = [
 ]
 
 const stats = [
-    { value: "2024", label: "Founded" },
+    { value: "2025", label: "Founded" },
     { value: "3", label: "Client Sites Live" },
     { value: "1", label: "Product in Beta" },
     { value: "1", label: "Person Studio" },
@@ -82,7 +82,7 @@ export default function AboutPage() {
                                 <div className="subtext mt-6 space-y-4 leading-8">
                                     <p>
                                         {
-                                            "I started Innovate & Amplify in 2024. It's where I build fast websites, brand systems, and AI workflows for my clients."
+                                            "I started Innovate & Amplify in 2025. It's where I build fast websites, brand systems, and AI workflows for my clients."
                                         }
                                     </p>
                                     <p>
@@ -92,7 +92,7 @@ export default function AboutPage() {
                                     </p>
                                     <p>
                                         {
-                                            "Since launching in 2024, I've built three client websites that are live today: Evergreen Rain Gutters, a gutter contractor in Spokane; MICRIST Environmental, a training company in Washington; and SP-Archives, the portfolio of photographer Skyelar Payne. I also run a product of my own, Starlit Stories, which is live in production with subscriptions and payments working. I built every one of them myself."
+                                            "Since launching in 2025, I've built three client websites that are live today: Evergreen Rain Gutters, a gutter contractor in Spokane; MICRIST Environmental, a training company in Washington; and SP-Archives, the portfolio of photographer Skyelar Payne. I also run a product of my own, Starlit Stories, which is live in production with subscriptions and payments working. I built every one of them myself."
                                         }
                                     </p>
                                     <p>
