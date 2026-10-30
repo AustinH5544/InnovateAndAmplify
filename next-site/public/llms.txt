@@ -6,7 +6,7 @@
 ## About
 
 Innovate and Amplify is a one-person web development and AI automation studio in
-Spokane, WA, started in 2024 by Austin Harrison. It builds websites, AI workflows,
+Spokane, WA, started in 2025 by Austin Harrison. It builds websites, AI workflows,
 and marketing systems for small businesses and creators. Clients work directly with
 Austin; there are no account managers or agency layers.
 
@@ -28,7 +28,7 @@ Website: https://innovateandamplify.com
 
 ## Key facts
 
-- Founded: 2024
+- Founded: 2025
 - Studio type: one person
 - Location: Spokane, WA
 - Client websites live: 3 (Evergreen Rain Gutters, MICRIST Environmental, SP-Archives)

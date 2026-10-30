@@ -92,7 +92,7 @@ export default function Footer() {
                 >
                     <div className="flex flex-col gap-2 pt-6 sm:flex-row sm:items-center sm:justify-between">
                         <p className="subtext text-xs">
-                            &copy; 2024-2026 Innovate &amp; Amplify. All rights reserved.
+                            &copy; 2025-2026 Innovate &amp; Amplify. All rights reserved.
                         </p>
                         <p className="subtext text-xs">Built by Austin Harrison</p>
                     </div>

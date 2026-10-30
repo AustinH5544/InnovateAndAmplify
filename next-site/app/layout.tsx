@@ -46,7 +46,7 @@ const orgSchema = {
             },
             description:
                 "A one-person studio in Spokane, WA, building websites, AI automation, and digital marketing for local service businesses.",
-            foundingDate: "2024",
+            foundingDate: "2025",
             founder: {
                 "@type": "Person",
                 "@id": "https://innovateandamplify.com/about#austin-harrison",

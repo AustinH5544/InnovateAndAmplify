@@ -118,7 +118,7 @@ export default function HomePage() {
                             </div>
                             <p className="subtext leading-8">
                                 {
-                                    "I handle every project myself. There are no account managers or handoffs, and I don't mark up work I'd otherwise subcontract. I started Innovate & Amplify in 2024. Since then I've built websites and automations for clients like Evergreen Rain Gutters, a gutter contractor in Spokane, and MICRIST Environmental, a training company in Washington. I work quickly, keep you posted, and stay on it until the work is right."
+                                    "I handle every project myself. There are no account managers or handoffs, and I don't mark up work I'd otherwise subcontract. I started Innovate & Amplify in 2025. Since then I've built websites and automations for clients like Evergreen Rain Gutters, a gutter contractor in Spokane, and MICRIST Environmental, a training company in Washington. I work quickly, keep you posted, and stay on it until the work is right."
                                 }
                             </p>
                         </div>
